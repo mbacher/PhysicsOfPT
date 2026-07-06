@@ -1,0 +1,423 @@
+% --- APPENDIX ---
+\section{Assumptions}
+\label{app:derivation}
+% Full Maxwell → Reciprocity → V_n derivation
+% Born approximation formal conditions
+% RLC parameter extraction
+% S-parameter network theory
+
+The electromagnetic environment is modeled as a time-harmonic system at the PT frequency ($f_{PT}=62.5MHz$ at $1.5T$ and $f_{PT}=122.5MHz$ at 3T) with $\omega=2\pi f_{PT}$.
+
+Maxwells curl equations in the source region are:
+
+\begin{align}
+    \nabla \times \mathbf{E} = -j\omega\mu_0 \mathbf{H} \label{maxwell1}\\
+    \nabla \times \mathbf{H} = \mathbf{J}_{src} + (\sigma+j\omega\epsilon)\mathbf{E} \label{maxwell2}
+\end{align}
+
+where $\mathbf{J}_{src}$ is the current density in the transmit loop (zero elsewhere), $\sigma$ is the electrical conductivity, $\epsilon$ is the permittivity and $\mu_0$ is the permeability of free space.
+
+To simplify the derivation, we make the following assumptions:
+\begin{itemize}
+    \item all media are linear and anisotropic
+    \item all media are non-magnetic, i.e. relative permeability is $\mu_r=1$ everywhere so that $\mathbf{B}=\mu_0 \mathbf{H}$
+    \item the system is in a steady-state at frequency $\omega$. Transient motion effects are ignored as the time scale is orders of magnitude lower.
+    \item Tissue properties are real-valued everywhere. We use complex admittivity defined as $\gamma = \sigma + j\omega\epsilon$
+\end{itemize}
+
+\section{Lorentz Reciprocity Theorem}
+
+Consider two distinct electromagnetic configurations (a) and (b) applied to the same electromagnetic environment (same $\sigma(r), \epsilon(r) and \mu_0$), each with its own source and fields:
+
+Configuration (a): source $\mathbf{J}^a$ on the loop conductor, zero elsewhere and fields $\mathbf{E}^a$ and $\mathbf{H}^a$
+
+Configuration (b): source $\mathbf{J}^b$ and fields $\mathbf{E}^b$ and $\mathbf{H}^b$
+
+We now seek to describe the Lorentz reciprocity identity
+
+\begin{align}
+    \label{lorentzreciprocity}
+    \nabla (\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \mathbf{H}^a) = \nabla(\mathbf{E}^a \times \mathbf{H}^b) - \nabla(\mathbf{E}^b \times \mathbf{H}^a)
+\end{align}
+
+in terms of only sources and material parameters:
+
+Using the product rule on the first term of \eqref{lorentzreciprocity}
+
+\begin{align}
+    \nabla(\mathbf{E}^a \times \mathbf{H}^b) = \mathbf{H}^b (\nabla \times \mathbf{E}^a) - \mathbf{E}^a (\nabla \times \mathbf{H}^b)
+\end{align}
+
+Substituting Eq.\eqref{maxwell1} and Eq.\eqref{maxwell2} and using complex admittivity we arrive at 
+
+\begin{align}
+    \nabla(\mathbf{E}^a \times \mathbf{H}^b) = \mathbf{H}^b (-j \omega \mu_0 \mathbf{H}^a) - \mathbf{E}^a (\mathbf{J}^b + \gamma \mathbf{E}^b) \\
+    = -j \omega \mu_0 (\mathbf{H}^b \mathbf{H}^a) - \mathbf{E}^a \mathbf{J}^b - \gamma(\mathbf{E}^a \mathbf{E}^b)
+\end{align}
+
+similarily for the second term of Eq.\eqref{lorentzreciprocity} we get
+
+\begin{align}
+    \nabla(\mathbf{E}^b \times \mathbf{H}^a) = -j \omega \mu_0 (\mathbf{H}^a \mathbf{H}^b) - \mathbf{E}^b \mathbf{J}^a - \gamma(\mathbf{E}^b \mathbf{E}^a)
+\end{align}
+
+Equation \eqref{lorentzreciprocity} is the difference of these two divergences:
+
+Collecting term by term 
+\begin{align}
+    -j\omega\mu_0 (\mathbf{H}^a \mathbf{H}^b) - (-j \omega \mu_0 (\mathbf{H}^a \mathbf{H}^b)) = 0 \\
+    -\gamma (\mathbf{E}^a \mathbf{E}^b) - (-\gamma (\mathbf{E}^b \mathbf{E}^a)) = -\gamma (\mathbf{E}^a \mathbf{E}^b) +\gamma (\mathbf{E}^a \mathbf{E}^b) = 0 \\
+    -\mathbf{E}^a \mathbf{J}b -(-\mathbf{E}^b \mathbf{J}^a) = \mathbf{E}^b \mathbf{J}^a - \mathbf{E}^a \mathbf{J}^b
+\end{align}
+
+only $\mathbf{E}^b \mathbf{J}^a - \mathbf{E}^a \mathbf{J}^b$ remains and 
+
+\begin{align}
+\label{before_reciprocity}
+    \nabla (\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \mathbf{H}^a) = \mathbf{E}^b \mathbf{J}^a - \mathbf{E}^a \mathbf{J}^b
+\end{align}
+
+Note that these cancellations require the above assumptions/simplifications that all tissue characteristics are anisotropic (scalar $\sigma$, $\epsilon$ $\rightarrow$ symmetric $\gamma$) and nonmagnetic (uniform $\mu_0$).
+
+Integrating Eq. \eqref{before_reciprocity} over a volume $V$ bounded by a closed surface $S$ we find 
+
+\begin{align}
+    \label{reciprocity}
+    \oiiint_{S} (\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \mathbf{H}^a) dS = \iiint_{V} (\mathbf{E}^b \mathbf{J}^a - \mathbf{E}^a \mathbf{J}^b) dV
+\end{align}
+
+the general Lorentz reciprocity theorem for lossy, dispersive, isotropic media. (Harrington 1961, Hoult 2000)
+
+At port n, the fields on the cross section can be expressed in terms of port voltage $V_p$ and port current $I_p$ via the transmission line mode (citation pending):
+
+\begin{align}
+    \label{harringtonTLM}
+    \int_{port \quad p}(\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \mathbf{H}^a)dS = V_p^a I_p^b - V_p^b I_p^a
+\end{align}
+
+Summing over all N+1 ports:
+
+\begin{align}
+    \sum_{p=0}^{N} [V_p^a I_p^b -V_p^b I_p^a] = 0
+\end{align}
+
+For a two-port subset, where port 1 is driven in configuration a, port n is driven in configuration b, all other ports terminated we get:
+
+\begin{align}
+    V_1^a I_1^b + V_n^a I_n^b = V_1^b I_1^a + V_n^b I_n^a
+\end{align}
+
+In configuration a, port n is terminated (load $Z_0$ only, sno source) so the voltage at port n is purely due to coupling $ \rightarrow V_n^a = $ recieved voltage from PT. In configuration b, port 1 is terminated, so $V_1^b =$ recieved voltage from driven coil n.
+
+For matched terminations and equal drive levels this yields the standard result:
+
+\begin{align}
+    \label{PortReciprocity}
+    \frac{V_n^a}{I_1^a} = \frac{V_1^b}{I_n^b} \equiv Z_{n,1}
+\end{align}
+
+wherein $Z_{n,1}$ is the transimpedence between port 1 and port n.
+
+
+\subsection{Evaluation of the surface integral}
+
+We apply the reciprocity Theorem (Eq. \eqref{lorentzreciprocity} to the PT system, where configuration (a) is the PT transmitter as port $1$ and configuration (b) is the recieve element $n$. For a linear, isotropic system, the multi-port network is reciprocal ($Z_{n,1}=Z_{1,n}$. 
+
+We now derive the explicit expression for $V_n^a$, the voltage induced at receive port n by the PT transmitter.
+
+We use Eq. \eqref{lorentzreciprocity} and seperate the volume integral into three non-overlapping regions: $V = V_{ports} \cup V_{body} \cup V_{free}$ where $V_{ports}$ contains the antenna conductors, $V_{body}$ is the tissue volume and $V_{free}$ is free space.
+
+in $V_{free}$ $\simga=0$, $\epsilon = \epsilon_0$ adn trhere are no sources $\rightarrow$ no contribution to the right side.
+
+In $V_{ports}$ the source contribution is captured by the port terms of Eq. \eqref{harringtonTLM}. In $V_{body}$ there are no impressed sources ($\mathbf{J}^a=\mathbf{J}^b=0$, but $\gamma \neq 0$ since tissue has nonzero $\sigma, \epsilon$.
+
+Splitting the integration volume allows us to rewrite the reciprocity theorem:
+
+In the body volume there are no impressed sources, so
+\begin{align}
+    \label{Vbody}
+    \oint_{S_{body}}(\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \mathbf{h}^a)dS = 0
+\end{align}
+
+This states that the reciprocity surface integral vanishes over any surface enclosing only passive media - a well known result (citation pending).
+
+To extract $V_n$ we use a different approach. The voltage at a terminated port can be written as \cite{Rumsey1954ReactionTheory}
+
+\begin{align}
+    \label{RumseyVoltage}
+    <a,b> = \int_V (\mathbf{E}^a \mathbf{J}^b) dV
+\end{align}
+
+where $<a,b>$ is the "reaction", i.e. the response produced by the fields of configuration $a$ om the sources of configuration $b$.
+
+In tissue, we defined $\mathbf{J}^b=\gamma \mathbf{E}^b$ as the induced current.
+According to \cite{Rumsey1954ReactionTheory} the port observable at port $n$ is simply the product of port voltage and port current $<a,b>=V_n I_n$ and with current normalized to $I_n=1A$ Eq. \eqref{RumseyVoltage} over the Volume $V_{body}$ is therefore
+
+\begin{align}
+    \label{PortVoltage}
+    V_n = \iiint_{V_{body}} \mathbf{E}^a \mathbf{J}^b dV \\
+    V_n = \iiint_{V_{body}} \gamma (\mathbf{E}^a \mathbf{E}^b) dV_{body}
+\end{align}
+
+This equation states that the received voltage at port $n$ $V_n$ equals the volume integral of the tissue admittivity $\gamma$ weighted by the overlap of the transmitter and receiver electric field - the coils sensitivity profile.
+
+\subsection{Origin of the electric fields in electrically small source}
+
+The PT loop antennas size ($d=30mm$ in our simulations) is electrically small compared to the wavelength. The electrical size parameter is defined as $ka$ where $k=2 \pi / \lambda_0$, the wave number in free space and $a=0.03m$ is the loop radius, so $ka=0.04$ at $62.5MHz$ and $ka=0.08$ at $122.5MHz$. 
+
+In an electrically small antenna ($ka << 1$) the loop radiates primarily as a magnetic dipole while the produced E-field is supressed by a factor $ka$ realtive to a plane wave.
+
+It is important to note that, as the radiated E-field is small, the Faraday induced E-field inside the body ($\mathbf{E}_{ind} \propto \omega \mu_0 a_tissue$) is dominant and scales with body dimension $a_{tissue}$.
+
+The total electric field in any region is governed by Faraday's law. This Faraday-induced field is:
+
+\begin{align}
+    \label{inducedField}
+    \nabla \times \mathbf{E}^a = -j \omega \mu_0 \mathbf{H}^a
+\end{align}
+
+In free-space near the loop, $\mathbf{H}^a >> \mathbf{E}^a$, however, inside the conducting body, the time-varying magnetic field induces an electric field. This Faraday-Field is
+
+\begin{align}
+    \label{FaradayField}
+    \mathbf{E}_1^{ind} \quad satisfying \quad \nabla \times \mathbf{E}_1^{ind} = -j \omega \mu_0 \mathbf{H}_1
+\end{align}
+
+with scaling by $a_tissue$
+
+\begin{align}
+    \label{ScaledFaraday}
+    |\mathbf{E}_1^{ind}| ~ \omega \mu_0 |\mathbf{H}_1| a_{tissue}
+\end{align}
+
+where $a_{tissue}$ is the characteristic radius of the human torso. This induced Faraday field, unlike the loop-generated field, is independent of loop geometry $ka$.
+
+The proportion of generated field vs. induced field can be approximated: Let $|\mathbf{H}_1|=1A/m$ at the body surface. Then the loop generated E-fields at 1.5T / 62.5MHz are approximately
+
+\begin{align}
+    \label{LoopEField15T}
+    |\mathbf{E}_1^{loop} \approx ka \eta_0 |\mathbf{H}_1| \approx 0.04 \cdot 377\Omega \cdot 1A/m \approx 15V/m \\
+    \label{inducedField15T}
+    |\mathbf{E}_1^{ind}| \approx \omega \mu_0 |\mathbf{H}_1| a_{tissue} \approx 3.9 \cdot 10^8 rad \cdot 1.26 \cdot 10^-6NA^{-2} \cdot  1A/m \cdot 0.15m \approx 74 V/m
+\end{align}
+
+and at 3T / 122.5MHz
+
+\begin{align}
+    \label{LoopEField3T}
+    |\mathbf{E}_1^{loop} \approx ka \eta_0 |\mathbf{H}_1| \approx 0.08 \cdot 377\Omega \cdot 1A/m \approx 30V/m \\
+    \label{inducedField3T}
+    |\mathbf{E}_1^{ind}| \approx \omega \mu_0 |\mathbf{H}_1| a_{tissue} \approx 7.8 \cdot 10^8 rad \cdot 1.26 \cdot 10^-6NA^{-2} \cdot  1A/m \cdot 0.15m \approx 148 V/m
+\end{align}
+
+with $a_{tissue}=0.15m$, $\mu_0=1.26\cdot 10^{-6}NA^{-2}$ the vacuum permeability and $\eta_0=377\Omega$ the vacuum impedance.
+
+\subsection{Decomposition into direct and tissue-mediated coupling}
+
+The received voltage in port n $V_n$ can be decomposed by splitting the domain of integration:
+
+\begin{align}
+    \label{VNCouplingFull}
+    V_n = \iiint_{all space} \gamma (\mathbf{E}_1 \mathbf{E}_n)dV
+\end{align}
+
+In free sapce outside the body, $\gamma = j \omega \Epsilon_0$, which is purely reactive and represents direct magnetic coupling (or in other words displacement-current coupling).
+Inside the body, $\gamma = \sigma + j\omega \espilon$ includes the conductive (lossy) contribution.
+
+The total coupling between the source and port n can be expressed through mutual impedance:
+
+\begin{align}
+    \label{MutualImped}
+    Z_{n,1} = Z_{n,1}^{direct} + Z_{n,a}^{tissue}
+\end{align}
+
+where $Z_{n,1}^{direct} = j \omega M_0$ is the mutual impedance in the absence of condictive tissue. $M_0$ is the mutual inductance between transmit loop and recieve loop n, determined solely by coil geometry and separation. It is frequency dependent only through the $j \omega$ factor.
+
+$Z_{n,1}^{tissue}$ is the additional impedance arising from the conductive tissue. It represents the coupling path PT loop $\rightarrow$ H-field $\rightarrow$ Faraday-induced E-field in the body $\rightarrow$ eddy-currents $\rightarrow$ secondary H-field $\rightarrow$ recieved at port n. This term depends on the tissue property distribution and therefore changes when cardiac motion redistributes tissue.
+
+The corresponding voltages (with $I_1=1A$ normalized) are:
+
+\begin{align}
+    \label{CoouplingVoltages}
+    V_n^{direct} = Z_{n,1}^{direct} \cdot I_1 = j \omega M_0 I_1 \\
+    V_n^{tissue} = Z_{n,1}^{tissue} \cdot I_1 = I_1 \iiint_{tissue} \gamma (\mathbf{e}_1 \mathbf{e}_n) dV
+\end{align}
+
+where $\mathbf{e}_1 = \mathbf{E}_1 I_1$ and $\mathbf{e}_1 = \mathbf{E}_n I_n$ are the electric fields normalized to unit drive current.
+
+
+
+\subsection{Modulation from cardiac motion and the first-order Born approximation}
+
+During the cardiac cycle, the heart contracts and relaxes, causing tissue to redistribute within the thorax. Between cardiac phase $\varphi_1$ and $\varphi_2$ (i.e. maximum and minimum volume):
+
+\begin{align}
+    \label{tissueRedist}
+    \sigma \rightarrow \sigma + \Delta \sigma \\
+    \epsilon \rightarrow \epsilon + \Delta \epsilon
+\end{align}
+
+where $\Delta \sigma$ and $\Delta \epsilon$ are nonzero only in the cardiac displacement Volume $V_{\Delta}$ - the region where tissue identity has changed (e.g. blood replacing myocardium).
+
+The change in voltage is
+
+\begin{align}
+    \label{replaceVoltage}
+    \Delta V_n = V_{n\varphi_1} - V_{n\varphi_2}
+\end{align}
+
+The first-order Born approximation \cite{Chew1995MathematicalTheory} (Chap 8.10) is a linearization of the scattering problem in which the total field inside a perturbed region is approximated by the unperturbed (incident) field.
+This assumes, that the secondary field produced by the perturbation is negligible compared to the primary field, i.e. $|E_{scattered}| \ll |E_{incident}|$ (and $|B_{scattered}| \ll |B_{incident}|$). This is the case when the scattering object is electrically small and/or weakly contrasting in its electrical parameters compared to the background.
+In the present contect, the "perturbation" is not the entire body (which produces substantial loading), but rather the redistribution of tissue during cardiac motion (a volume $V_{\Delta} \approx 250mL$, based on typical stroke volume) with admittivity contrast $|\frac{\Delta \gamma}{\gamma}| \approx 0.5$. Since this displacement volume is small compared to the total body volume, the illuminated volume of each recieve element and even the typical wavelength in tissue, the condition(s) for the Born application are satisfied. Experimental and simulation results for cardiac modulation depths of $M_n<1\%$ further validate the assumption, that the secondary/scattered field is extremely small compared to the primary/incident field.
+This allows us to write the signal change $\Delta V_n$ as a linear function of $\Delta\gamma$ weighted by the unperturbed field overlap, without requiring more complex iterative solutions:
+
+\begin{align}
+    \label{Born1}
+    \Delta V_n \approx \iiint_{V_{\Delta}} [\Delta \sigma + j \omega \Delta \epsilon][\mathbf{E}_1 \mathbf{E}_n] dV
+\end{align}
+
+The signal change equals the admittivity change integrated over the displacement volume, weighted by the sensitivity overlap.
+
+
+\textbf{Note}: we use the term "sensitivity" loosely here as, in the MRI domain, it is more common to think of the sensitivity as the radiated magnetic field rather then the electric field. In this particular application, the electric field is generated by eddy-currents induced in conductive tissue - our "sensitivity" therefore is technically the H-field illuminated volume contsrained by the area therein where $\sigma > 0$
+
+\subsection{Connection to Scattering Parameters}
+
+The scattering parameter $S_{n,1}$ (transmission coefficient from port 1, the PT generator loop, to receive element port n) is defined as the relative incident and reflected waves at each port:
+
+\begin{align}
+    \label{ZDef}
+    S_{n,1} = \frac{b_n}{a_1}
+\end{align}
+
+where $A_1 = \frac{V_1^{inc}}{\sqrt{Z_0}}$ is the incident wave amplitude at (transmit) port 1, $b_n = \frac{V_n^{scattered}}{\sqrt{Z_0}}$ is the scattered wave amplitude at (receive) port n, and all other ports are terminated.
+
+The transimpedance $Z_{n,1}$, defined as the open-circuit voltage appearing at port n per unit current driven at port 1
+
+\begin{align}
+    \label{transZ}
+    Z_{n,1} = \frac{V_n}{I}
+\end{align}
+
+bridges the derivation of the voltage integral (Eq. \eqref{CoouplingVoltages} with the circuital and S-parameter models.
+
+Using the transimpedence normalizes out the drive current: the reciprocity integral
+
+\begin{align}
+    \label{recInt}
+    V_n = I_1 \iiint \gamma (e_1 \cdot e_n) dV
+\end{align}
+
+gives $V_n$ for a specific drive current $I_1$. Dividing by $I_1$ yields the transimpedence $Z_{n,1}$ - a system property independent of excitation amplitude.
+
+Reciprocity is cleanly contained in the transimpedence: Eqn. \eqref{PortReciprocity} directly shows $Z_{n,1} = Z_{1,n}$ - the transimpedence is symmetric.
+
+The relationship between $S_{n,1}$ and the transimpedence $Z_{n,1}$ is shown below (citation pending):
+
+\begin{align}
+    \label{SandZ}
+    S_{n,1} = \frac{2Z_0Z_{n,1}}{(Z_0 + Z_{11})(Z_0 + Z_{nn}) - Z_{n,1}^2}
+\end{align}
+
+In this application, the inter-port coupling is weak compared to port-port coupling ($|Z_{n,1}| << |Z_0 + Z_{nn}|$), so
+
+\begin{align}
+    \label{SparamWOinterportCoupling}
+    S_{n,1} \approx \frac{2Z_0 Z_{n,1}}{(Z_0 + Z_{11})(Z_0 + Z_{nn})}
+\end{align}
+
+The port self-impedences $Z_{1,1}$ and $Z_{n,n}$ lump together both coil impedance and body loading. Coil impedence is unchanged by tissue replacement and coil loading is dominated mainly by local tissue around the coil and not the minute changes in the comperatively far away cardiac region.
+
+With $|Z_{n,1}| >> |Z_{1,1}|$ and $|Z_{n,1}| >> |Z_{n,n}|$, the denominator in Eq. \eqref{SparamWOinterportCoupling} is approximately constant between cardiac phases and consequently
+
+\begin{align}
+    \label{SParamCouplingSimplified}
+    \frac{\Delta S_{n,1}}{S_{n,1}} \approx \frac{\Delta Z_{n,1}}{Z_{n,1}} = \frac{\Delta V_n}{V_n} = M_n
+\end{align}
+
+with $M_n$ the modulation depth in receive channel n. The transimpedence is the carrier of PT signal modulation.
+
+This also connects this theoretical derivation to the full-wave simulation, where the modulation depth is defined as:
+
+\begin{align}
+    \label{TheoryToSim}
+    M_n^{sim} = \frac{|S_{n,1}(\varphi_2) - S_{n,1}(\varphi_1)|}{|S_{n,1}(\varphi_1)|}
+\end{align}
+
+
+\subsection{Reduction to Equivalent Circuit Model}
+
+The volume integral formulation (Eq. \eqref{PortVoltage}) can be mapped to a lumped-element equivalent circuit, providing an intuitive formulation of the modulation mechanism:
+
+\textbf{Body loading as an equivalent impedance}
+
+The body-mediated mutual impedance can be written as
+
+\begin{align}
+\label{mutImped}
+    Z_{n,1}^{body} = \iiint_{body} \gamma (\mathbf{e}_1 \cdot \mathbf{e}_n) dV
+\end{align}
+
+Similarily, the self-impedance contribution from the body to coil n, the body-loading is
+
+\begin{align}
+\label{selfImped}
+    Z_{nn}^{body} = \iiint_{body} \gamma |\mathbf{e}_n|^2dV
+\end{align}
+
+This complex impedance has real- and imaginary parts
+
+\begin{align}
+    Re(Z_{nn}^{body}) = R_{tissue} = \iiint_{body} \sigma|\mathbf{e_n}|^2dV \\
+    Im(Z_{nn}^{body}) = X_{tissue} = \omega \iiint_{body} \epsilon |\mathbf{e}_n|^2dV
+\end{align}
+
+\textbf{Equivalent RLC circuit}
+
+The reciewve coil element n can be modeled as a series RLC circuit:
+
+\begin{align}
+    Z_n = R_{coil} + R_{tissue} + j (\omega L_{coil} - \frac{1}{\omega C_{tune}} + X_{tissue})
+\end{align}
+
+where $R_{coil}$ is the coils conductive loss, $L_{coil}$ is the coils self-inductance and $C_{tune}$ is the tuning capacitance.
+
+The loaded and unloaded quality factors are:
+
+\begin{align}
+    Q_{unloaded} = \frac{\omega L_{coil}}{R_{coil}} \\
+    Q_{loaded} = \frac{\omega L_{coil}}{R_{coil} + R_{tissue}}
+\end{align}
+
+At clinical frequencies (0.5T, 1.5T and 3T) body noise dominates, so $R_{tissue} >> R_{coil}$ and $Q_{loaded} << Q_{unloaded}$ [Edelstein 1986, Hoult & Lauterbur 1979].
+
+
+\textbf{Modulation in the RLC model}
+
+Cardiac motion changes the tissue distribution in the illuminated area, causing
+
+\begin{align}
+    R_{tissue} \rightarrow R_{tissue} + \Delta R_{tissue} \\
+    X_{tissue} \rightarrow X_{tissue} + \Delta X_{tissue}
+\end{align}
+
+where
+
+\begin{align}
+    R_{tissue} = \iiint_{V_{\Delta}} \Delta \sigma |\mathbf{e}_n|^2 dV \\
+    X_{tissue} = \omega \iiint_{V_{\Delta}} \Delta \epsilon |\mathbf{e}_n|^2 dV
+\end{align}
+
+These changes in both mutual impedance (Eq. \eqref{mutImped}) and self-impedance (Eq. \eqref{selfImped}) change the transfer function between port 1 and n, so modulation depth is
+
+\begin{align}
+    M_n \approx \frac{|\Delta Z_{n,1}^{body}|}{|Z_{n,1}^{direct} + Z_{n,1}^{body}|}
+\end{align}
+
+This relation can be further simplified by assuming approximately uniform sensitivity $\mathbf{e}_n$, which is only valid for coils physically larger than the heart and placed in such a way that the heart is well within the sensitivity.
+
+\begin{align}
+    M_n \approx \frac{\Delta \sigma_{eff} \times V_{Delta} \times |\mathbf{e}_1|^2|\mathbf{e}_n|^2}{\omega M_0}
+\end{align}
+
+where $\Delta \sigma_{eff}$ is the effective conductivity contrast between displaced tissues.
