@@ -37,6 +37,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,keepaspectratio}
 \makeatletter
 \newsavebox\pandoc@box
 \newcommand*\pandocbounded[1]{% scales image to fit in text height/width
@@ -478,7 +479,7 @@ resistance \(R_{e}\) and capacitance \(C_{e}\).
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=1.6125in,alt={A black background with a black square Description automatically generated with medium confidence}]{./media/image1.png}
+\includegraphics[alt={A black background with a black square Description automatically generated with medium confidence}]{./media/image1.png}
 \caption{Equivalent circuit of one pair of PT transmit (primary) and
 MR receive coil (secondary). The effect of eddy- and displacement
 currents are modeled by resistance \(R_{e}\) and capacitance \(C_{e}\).
@@ -540,7 +541,7 @@ regions.
 
 \begin{figure}
 \centering
-\includegraphics[width=4.25in,height=5.5in,alt={A screenshot of a computer generated image Description automatically generated}]{./media/image2.png}
+\includegraphics[alt={A screenshot of a computer generated image Description automatically generated}]{./media/image2.png}
 \caption{(a) The primary field \(B_{G}\) is created by driving
 the generating coil \(L_{G}\) with an AC current. The receiving coil
 \(L_{R}\) is penetrated by this field and a current is induced. A
@@ -605,7 +606,7 @@ the received signal \cite{BacherCardiacStudy, Bacher2020PerformanceFramework}
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=1.79514in,alt={A blue and yellow circle with a red dot Description automatically generated with medium confidence}]{./media/image3.png}
+\includegraphics[alt={A blue and yellow circle with a red dot Description automatically generated with medium confidence}]{./media/image3.png}
 \caption{(a) Absolute magnetic field \(|\mathbf{H|}\), (b)
 absolute magnetic difference
 \(|\mathrm{\Delta}H| = |H| - {|H}_{vacuum}|\) to vacuum and (c) induced
@@ -709,7 +710,7 @@ frequency range 10MHz -- 150MHz were then exported to Matlab 2023a
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=3.48125in]{./media/image4.png}
+\includegraphics{./media/image4.png}
 \caption{Geometric setup of the virtual human phantom. (a) 3D
 view and (b) frontal and side view of the virtual human phantom and the
 receive coils. (c) Position and port numbers of PT generator coil (1),
@@ -786,7 +787,7 @@ transverse plane intersecting the phantom's heart while also subtracting
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=6.36597in,alt={A screenshot of a scan of a body Description automatically generated}]{./media/image5.png}
+\includegraphics[alt={A screenshot of a scan of a body Description automatically generated}]{./media/image5.png}
 \caption{Coronal (top) and sagittal (bottom) slices through
 the heart of the virtual human phantom. (b) absolute induced current
 density ‖J‖ in A/m\^{}2 and (b) absolute secondary magnetic field ‖ΔH ‖
@@ -844,7 +845,7 @@ doubling the PT frequency.
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=8.17778in,alt={A black screen with red lines Description automatically generated}]{./media/image6.png}
+\includegraphics[alt={A black screen with red lines Description automatically generated}]{./media/image6.png}
 \caption{Received signal magnitude in dBm in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
 62.5MHz. Cardiac volume ground truth is shown in red.}
@@ -853,7 +854,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=8.20625in,alt={A black screen with red lines Description automatically generated}]{./media/image7.png}
+\includegraphics[alt={A black screen with red lines Description automatically generated}]{./media/image7.png}
 \caption{Received signal magnitude in dBm in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
 122.5MHz. Cardiac volume ground truth is shown in red.}
@@ -862,7 +863,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=8.26806in]{./media/image8.png}
+\includegraphics{./media/image8.png}
 \caption{Received signal phase in radians in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
 62.5MHz. Cardiac volume ground truth is shown in red.}
@@ -871,7 +872,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=8.25208in,alt={A black screen with red lines Description automatically generated}]{./media/image9.png}
+\includegraphics[alt={A black screen with red lines Description automatically generated}]{./media/image9.png}
 \caption{Received signal phase in radians in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
 62.5MHz. Cardiac volume ground truth is shown in red.}
@@ -880,7 +881,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=2.74514in]{./media/image10.png}
+\includegraphics{./media/image10.png}
 \caption{Magnitude (\(m_{D,mag}\)) and absolute phase (\(|m_{D,ph}|\))
 modulation depths of all anterior and posterior elements at f=62.5MHz
 and f=122.5MHz}
@@ -889,7 +890,7 @@ and f=122.5MHz}
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=5.60486in]{./media/image11.emf}
+\includegraphics{./media/image11.emf}
 \caption{Bar-graph of magnitude modulation depths in percent
 in anterior (top) and posterior (bottom) elements at f=62.5MHz and
 f=122.5MHz}
@@ -898,7 +899,7 @@ f=122.5MHz}
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=5.38958in]{./media/image12.emf}
+\includegraphics{./media/image12.emf}
 \caption{Bar-graph of phase modulation depths in radians in
 anterior (top) and posterior (bottom) elements at f=62.5MHz and
 f=122.5MHz}
@@ -935,7 +936,7 @@ shows mean \textbf{absolute} phase modulation.
 
 \begin{figure}
 \centering
-\includegraphics[width=6.26806in,height=5.41042in,alt={A screenshot of a graph Description automatically generated}]{./media/image13.png}
+\includegraphics[alt={A screenshot of a graph Description automatically generated}]{./media/image13.png}
 \caption{Calculated absolute magnitude (left) modulation
 depth in percent and phase (right) modulation depth in radians for
 anterior (top) and posterior (bottom) Rx channels. The dashed black line
