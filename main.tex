@@ -261,6 +261,8 @@ lies within the receiver's operating bandwidth but has enough separation
 in the frequency domain to the bandwidth occupied by the MR signal to
 not interfere with imaging.
 
+\rev{In practice, the PT signal is separated from the MR imaging signal in the frequency domain. The PT amplitude and phase are extracted from a narrow spectral bin (typically $\leq 5\,\mathrm{Hz}$ bandwidth) centered at $f_{PT}$ in the digitized receiver data \cite{Speier2015PT-Nav:MR-receiver}. This narrowband extraction provides substantial noise suppression ($\mathrm{SNR} \propto \sqrt{f_s / \Delta f}$, where $f_s$ is the sampling rate and $\Delta f$ the extraction bandwidth). The present work models only the electromagnetic physics of the modulation mechanism; the signal processing aspects of PT extraction are beyond its scope.}
+
 Since most biological tissues are almost completely transparent to
 magnetic fields, having relative permeabilities
 \(\mu_{r,tissue} = 1 + \chi_{tissue} \approx 1\)
@@ -729,7 +731,9 @@ background air material. Additionally, the current density (J) field in
 these two slices was extracted from the simulated J-field.
 
 S-parameter calculation was performed for each timeframe of the virtual
-phantoms cardiac cycle. To evaluate the change in received signal in
+phantoms cardiac cycle. \rev{Scattering parameters (S-parameters) characterize the transmission and reflection of electromagnetic waves in a multi-port network. In our setup, $S_{n,1}$ represents the complex transmission coefficient from the PT source (port 1) to receive coil element $n$ --- i.e., the ratio of the wave amplitude received at port $n$ to the wave amplitude incident at port 1, with all other ports terminated in their characteristic impedance $Z_0 = 50\,\Omega$. Changes in the tissue distribution between the transmit and receive ports alter $S_{n,1}$; the relative change $\Delta S_{n,1}/S_{n,1}$ between cardiac phases directly quantifies the modulation depth (see Appendix, Eq.~\ref{SParamCouplingSimplified}).}
+
+To evaluate the change in received signal in
 each Rx coil due to cardiac motion, we evaluated the S-parameter at
 typical frequencies (122.5MHz for 3T systems and 62.5MHz for 1.5T
 systems) in time direction and compared to the known volume curve of the
@@ -1051,6 +1055,10 @@ When integrating the PT generator in e.g. a abdominal coil array, it
 must be designed in such a way that the generator is optimally located
 when the coil array is positioned for optimal imaging.
 
+\rev{\subsubsection{Generator placement}\label{generator-placement}
+
+The position of the PT generator coil relative to the heart is a key design parameter. In this work, the generator was placed anterior to the chest wall, directly above the heart --- consistent with practical implementations where the PT source is integrated into the anterior coil array housing. Because the primary magnetic field decays as $r^{-3}$ (magnetic dipole), the induced eddy currents and consequently the secondary field scale strongly with distance. A generator placed closer to the heart produces stronger tissue-mediated coupling and thus higher modulation depths, while a more distant placement yields more uniform illumination at the expense of sensitivity. Optimization of generator position for specific clinical applications remains an interesting topic for future work.}
+
 \subsubsection{Limitations of the model}\label{limitations-of-the-model}
 
 While in vivo results agree well with simulations, some factors were not
@@ -1081,6 +1089,7 @@ Muscle fibers for instance are much more conductive in axial (1S/m) than
 radial (0.2S/m) direction \cite{Beck2005AAmplitudes}. To our knowledge, no commercial
 solvers currently exist that support tensorial electromagnetic
 parameters throughout the numerical simulation.
+\rev{However, the isotropic approximation is standard practice in RF safety simulations and MRI coil modeling at clinical frequencies. The bulk effect of tissue redistribution during cardiac motion --- replacing one tissue type with another --- is expected to dominate over local anisotropy effects. Furthermore, the volume-integrated nature of the PT signal (Appendix, Eq.~\ref{PortVoltage}) averages over many fiber orientations, reducing the impact of directional conductivity variations on the net modulation depth.}
 
 \section{Conclusion}\label{conclusion-1}
 
