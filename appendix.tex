@@ -19,7 +19,7 @@ where $\mathbf{J}_{src}$ is the current density in the transmit loop (zero elsew
 
 To simplify the derivation, we make the following assumptions:
 \begin{itemize}
-    \item all media are linear and anisotropic
+    \item all media are linear and \rev{isotropic}
     \item all media are non-magnetic, i.e. relative permeability is $\mu_r=1$ everywhere so that $\mathbf{B}=\mu_0 \mathbf{H}$
     \item the system is in a steady-state at frequency $\omega$. Transient motion effects are ignored as the time scale is orders of magnitude lower.
     \item Tissue properties are real-valued everywhere. We use complex admittivity defined as $\gamma = \sigma + j\omega\epsilon$
@@ -55,7 +55,7 @@ Substituting Eq.\eqref{maxwell1} and Eq.\eqref{maxwell2} and using complex admit
     = -j \omega \mu_0 (\mathbf{H}^b \mathbf{H}^a) - \mathbf{E}^a \mathbf{J}^b - \gamma(\mathbf{E}^a \mathbf{E}^b)
 \end{align}
 
-similarily for the second term of Eq.\eqref{lorentzreciprocity} we get
+\rev{Similarly} for the second term of Eq.\eqref{lorentzreciprocity} we get
 
 \begin{align}
     \nabla(\mathbf{E}^b \times \mathbf{H}^a) = -j \omega \mu_0 (\mathbf{H}^a \mathbf{H}^b) - \mathbf{E}^b \mathbf{J}^a - \gamma(\mathbf{E}^b \mathbf{E}^a)
@@ -77,7 +77,7 @@ only $\mathbf{E}^b \mathbf{J}^a - \mathbf{E}^a \mathbf{J}^b$ remains and
     \nabla (\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \mathbf{H}^a) = \mathbf{E}^b \mathbf{J}^a - \mathbf{E}^a \mathbf{J}^b
 \end{align}
 
-Note that these cancellations require the above assumptions/simplifications that all tissue characteristics are anisotropic (scalar $\sigma$, $\epsilon$ $\rightarrow$ symmetric $\gamma$) and nonmagnetic (uniform $\mu_0$).
+Note that these cancellations require the above assumptions/simplifications that all tissue characteristics are \rev{isotropic} (scalar $\sigma$, $\epsilon$ $\rightarrow$ symmetric $\gamma$) and nonmagnetic (uniform $\mu_0$).
 
 Integrating Eq. \eqref{before_reciprocity} over a volume $V$ bounded by a closed surface $S$ we find 
 
@@ -107,7 +107,7 @@ For a two-port subset, where port 1 is driven in configuration a, port n is driv
     V_1^a I_1^b + V_n^a I_n^b = V_1^b I_1^a + V_n^b I_n^a
 \end{align}
 
-In configuration a, port n is terminated (load $Z_0$ only, sno source) so the voltage at port n is purely due to coupling $ \rightarrow V_n^a = $ recieved voltage from PT. In configuration b, port 1 is terminated, so $V_1^b =$ recieved voltage from driven coil n.
+In configuration a, port n is terminated (load $Z_0$ only, \rev{no} source) so the voltage at port n is purely due to coupling $ \rightarrow V_n^a = $ \rev{received} voltage from PT. In configuration b, port 1 is terminated, so $V_1^b =$ \rev{received} voltage from driven coil n.
 
 For matched terminations and equal drive levels this yields the standard result:
 
@@ -116,18 +116,18 @@ For matched terminations and equal drive levels this yields the standard result:
     \frac{V_n^a}{I_1^a} = \frac{V_1^b}{I_n^b} \equiv Z_{n,1}
 \end{align}
 
-wherein $Z_{n,1}$ is the transimpedence between port 1 and port n.
+wherein $Z_{n,1}$ is the \rev{transimpedance} between port 1 and port n.
 
 
 \subsection{Evaluation of the surface integral}
 
-We apply the reciprocity Theorem (Eq. \eqref{lorentzreciprocity} to the PT system, where configuration (a) is the PT transmitter as port $1$ and configuration (b) is the recieve element $n$. For a linear, isotropic system, the multi-port network is reciprocal ($Z_{n,1}=Z_{1,n}$. 
+We apply the reciprocity Theorem (Eq. \eqref{lorentzreciprocity}) to the PT system, where configuration (a) is the PT transmitter as port $1$ and configuration (b) is the \rev{receive} element $n$. For a linear, isotropic system, the multi-port network is reciprocal ($Z_{n,1}=Z_{1,n}$).
 
 We now derive the explicit expression for $V_n^a$, the voltage induced at receive port n by the PT transmitter.
 
-We use Eq. \eqref{lorentzreciprocity} and seperate the volume integral into three non-overlapping regions: $V = V_{ports} \cup V_{body} \cup V_{free}$ where $V_{ports}$ contains the antenna conductors, $V_{body}$ is the tissue volume and $V_{free}$ is free space.
+We use Eq. \eqref{lorentzreciprocity} and \rev{separate} the volume integral into three non-overlapping regions: $V = V_{ports} \cup V_{body} \cup V_{free}$ where $V_{ports}$ contains the antenna conductors, $V_{body}$ is the tissue volume and $V_{free}$ is free space.
 
-in $V_{free}$ $\simga=0$, $\epsilon = \epsilon_0$ adn trhere are no sources $\rightarrow$ no contribution to the right side.
+\rev{In} $V_{free}$\rev{:} $\sigma=0$, $\epsilon = \epsilon_0$ \rev{and there are no sources} $\rightarrow$ no contribution to the right side.
 
 In $V_{ports}$ the source contribution is captured by the port terms of Eq. \eqref{harringtonTLM}. In $V_{body}$ there are no impressed sources ($\mathbf{J}^a=\mathbf{J}^b=0$, but $\gamma \neq 0$ since tissue has nonzero $\sigma, \epsilon$.
 
@@ -221,8 +221,8 @@ The received voltage in port n $V_n$ can be decomposed by splitting the domain o
     V_n = \iiint_{all space} \gamma (\mathbf{E}_1 \mathbf{E}_n)dV
 \end{align}
 
-In free sapce outside the body, $\gamma = j \omega \Epsilon_0$, which is purely reactive and represents direct magnetic coupling (or in other words displacement-current coupling).
-Inside the body, $\gamma = \sigma + j\omega \espilon$ includes the conductive (lossy) contribution.
+In free \rev{space} outside the body, $\gamma = j \omega \epsilon_0$, which is purely reactive and represents direct magnetic coupling (or in other words displacement-current coupling).
+Inside the body, $\gamma = \sigma + j\omega \epsilon$ includes the conductive (lossy) contribution.
 
 The total coupling between the source and port n can be expressed through mutual impedance:
 
@@ -231,9 +231,9 @@ The total coupling between the source and port n can be expressed through mutual
     Z_{n,1} = Z_{n,1}^{direct} + Z_{n,a}^{tissue}
 \end{align}
 
-where $Z_{n,1}^{direct} = j \omega M_0$ is the mutual impedance in the absence of condictive tissue. $M_0$ is the mutual inductance between transmit loop and recieve loop n, determined solely by coil geometry and separation. It is frequency dependent only through the $j \omega$ factor.
+where $Z_{n,1}^{direct} = j \omega M_0$ is the mutual impedance in the absence of conductive tissue. $M_0$ is the mutual inductance between transmit loop and \rev{receive} loop n, determined solely by coil geometry and separation. It is frequency dependent only through the $j \omega$ factor.
 
-$Z_{n,1}^{tissue}$ is the additional impedance arising from the conductive tissue. It represents the coupling path PT loop $\rightarrow$ H-field $\rightarrow$ Faraday-induced E-field in the body $\rightarrow$ eddy-currents $\rightarrow$ secondary H-field $\rightarrow$ recieved at port n. This term depends on the tissue property distribution and therefore changes when cardiac motion redistributes tissue.
+$Z_{n,1}^{tissue}$ is the additional impedance arising from the conductive tissue. It represents the coupling path PT loop $\rightarrow$ H-field $\rightarrow$ Faraday-induced E-field in the body $\rightarrow$ eddy-currents $\rightarrow$ secondary H-field $\rightarrow$ \rev{received} at port n. This term depends on the tissue property distribution and therefore changes when cardiac motion redistributes tissue.
 
 The corresponding voltages (with $I_1=1A$ normalized) are:
 
@@ -268,7 +268,7 @@ The change in voltage is
 
 The first-order Born approximation \cite{Chew1995MathematicalTheory} (Chap 8.10) is a linearization of the scattering problem in which the total field inside a perturbed region is approximated by the unperturbed (incident) field.
 This assumes, that the secondary field produced by the perturbation is negligible compared to the primary field, i.e. $|E_{scattered}| \ll |E_{incident}|$ (and $|B_{scattered}| \ll |B_{incident}|$). This is the case when the scattering object is electrically small and/or weakly contrasting in its electrical parameters compared to the background.
-In the present contect, the "perturbation" is not the entire body (which produces substantial loading), but rather the redistribution of tissue during cardiac motion (a volume $V_{\Delta} \approx 250mL$, based on typical stroke volume) with admittivity contrast $|\frac{\Delta \gamma}{\gamma}| \approx 0.5$. Since this displacement volume is small compared to the total body volume, the illuminated volume of each recieve element and even the typical wavelength in tissue, the condition(s) for the Born application are satisfied. Experimental and simulation results for cardiac modulation depths of $M_n<1\%$ further validate the assumption, that the secondary/scattered field is extremely small compared to the primary/incident field.
+In the present \rev{context}, the "perturbation" is not the entire body (which produces substantial loading), but rather the redistribution of tissue during cardiac motion (a volume $V_{\Delta} \approx 250mL$, based on typical stroke volume) with admittivity contrast $|\frac{\Delta \gamma}{\gamma}| \approx 0.5$. Since this displacement volume is small compared to the total body volume, the illuminated volume of each \rev{receive} element and even the typical wavelength in tissue, the condition(s) for the Born application are satisfied. Experimental and simulation results for cardiac modulation depths of $M_n<1\%$ further validate the assumption, that the secondary/scattered field is extremely small compared to the primary/incident field.
 This allows us to write the signal change $\Delta V_n$ as a linear function of $\Delta\gamma$ weighted by the unperturbed field overlap, without requiring more complex iterative solutions:
 
 \begin{align}
@@ -301,18 +301,18 @@ The transimpedance $Z_{n,1}$, defined as the open-circuit voltage appearing at p
 
 bridges the derivation of the voltage integral (Eq. \eqref{CoouplingVoltages} with the circuital and S-parameter models.
 
-Using the transimpedence normalizes out the drive current: the reciprocity integral
+Using the \rev{transimpedance} normalizes out the drive current: the reciprocity integral
 
 \begin{align}
     \label{recInt}
     V_n = I_1 \iiint \gamma (e_1 \cdot e_n) dV
 \end{align}
 
-gives $V_n$ for a specific drive current $I_1$. Dividing by $I_1$ yields the transimpedence $Z_{n,1}$ - a system property independent of excitation amplitude.
+gives $V_n$ for a specific drive current $I_1$. Dividing by $I_1$ yields the \rev{transimpedance} $Z_{n,1}$ - a system property independent of excitation amplitude.
 
-Reciprocity is cleanly contained in the transimpedence: Eqn. \eqref{PortReciprocity} directly shows $Z_{n,1} = Z_{1,n}$ - the transimpedence is symmetric.
+Reciprocity is cleanly contained in the \rev{transimpedance}: Eqn. \eqref{PortReciprocity} directly shows $Z_{n,1} = Z_{1,n}$ - the \rev{transimpedance} is symmetric.
 
-The relationship between $S_{n,1}$ and the transimpedence $Z_{n,1}$ is shown below (citation pending):
+The relationship between $S_{n,1}$ and the \rev{transimpedance} $Z_{n,1}$ is shown below (citation pending):
 
 \begin{align}
     \label{SandZ}
@@ -326,7 +326,7 @@ In this application, the inter-port coupling is weak compared to port-port coupl
     S_{n,1} \approx \frac{2Z_0 Z_{n,1}}{(Z_0 + Z_{11})(Z_0 + Z_{nn})}
 \end{align}
 
-The port self-impedences $Z_{1,1}$ and $Z_{n,n}$ lump together both coil impedance and body loading. Coil impedence is unchanged by tissue replacement and coil loading is dominated mainly by local tissue around the coil and not the minute changes in the comperatively far away cardiac region.
+The port self-\rev{impedances} $Z_{1,1}$ and $Z_{n,n}$ lump together both coil impedance and body loading. Coil \rev{impedance} is unchanged by tissue replacement and coil loading is dominated mainly by local tissue around the coil and not the minute changes in the \rev{comparatively} far away cardiac region.
 
 With $|Z_{n,1}| >> |Z_{1,1}|$ and $|Z_{n,1}| >> |Z_{n,n}|$, the denominator in Eq. \eqref{SparamWOinterportCoupling} is approximately constant between cardiac phases and consequently
 
@@ -335,7 +335,7 @@ With $|Z_{n,1}| >> |Z_{1,1}|$ and $|Z_{n,1}| >> |Z_{n,n}|$, the denominator in E
     \frac{\Delta S_{n,1}}{S_{n,1}} \approx \frac{\Delta Z_{n,1}}{Z_{n,1}} = \frac{\Delta V_n}{V_n} = M_n
 \end{align}
 
-with $M_n$ the modulation depth in receive channel n. The transimpedence is the carrier of PT signal modulation.
+with $M_n$ the modulation depth in receive channel n. The \rev{transimpedance} is the carrier of PT signal modulation.
 
 This also connects this theoretical derivation to the full-wave simulation, where the modulation depth is defined as:
 
@@ -374,7 +374,7 @@ This complex impedance has real- and imaginary parts
 
 \textbf{Equivalent RLC circuit}
 
-The reciewve coil element n can be modeled as a series RLC circuit:
+The \rev{receive} coil element n can be modeled as a series RLC circuit:
 
 \begin{align}
     Z_n = R_{coil} + R_{tissue} + j (\omega L_{coil} - \frac{1}{\omega C_{tune}} + X_{tissue})
