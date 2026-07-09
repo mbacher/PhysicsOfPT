@@ -854,7 +854,7 @@ anterior element.
 Modulation depths (see also Table 1 and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) were found to be
 slightly higher in the anterior elements at 122.5MHz (mean modulation
 depth 0.14\% anterior vs. 0.12\% posterior) and almost similar at
-62.5MHz (0.06\% anterior vs. 0.065\% posterior)
+62.5MHz (0.06\% anterior vs. 0.065\% posterior)\revred{. Per-channel modulation depths and signed correlation coefficients are listed in Table~\ref{tab:per-channel}.}
 
 Direct coupling, i.e. mean received amplitudes as well as modulation
 depths overall appear to increase roughly linearly with frequency --
@@ -972,6 +972,61 @@ shows the mean modulation depth over all channels. For phase, the dashed
 black line shows mean \textbf{absolute} modulation depth.}
 \label{fig:mod-depth-vs-frequency}
 \end{figure}
+
+\revred{
+\subsubsection{Per-channel correlation with cardiac volume}\label{per-channel-correlation}
+
+Table~\ref{tab:per-channel} lists the signed Pearson correlation coefficient $R$ and magnitude modulation depth $m_{D,\text{mag}}$ for each receive channel at both 62.5\,MHz and 122.5\,MHz. The sign of $R$ indicates whether the received signal magnitude increases (positive) or decreases (negative) with increasing cardiac volume. Channels where $|R| > 0.99$ exhibit near-perfect linear tracking of cardiac volume changes. Notably, most channels show $|R| > 0.97$, confirming that the PT magnitude signal can serve as a reliable surrogate for cardiac volume in nearly all spatial positions. Channel S2,1 at 62.5\,MHz and S12,1 at 122.5\,MHz show reduced correlation due to the sign-flip phenomenon discussed above.
+}
+
+\begin{table}[ht]
+\centering
+\revred{
+\caption{Per-channel signed Pearson correlation coefficient $R$ and magnitude modulation depth $m_{D,\text{mag}}$ [\%] between the simulated S-parameter magnitude and heart volume ground truth.}
+\label{tab:per-channel}
+\small
+\begin{tabular}{l|rr|rr}
+\hline
+ & \multicolumn{2}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{2}{c}{\textbf{122.5 MHz (3T)}} \\
+\textbf{Channel} & $R$ & $m_D$ [\%] & $R$ & $m_D$ [\%] \\
+\hline
+\multicolumn{5}{l}{\textit{Anterior array}} \\
+\hline
+$S_{2,1}$  & $+0.31$ & $0.02$ & $-1.00$ & $0.11$ \\
+$S_{3,1}$  & $+1.00$ & $0.08$ & $-0.99$ & $0.10$ \\
+$S_{4,1}$  & $+1.00$ & $0.08$ & $-0.99$ & $0.16$ \\
+$S_{5,1}$  & $+1.00$ & $0.06$ & $-0.99$ & $0.34$ \\
+$S_{6,1}$  & $-1.00$ & $1.38$ & $+0.97$ & $0.20$ \\
+$S_{7,1}$  & $-1.00$ & $1.40$ & $+1.00$ & $2.84$ \\
+$S_{8,1}$  & $-1.00$ & $1.42$ & $+1.00$ & $6.17$ \\
+$S_{9,1}$  & $-1.00$ & $0.78$ & $+1.00$ & $2.46$ \\
+$S_{10,1}$ & $-1.00$ & $1.70$ & $-1.00$ & $4.78$ \\
+$S_{11,1}$ & $-1.00$ & $1.25$ & $-1.00$ & $3.25$ \\
+$S_{12,1}$ & $+0.99$ & $0.08$ & $-0.36$ & $0.02$ \\
+$S_{13,1}$ & $-1.00$ & $1.26$ & $-1.00$ & $3.53$ \\
+\hline
+\multicolumn{5}{l}{\textit{Posterior array}} \\
+\hline
+$S_{14,1}$ & $-1.00$ & $1.23$ & $-1.00$ & $7.88$ \\
+$S_{15,1}$ & $-1.00$ & $2.16$ & $-1.00$ & $3.77$ \\
+$S_{16,1}$ & $-1.00$ & $1.36$ & $-1.00$ & $3.26$ \\
+$S_{17,1}$ & $-1.00$ & $1.25$ & $-1.00$ & $2.23$ \\
+$S_{18,1}$ & $-1.00$ & $1.09$ & $+0.78$ & $1.15$ \\
+$S_{19,1}$ & $-1.00$ & $2.09$ & $+1.00$ & $1.43$ \\
+$S_{20,1}$ & $-1.00$ & $1.73$ & $+0.98$ & $5.14$ \\
+$S_{21,1}$ & $-1.00$ & $1.49$ & $+0.87$ & $1.25$ \\
+$S_{22,1}$ & $-1.00$ & $0.83$ & $+1.00$ & $1.79$ \\
+$S_{23,1}$ & $+1.00$ & $0.08$ & $-1.00$ & $0.10$ \\
+$S_{24,1}$ & $+0.99$ & $0.07$ & $-1.00$ & $0.14$ \\
+$S_{25,1}$ & $+0.89$ & $0.05$ & $-1.00$ & $0.26$ \\
+$S_{26,1}$ & $+1.00$ & $0.09$ & $-0.94$ & $0.03$ \\
+$S_{27,1}$ & $+1.00$ & $0.05$ & $-0.97$ & $0.04$ \\
+$S_{28,1}$ & $+1.00$ & $0.05$ & $-0.99$ & $0.09$ \\
+$S_{29,1}$ & $+1.00$ & $0.05$ & $-0.99$ & $0.30$ \\
+\hline
+\end{tabular}
+}
+\end{table}
 
 \section{Discussion}\label{discussion}
 
