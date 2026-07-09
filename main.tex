@@ -7,6 +7,7 @@
 \usepackage[normalem]{ulem} % for \sout (strikethrough)
 \newcommand{\rev}[1]{\textcolor{blue}{#1}}
 \newcommand{\revdel}[1]{\textcolor{red}{\sout{#1}}}
+\newcommand{\revred}[1]{\textcolor{red}{#1}}
 \usepackage{amsmath,amssymb}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
@@ -136,8 +137,8 @@ Differences in conductivity between tissues and their movement during
 the cardiac cycle is the driving force behind the observed PT signal
 modulation. Simulations \rev{reproduce expected signal modulation trends and provide mechanistic insight into} how signal modulation due to
 cardiac motion can be sensed throughout the measurement volume. The
-measured signal modulation is strongly correlated to total cardiac
-volume.
+measured signal modulation is \revred{quantitatively} strongly correlated to total cardiac
+volume \revred{($|R| > 0.94$)}.
 
 \subsection{Conclusion}\label{conclusion}
 
@@ -821,12 +822,33 @@ Table 1.
 All evaluations were performed at frequencies of 62.5 MHz and 122.5MHz,
 suitable for field strengths of 1.5T and 3T, respectively.
 
+\revred{To quantify the relationship between the simulated S-parameter modulation and cardiac motion, we computed the Pearson correlation coefficient $|R|$ between the magnitude of each channel's S-parameter curve and the total heart volume ground truth extracted from the voxel model across all 12 cardiac phases. Results are summarized in Table~\ref{tab:correlation}.}
+
+\begin{table}[ht]
+\centering
+\revred{
+\caption{Pearson correlation coefficient $|R|$ and magnitude modulation depth $m_{D,\text{mag}}$ between simulated S-parameter curves and heart volume ground truth, given as mean $\pm$ SD across channels.}
+\label{tab:correlation}
+\begin{tabular}{l|cc|cc}
+\hline
+ & \multicolumn{2}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{2}{c}{\textbf{122.5 MHz (3T)}} \\
+\textbf{Array} & $|R|$ & $m_{D,\text{mag}}$ [\%] & $|R|$ & $m_{D,\text{mag}}$ [\%] \\
+\hline
+Anterior (S2--S13) & $0.94 \pm 0.20$ & $0.79 \pm 0.68$ & $0.94 \pm 0.18$ & $2.00 \pm 2.14$ \\
+Posterior (S14--S29) & $0.99 \pm 0.03$ & $0.85 \pm 0.79$ & $0.97 \pm 0.06$ & $1.80 \pm 2.23$ \\
+\hline
+All channels & $0.97 \pm 0.13$ & $0.83 \pm 0.73$ & $0.96 \pm 0.13$ & $1.89 \pm 2.15$ \\
+\hline
+\end{tabular}
+}
+\end{table}
+
 \subsubsection{Magnitude modulation:}\label{magnitude-modulation}
 
 Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122} show the received magnitude signal over time in dBm
 (rescaled to 1mW input power) during one cardiac cycle, evaluated at
-62.5 and 122.5MHz. Received signal curves correlate qualitatively
-extremely well to total cardiac volume, plotted in red, in all but one
+62.5 and 122.5MHz. \revred{Received signal curves show strong quantitative correlation to total cardiac volume ($|R| = 0.97 \pm 0.13$ at 62.5\,MHz, $|R| = 0.96 \pm 0.13$ at 122.5\,MHz, see Table~\ref{tab:correlation})}\revdel{Received signal curves correlate qualitatively
+extremely well to total cardiac volume}, plotted in red, in all but one
 anterior element.
 
 Modulation depths (see also Table 1 and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) were found to be
@@ -1041,7 +1063,7 @@ avoid ``blind spots'' in sensitivity to motion that can occur in
 magnitude only processing.
 
 The strong correlation of the received signal with cardiac volume ground
-truth suggests that, at least approximately, the cardiac PT signal may
+truth \revred{($|R| > 0.94$ on average across all channels and both frequencies, Table~\ref{tab:correlation})} suggests that, at least approximately, the cardiac PT signal may
 be seen as a proxy for total cardiac volume. Importantly, maxima and
 minima of the heart volume curve (i.e. the onset of mechanical systole
 and the point of maximum contraction) closely match ground truth.
