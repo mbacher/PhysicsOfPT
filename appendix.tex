@@ -393,6 +393,94 @@ The loaded and unloaded quality factors are:
 
 At clinical frequencies (0.5T, 1.5T and 3T) body noise dominates, so $R_{\rev{\mathrm{tissue}}} \rev{\gg} R_{\rev{\mathrm{coil}}}$ and $Q_{\rev{\mathrm{loaded}}} \rev{\ll} Q_{\rev{\mathrm{unloaded}}}$ [Edelstein 1986, Hoult & Lauterbur 1979].
 
+Figure~\ref{fig:appendix-circuit} shows the complete equivalent circuit corresponding to this multiport formulation. Unlike the simplified lumped model in the main text (Figure~\ref{fig:equivalent-circuit}), this representation explicitly separates self-loading (body impedance on each port) from the body-mediated mutual coupling that carries the PT signal.
+
+\begin{figure}[htbp]
+\centering
+\begin{circuitikz}[
+    scale=0.85, transform shape,
+    every node/.style={font=\small},
+    annotation/.style={font=\footnotesize\itshape, text=violet}
+]
+
+% === TX Port (Port 1) ===
+% Source
+\draw (0,0) to[sinusoidal voltage source, l=$V_{PT}$] (0,3);
+% Coil resistance
+\draw (0,3) to[R, l=$R_{\mathrm{coil},1}$] (2.5,3);
+% Coil inductance (TX)
+\draw (2.5,3) to[cute inductor, l=$L_1$] (4.5,3);
+% Body self-loading TX
+\draw (4.5,3) to[generic, l=$Z_{11}^{\mathrm{body}}$, color=violet] (4.5,0);
+% Ground return TX
+\draw (0,0) -- (4.5,0);
+
+% Port 1 label
+\node[above] at (0,3.2) {\textbf{Port 1 (TX)}};
+
+% Z11 annotation
+\node[annotation, right] at (5.0,1.5) {$= R_{\mathrm{tissue},1} + jX_{\mathrm{tissue},1}$};
+\node[annotation, right] at (5.0,0.9) {$= \iiint \gamma\,|\mathbf{e}_1|^2\,dV$};
+
+% === RX Port (Port n) ===
+% Shifted right
+\def\rxshift{10}
+% Coil inductance (RX)
+\draw (\rxshift,3) to[cute inductor, l_=$L_n$] (\rxshift+2,3);
+% Coil resistance
+\draw (\rxshift+2,3) to[R, l=$R_{\mathrm{coil},n}$] (\rxshift+4.5,3);
+% Tuning capacitor
+\draw (\rxshift+4.5,3) to[C, l=$C_{\mathrm{tune}}$] (\rxshift+4.5,0);
+% Body self-loading RX
+\draw (\rxshift,3) to[generic, l_=$Z_{nn}^{\mathrm{body}}$, color=violet] (\rxshift,0);
+% Ground return RX
+\draw (\rxshift,0) -- (\rxshift+4.5,0);
+% Output
+\draw (\rxshift+4.5,3) -- (\rxshift+5.5,3);
+\draw (\rxshift+4.5,0) -- (\rxshift+5.5,0);
+\node[right] at (\rxshift+5.5,1.5) {$V_{\mathrm{out}}$};
+\draw[<->] (\rxshift+5.5,0.2) -- (\rxshift+5.5,2.8);
+
+% Port n label
+\node[above] at (\rxshift+2.5,3.2) {\textbf{Port $n$ (RX)}};
+
+% Znn annotation
+\node[annotation, left] at (\rxshift-0.5,1.5) {$= R_{\mathrm{tissue},n} + jX_{\mathrm{tissue},n}$};
+\node[annotation, left] at (\rxshift-0.5,0.9) {$= \iiint \gamma\,|\mathbf{e}_n|^2\,dV$};
+
+% === Direct Magnetic Coupling (M) ===
+% Coupling arc between inductors
+\draw[<->, thick, blue!60!black] (3.5,4.0) to[bend left=30]
+    node[midway, above, font=\small] {$M_{1n}$ (direct)}
+    (\rxshift+1,4.0);
+
+% === Body-Mediated Coupling ===
+% Controlled voltage source on RX side representing Z_{n,1}^body
+\draw[thick, violet] (4.5,-1.5) -- (\rxshift,-1.5);
+\node[draw, thick, violet, fill=violet!5, minimum width=3.5cm, minimum height=1.0cm] 
+    at (7.25,-1.5) {$Z_{n,1}^{\mathrm{body}} = \iiint \gamma\,(\mathbf{e}_1 \cdot \mathbf{e}_n)\,dV$};
+
+% Connect body coupling to ports
+\draw[thick, violet, dashed] (4.5,0) -- (4.5,-1.0);
+\draw[thick, violet, dashed] (\rxshift,0) -- (\rxshift,-1.0);
+
+% Modulation annotation
+\node[annotation, text=violet, fill=white, draw=violet, rounded corners, inner sep=3pt] 
+    at (7.25,-2.8) {Modulated by cardiac motion: $\Delta Z_{n,1}^{\mathrm{body}} \rightarrow M_n$};
+
+% === Legend / Key ===
+\node[draw, rounded corners, fill=gray!5, inner sep=5pt, font=\footnotesize, 
+    text width=5.5cm, align=left] at (7.25,-4.5) {
+    \textcolor{violet}{\rule{0.5cm}{2pt}} Body-mediated (volume integral)\\
+    \textcolor{blue!60!black}{\rule{0.5cm}{2pt}} Direct magnetic coupling\\[2pt]
+    PT signal: $\Delta S_{n,1}/S_{n,1} \approx \Delta Z_{n,1}^{\mathrm{body}}/Z_{n,1}$
+};
+
+\end{circuitikz}
+\caption{Multiport equivalent circuit derived from the Lorentz reciprocity volume integral formulation. Each port experiences body self-loading ($Z_{nn}^{\mathrm{body}}$, modifying coil Q-factor) and is coupled via two paths: direct magnetic coupling ($M_{1n}$, approximately constant) and body-mediated mutual impedance ($Z_{n,1}^{\mathrm{body}}$, carrying the PT signal). Cardiac motion modulates $Z_{n,1}^{\mathrm{body}}$ while self-impedances remain approximately constant, leading to $\Delta S_{n,1}/S_{n,1} \approx \Delta Z_{n,1}^{\mathrm{body}}/Z_{n,1}$ (Eq.~\eqref{SParamCouplingSimplified}).}
+\label{fig:appendix-circuit}
+\end{figure}
+
 
 \textbf{Modulation in the RLC model}
 
