@@ -817,7 +817,7 @@ expansion and maximum contraction of the cardiac volume ground truth.
 
 Modulation depths of individual channels are compared graphically in
 Figure~\ref{fig:mod-depth-bars-mag} for magnitude and in Figure~\ref{fig:mod-depth-bars-phase} for phase and summarized in
-Table 1.
+Figure~\ref{fig:mod-depth-summary}\revred{, with per-channel correlation coefficients listed in Table~\ref{tab:per-channel}}.
 
 All evaluations were performed at frequencies of 62.5 MHz and 122.5MHz,
 suitable for field strengths of 1.5T and 3T, respectively.
@@ -827,17 +827,20 @@ suitable for field strengths of 1.5T and 3T, respectively.
 \begin{table}[ht]
 \centering
 \revred{
-\caption{Pearson correlation coefficient $|R|$ and magnitude modulation depth $m_{D,\text{mag}}$ between simulated S-parameter curves and heart volume ground truth, given as mean $\pm$ SD across channels.}
+\caption{Pearson correlation coefficient $|R|$ and modulation depth $m_D$ between simulated S-parameter curves and heart volume ground truth, given as mean $\pm$ SD across channels. Magnitude modulation depth is in percent; phase modulation depth in radians.}
 \label{tab:correlation}
-\begin{tabular}{l|cc|cc}
+\begin{tabular}{ll|cc|cc}
 \hline
- & \multicolumn{2}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{2}{c}{\textbf{122.5 MHz (3T)}} \\
-\textbf{Array} & $|R|$ & $m_{D,\text{mag}}$ [\%] & $|R|$ & $m_{D,\text{mag}}$ [\%] \\
+ & & \multicolumn{2}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{2}{c}{\textbf{122.5 MHz (3T)}} \\
+\textbf{Array} & \textbf{Signal} & $|R|$ & $m_D$ & $|R|$ & $m_D$ \\
 \hline
-Anterior (S2--S13) & $0.94 \pm 0.20$ & $0.79 \pm 0.68$ & $0.94 \pm 0.18$ & $2.00 \pm 2.14$ \\
-Posterior (S14--S29) & $0.99 \pm 0.03$ & $0.85 \pm 0.79$ & $0.97 \pm 0.06$ & $1.80 \pm 2.23$ \\
+Anterior (S2--S13) & Mag. [\%] & $0.94 \pm 0.20$ & $0.79 \pm 0.68$ & $0.94 \pm 0.18$ & $2.00 \pm 2.14$ \\
+                   & Phase [rad] & $0.90 \pm 0.28$ & $0.004 \pm 0.004$ & $0.98 \pm 0.05$ & $0.017 \pm 0.023$ \\
+Posterior (S14--S29) & Mag. [\%] & $0.99 \pm 0.03$ & $0.85 \pm 0.79$ & $0.97 \pm 0.06$ & $1.80 \pm 2.23$ \\
+                     & Phase [rad] & $0.99 \pm 0.03$ & $0.005 \pm 0.005$ & $0.99 \pm 0.02$ & $0.035 \pm 0.041$ \\
 \hline
-All channels & $0.97 \pm 0.13$ & $0.83 \pm 0.73$ & $0.96 \pm 0.13$ & $1.89 \pm 2.15$ \\
+All channels & Mag. [\%] & $0.97 \pm 0.13$ & $0.83 \pm 0.73$ & $0.96 \pm 0.13$ & $1.89 \pm 2.15$ \\
+             & Phase [rad] & $0.95 \pm 0.18$ & $0.004 \pm 0.005$ & $0.98 \pm 0.04$ & $0.027 \pm 0.035$ \\
 \hline
 \end{tabular}
 }
@@ -851,7 +854,7 @@ Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122} show the receiv
 extremely well to total cardiac volume}, plotted in red, in all but one
 anterior element.
 
-Modulation depths (see also Table 1 and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) were found to be
+Modulation depths (see also Figure~\ref{fig:mod-depth-summary} and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) were found to be
 slightly higher in the anterior elements at 122.5MHz (mean modulation
 depth 0.14\% anterior vs. 0.12\% posterior) and almost similar at
 62.5MHz (0.06\% anterior vs. 0.065\% posterior)\revred{. Per-channel modulation depths and signed correlation coefficients are listed in Table~\ref{tab:per-channel}.}
@@ -865,7 +868,7 @@ modulation depth.
 
 Figures~\ref{fig:rx-phase-62} and~\ref{fig:rx-phase-122} show the received phase signal over time at 62.5MHz and
 122.5MHz in anterior and posterior elements. Phase modulation
-(individual elements summarized in Table 1 and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) also
+(individual elements summarized in Figure~\ref{fig:mod-depth-summary} and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) also
 correlates very well quantitatively to cardiac volume ground truth.
 Contrary to magnitude modulation depth, phase modulation depth increased
 by a factor of 5 in anterior elements and 7 in posterior elements when
@@ -976,53 +979,54 @@ black line shows mean \textbf{absolute} modulation depth.}
 \revred{
 \subsubsection{Per-channel correlation with cardiac volume}\label{per-channel-correlation}
 
-Table~\ref{tab:per-channel} lists the signed Pearson correlation coefficient $R$ and magnitude modulation depth $m_{D,\text{mag}}$ for each receive channel at both 62.5\,MHz and 122.5\,MHz. The sign of $R$ indicates whether the received signal magnitude increases (positive) or decreases (negative) with increasing cardiac volume. Channels where $|R| > 0.99$ exhibit near-perfect linear tracking of cardiac volume changes. Notably, most channels show $|R| > 0.97$, confirming that the PT magnitude signal can serve as a reliable surrogate for cardiac volume in nearly all spatial positions. Channel S2,1 at 62.5\,MHz and S12,1 at 122.5\,MHz show reduced correlation due to the sign-flip phenomenon discussed above.
+Table~\ref{tab:per-channel} lists the signed Pearson correlation coefficient $R$ and modulation depth for each receive channel at both 62.5\,MHz and 122.5\,MHz, for both magnitude and phase. The sign of $R$ indicates whether the received signal increases (positive) or decreases (negative) with increasing cardiac volume. For magnitude, modulation depth is given as $(|S|_{\max} - |S|_{\min}) / \overline{|S|} \times 100\%$; for phase, it is the signed phase difference (in radians) between the cardiac phase of maximum expansion (frame~1) and maximum contraction (frame~7). Channels where $|R| > 0.99$ exhibit near-perfect linear tracking of cardiac volume changes. Notably, most channels show $|R| > 0.97$ for both magnitude and phase, confirming that the PT signal can serve as a reliable surrogate for cardiac volume in nearly all spatial positions. Channel S2,1 at 62.5\,MHz and S12,1 at 122.5\,MHz show reduced magnitude correlation due to the sign-flip phenomenon discussed above, while phase correlation remains high in these channels.
 }
 
 \begin{table}[ht]
 \centering
 \revred{
-\caption{Per-channel signed Pearson correlation coefficient $R$ and magnitude modulation depth $m_{D,\text{mag}}$ [\%] between the simulated S-parameter magnitude and heart volume ground truth.}
+\caption{Per-channel signed Pearson correlation coefficient $R$ and modulation depth between the simulated S-parameter and heart volume ground truth. Magnitude modulation depth $m_{D,\text{mag}}$ is given in percent; phase modulation depth $m_{D,\text{ph}}$ in radians (signed, defined as the phase difference between maximum expansion and maximum contraction).}
 \label{tab:per-channel}
 \small
-\begin{tabular}{l|rr|rr}
+\begin{tabular}{l|rr|rr|rr|rr}
 \hline
- & \multicolumn{2}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{2}{c}{\textbf{122.5 MHz (3T)}} \\
-\textbf{Channel} & $R$ & $m_D$ [\%] & $R$ & $m_D$ [\%] \\
+ & \multicolumn{4}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{4}{c}{\textbf{122.5 MHz (3T)}} \\
+ & \multicolumn{2}{c|}{Magnitude} & \multicolumn{2}{c|}{Phase} & \multicolumn{2}{c|}{Magnitude} & \multicolumn{2}{c}{Phase} \\
+\textbf{Channel} & $R$ & $m_D$ [\%] & $R$ & $m_D$ [rad] & $R$ & $m_D$ [\%] & $R$ & $m_D$ [rad] \\
 \hline
-\multicolumn{5}{l}{\textit{Anterior array}} \\
+\multicolumn{9}{l}{\textit{Anterior array}} \\
 \hline
-$S_{2,1}$  & $+0.31$ & $0.02$ & $-1.00$ & $0.11$ \\
-$S_{3,1}$  & $+1.00$ & $0.08$ & $-0.99$ & $0.10$ \\
-$S_{4,1}$  & $+1.00$ & $0.08$ & $-0.99$ & $0.16$ \\
-$S_{5,1}$  & $+1.00$ & $0.06$ & $-0.99$ & $0.34$ \\
-$S_{6,1}$  & $-1.00$ & $1.38$ & $+0.97$ & $0.20$ \\
-$S_{7,1}$  & $-1.00$ & $1.40$ & $+1.00$ & $2.84$ \\
-$S_{8,1}$  & $-1.00$ & $1.42$ & $+1.00$ & $6.17$ \\
-$S_{9,1}$  & $-1.00$ & $0.78$ & $+1.00$ & $2.46$ \\
-$S_{10,1}$ & $-1.00$ & $1.70$ & $-1.00$ & $4.78$ \\
-$S_{11,1}$ & $-1.00$ & $1.25$ & $-1.00$ & $3.25$ \\
-$S_{12,1}$ & $+0.99$ & $0.08$ & $-0.36$ & $0.02$ \\
-$S_{13,1}$ & $-1.00$ & $1.26$ & $-1.00$ & $3.53$ \\
+$S_{2,1}$  & $+0.31$ & $0.02$ & $-0.99$ & $-0.001$ & $-1.00$ & $0.11$ & $+0.83$ & $+0.001$ \\
+$S_{3,1}$  & $+1.00$ & $0.08$ & $-1.00$ & $-0.001$ & $-0.99$ & $0.10$ & $-0.94$ & $-0.000$ \\
+$S_{4,1}$  & $+1.00$ & $0.08$ & $-1.00$ & $-0.001$ & $-0.99$ & $0.16$ & $-1.00$ & $-0.001$ \\
+$S_{5,1}$  & $+1.00$ & $0.06$ & $-1.00$ & $-0.003$ & $-0.99$ & $0.34$ & $+0.98$ & $+0.000$ \\
+$S_{6,1}$  & $-1.00$ & $1.38$ & $-0.92$ & $-0.000$ & $+0.97$ & $0.20$ & $+1.00$ & $+0.027$ \\
+$S_{7,1}$  & $-1.00$ & $1.40$ & $-0.87$ & $-0.000$ & $+1.00$ & $2.84$ & $+1.00$ & $+0.065$ \\
+$S_{8,1}$  & $-1.00$ & $1.42$ & $-0.03$ & $+0.000$ & $+1.00$ & $6.17$ & $+1.00$ & $+0.060$ \\
+$S_{9,1}$  & $-1.00$ & $0.78$ & $+1.00$ & $+0.004$ & $+1.00$ & $2.46$ & $+1.00$ & $+0.002$ \\
+$S_{10,1}$ & $-1.00$ & $1.70$ & $-1.00$ & $-0.010$ & $-1.00$ & $4.78$ & $+1.00$ & $+0.020$ \\
+$S_{11,1}$ & $-1.00$ & $1.25$ & $-1.00$ & $-0.011$ & $-1.00$ & $3.25$ & $-1.00$ & $-0.011$ \\
+$S_{12,1}$ & $+0.99$ & $0.08$ & $-0.99$ & $-0.000$ & $-0.36$ & $0.02$ & $+1.00$ & $+0.001$ \\
+$S_{13,1}$ & $-1.00$ & $1.26$ & $-1.00$ & $-0.011$ & $-1.00$ & $3.53$ & $-1.00$ & $-0.017$ \\
 \hline
-\multicolumn{5}{l}{\textit{Posterior array}} \\
+\multicolumn{9}{l}{\textit{Posterior array}} \\
 \hline
-$S_{14,1}$ & $-1.00$ & $1.23$ & $-1.00$ & $7.88$ \\
-$S_{15,1}$ & $-1.00$ & $2.16$ & $-1.00$ & $3.77$ \\
-$S_{16,1}$ & $-1.00$ & $1.36$ & $-1.00$ & $3.26$ \\
-$S_{17,1}$ & $-1.00$ & $1.25$ & $-1.00$ & $2.23$ \\
-$S_{18,1}$ & $-1.00$ & $1.09$ & $+0.78$ & $1.15$ \\
-$S_{19,1}$ & $-1.00$ & $2.09$ & $+1.00$ & $1.43$ \\
-$S_{20,1}$ & $-1.00$ & $1.73$ & $+0.98$ & $5.14$ \\
-$S_{21,1}$ & $-1.00$ & $1.49$ & $+0.87$ & $1.25$ \\
-$S_{22,1}$ & $-1.00$ & $0.83$ & $+1.00$ & $1.79$ \\
-$S_{23,1}$ & $+1.00$ & $0.08$ & $-1.00$ & $0.10$ \\
-$S_{24,1}$ & $+0.99$ & $0.07$ & $-1.00$ & $0.14$ \\
-$S_{25,1}$ & $+0.89$ & $0.05$ & $-1.00$ & $0.26$ \\
-$S_{26,1}$ & $+1.00$ & $0.09$ & $-0.94$ & $0.03$ \\
-$S_{27,1}$ & $+1.00$ & $0.05$ & $-0.97$ & $0.04$ \\
-$S_{28,1}$ & $+1.00$ & $0.05$ & $-0.99$ & $0.09$ \\
-$S_{29,1}$ & $+1.00$ & $0.05$ & $-0.99$ & $0.30$ \\
+$S_{14,1}$ & $-1.00$ & $1.23$ & $-0.99$ & $-0.003$ & $-1.00$ & $7.88$ & $+1.00$ & $+0.074$ \\
+$S_{15,1}$ & $-1.00$ & $2.16$ & $-1.00$ & $-0.011$ & $-1.00$ & $3.77$ & $+1.00$ & $+0.062$ \\
+$S_{16,1}$ & $-1.00$ & $1.36$ & $-1.00$ & $-0.014$ & $-1.00$ & $3.26$ & $-1.00$ & $-0.035$ \\
+$S_{17,1}$ & $-1.00$ & $1.25$ & $-1.00$ & $-0.014$ & $-1.00$ & $2.23$ & $-1.00$ & $-0.036$ \\
+$S_{18,1}$ & $-1.00$ & $1.09$ & $-0.98$ & $-0.002$ & $+0.78$ & $1.15$ & $-1.00$ & $-0.134$ \\
+$S_{19,1}$ & $-1.00$ & $2.09$ & $-0.99$ & $-0.004$ & $+1.00$ & $1.43$ & $+0.99$ & $+0.050$ \\
+$S_{20,1}$ & $-1.00$ & $1.73$ & $-1.00$ & $-0.011$ & $+0.98$ & $5.14$ & $-1.00$ & $-0.092$ \\
+$S_{21,1}$ & $-1.00$ & $1.49$ & $-0.99$ & $-0.008$ & $+0.87$ & $1.25$ & $-1.00$ & $-0.056$ \\
+$S_{22,1}$ & $-1.00$ & $0.83$ & $+0.86$ & $+0.001$ & $+1.00$ & $1.79$ & $-0.99$ & $-0.015$ \\
+$S_{23,1}$ & $+1.00$ & $0.08$ & $-1.00$ & $-0.001$ & $-1.00$ & $0.10$ & $-1.00$ & $-0.000$ \\
+$S_{24,1}$ & $+0.99$ & $0.07$ & $-1.00$ & $-0.001$ & $-1.00$ & $0.14$ & $-0.99$ & $-0.001$ \\
+$S_{25,1}$ & $+0.89$ & $0.05$ & $-1.00$ & $-0.003$ & $-1.00$ & $0.26$ & $-0.91$ & $-0.001$ \\
+$S_{26,1}$ & $+1.00$ & $0.09$ & $-0.98$ & $-0.000$ & $-0.94$ & $0.03$ & $-0.96$ & $-0.001$ \\
+$S_{27,1}$ & $+1.00$ & $0.05$ & $-0.99$ & $-0.000$ & $-0.97$ & $0.04$ & $-1.00$ & $-0.001$ \\
+$S_{28,1}$ & $+1.00$ & $0.05$ & $-0.99$ & $-0.001$ & $-0.99$ & $0.09$ & $-1.00$ & $-0.001$ \\
+$S_{29,1}$ & $+1.00$ & $0.05$ & $-1.00$ & $-0.002$ & $-0.99$ & $0.30$ & $-0.96$ & $-0.000$ \\
 \hline
 \end{tabular}
 }
