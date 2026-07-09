@@ -8,6 +8,7 @@
 \newcommand{\rev}[1]{\textcolor{blue}{#1}}
 \newcommand{\revdel}[1]{\textcolor{red}{\sout{#1}}}
 \newcommand{\revred}[1]{\textcolor{red}{#1}}
+\newcommand{\revgreen}[1]{\textcolor{green!50!black}{#1}}
 \usepackage{amsmath,amssymb}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
@@ -731,6 +732,8 @@ obtained from one simulation run where all tissues were set to the
 background air material. Additionally, the current density (J) field in
 these two slices was extracted from the simulated J-field.
 
+\revgreen{To visualize the temporal evolution of the secondary magnetic field due to cardiac motion, we computed the difference $\Delta\mathbf{H}(t) = \mathbf{H}(t) - \mathbf{H}(t_1) - \mathbf{B}_G$ at each timepoint relative to the first frame (start of systole) in a transverse plane through the heart, with the static generator field $B_G$ subtracted.}
+
 S-parameter calculation was performed for each timeframe of the virtual
 phantoms cardiac cycle. \rev{Scattering parameters (S-parameters) characterize the transmission and reflection of electromagnetic waves in a multi-port network. In our setup, $S_{n,1}$ represents the complex transmission coefficient from the PT source (port 1) to receive coil element $n$ --- i.e., the ratio of the wave amplitude received at port $n$ to the wave amplitude incident at port 1, with all other ports terminated in their characteristic impedance $Z_0 = 50\,\Omega$. Changes in the tissue distribution between the transmit and receive ports alter $S_{n,1}$; the relative change $\Delta S_{n,1}/S_{n,1}$ between cardiac phases directly quantifies the modulation depth (see Appendix, Eq.~\ref{SParamCouplingSimplified}).}
 
@@ -764,6 +767,8 @@ Note that, as discussed previously, the modulation can be either
 positive (decrease in received signal as cardiac volume decreases) or
 positive.
 
+\revgreen{To quantify the relationship between signal modulation and cardiac motion, we computed the Pearson correlation coefficient $R$ between each channel's S-parameter curve (magnitude and phase, respectively) and the total heart volume ground truth. The heart volume was extracted from the voxel model by summing all voxels belonging to cardiac tissue types (heart muscle, blood, pericardium) across all 12 cardiac phases. A positive $R$ indicates that the signal quantity increases with cardiac volume; a negative $R$ indicates an inverse relationship. We report $|R|$ (mean $\pm$ SD) across channel groups and per-channel signed $R$ values.}
+
 \section{\texorpdfstring{Results }{Results }}\label{results-1}
 
 \subsection{Electric and magnetic
@@ -785,12 +790,7 @@ distance cubed from the generator loop (Biot-Savart law) and
 consequently so does the secondary field \(\Delta\mathbf{B}\) and the
 induced current density \(\mathbf{J}\).
 
-To better visualize the changes in the magnetic field due to cardiac
-motion, we plot the change in the magnetic field at every timepoint as a
-difference to the first timepoint \(t_{1}\) (start of systole) in a
-transverse plane intersecting the phantom's heart while also subtracting
-\(B_{G}\). This is shown as an animated series in Supplementary Figure
-1.
+\revgreen{The resulting animated difference maps of the secondary magnetic field over the cardiac cycle are shown in Supplementary Figure 1.}
 
 \begin{figure}
 \centering
@@ -809,20 +809,15 @@ motion}\label{signal-modulation-relation-to-cardiac-motion}
 
 The received signal over time is plotted, for all individual Rx
 elements, in Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122} as complex magnitude in dBm (rescaled to
-1mW input power) and in Figures~\ref{fig:rx-phase-62} and~\ref{fig:rx-phase-122} as phase modulation. For complex
-magnitude, modulation depths are given as percent of the direct coupling
-amplitude, as defined in Eq.~\eqref{eq:mod-depth-mag}. Modulation depth for phase signals is
-given simply as the difference between the phase value between maximum
-expansion and maximum contraction of the cardiac volume ground truth.
+1mW input power) and in Figures~\ref{fig:rx-phase-62} and~\ref{fig:rx-phase-122} as phase modulation. \revgreen{Magnitude and phase modulation depths are defined in Eqs.~\eqref{eq:mod-depth-mag} and~\eqref{eq:mod-depth-phase}, respectively.}
 
 Modulation depths of individual channels are compared graphically in
 Figure~\ref{fig:mod-depth-bars-mag} for magnitude and in Figure~\ref{fig:mod-depth-bars-phase} for phase and summarized in
 Figure~\ref{fig:mod-depth-summary}\revred{, with per-channel correlation coefficients listed in Table~\ref{tab:per-channel}}.
 
-All evaluations were performed at frequencies of 62.5 MHz and 122.5MHz,
-suitable for field strengths of 1.5T and 3T, respectively.
+\revgreen{Results are presented at 62.5\,MHz and 122.5\,MHz, corresponding to Larmor frequencies at 1.5\,T and 3\,T, respectively.}
 
-\revred{To quantify the relationship between the simulated S-parameter modulation and cardiac motion, we computed the Pearson correlation coefficient $|R|$ between the magnitude of each channel's S-parameter curve and the total heart volume ground truth extracted from the voxel model across all 12 cardiac phases. Results are summarized in Table~\ref{tab:correlation}.}
+\revgreen{Correlation results between S-parameter modulation and heart volume are summarized in Table~\ref{tab:correlation}.}
 
 \begin{table}[ht]
 \centering
@@ -976,10 +971,10 @@ black line shows mean \textbf{absolute} modulation depth.}
 \label{fig:mod-depth-vs-frequency}
 \end{figure}
 
-\revred{
+\revgreen{
 \subsubsection{Per-channel correlation with cardiac volume}\label{per-channel-correlation}
 
-Table~\ref{tab:per-channel} lists the signed Pearson correlation coefficient $R$ and modulation depth for each receive channel at both 62.5\,MHz and 122.5\,MHz, for both magnitude and phase. The sign of $R$ indicates whether the received signal increases (positive) or decreases (negative) with increasing cardiac volume. For magnitude, modulation depth is given as $(|S|_{\max} - |S|_{\min}) / \overline{|S|} \times 100\%$; for phase, it is the signed phase difference (in radians) between the cardiac phase of maximum expansion (frame~1) and maximum contraction (frame~7). Channels where $|R| > 0.99$ exhibit near-perfect linear tracking of cardiac volume changes. Notably, most channels show $|R| > 0.97$ for both magnitude and phase, confirming that the PT signal can serve as a reliable surrogate for cardiac volume in nearly all spatial positions. Channel S2,1 at 62.5\,MHz and S12,1 at 122.5\,MHz show reduced magnitude correlation due to the sign-flip phenomenon discussed above, while phase correlation remains high in these channels.
+Table~\ref{tab:per-channel} lists the signed Pearson correlation coefficient $R$ and modulation depth (Eqs.~\eqref{eq:mod-depth-mag} and~\eqref{eq:mod-depth-phase}) for each receive channel at both 62.5\,MHz and 122.5\,MHz, for both magnitude and phase. Channels where $|R| > 0.99$ exhibit near-perfect linear tracking of cardiac volume changes. Notably, most channels show $|R| > 0.97$ for both magnitude and phase, confirming that the PT signal can serve as a reliable surrogate for cardiac volume in nearly all spatial positions. Channel S2,1 at 62.5\,MHz and S12,1 at 122.5\,MHz show reduced magnitude correlation due to the sign-flip phenomenon discussed above, while phase correlation remains high in these channels.
 }
 
 \begin{table}[ht]
