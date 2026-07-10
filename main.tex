@@ -11,6 +11,7 @@
 \newcommand{\revgreen}[1]{\textcolor{green!50!black}{#1}}
 \newcommand{\revpurple}[1]{\textcolor{violet}{#1}}
 \newcommand{\revpurpdel}[1]{\textcolor{violet}{\sout{#1}}}
+\newcommand{\revorange}[1]{\textcolor{orange}{#1}}
 \usepackage{amsmath,amssymb}
 \usepackage[european]{circuitikz}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
@@ -1171,6 +1172,8 @@ radial (0.2S/m) direction \cite{Beck2005AAmplitudes}. To our knowledge, no comme
 solvers currently exist that support tensorial electromagnetic
 parameters throughout the numerical simulation.
 \rev{However, the isotropic approximation is standard practice in RF safety simulations and MRI coil modeling at clinical frequencies. The bulk effect of tissue redistribution during cardiac motion --- replacing one tissue type with another --- is expected to dominate over local anisotropy effects. Furthermore, the volume-integrated nature of the PT signal (Appendix, Eq.~\ref{PortVoltage}) averages over many fiber orientations, reducing the impact of directional conductivity variations on the net modulation depth.}
+
+\revorange{Respiratory motion was not included in the present simulation framework. Unlike cardiac motion, which modulates the PT signal exclusively through redistribution of tissue admittivity within the illuminated volume (Eq.~\ref{eq:vn-integral}), respiration additionally displaces the PT transmit coil itself --- typically mounted on or integrated into the anterior array --- along with the chest wall. This geometric displacement of the source directly changes the field patterns $\mathbf{E}_1$ and consequently the coupling to all receive elements, producing modulation depths one to two orders of magnitude larger than the cardiac signal. Schroeder et al.\ \cite{Schroeder2016a} demonstrated that these two respiratory components --- chest-wall motion and internal tissue displacement (e.g.\ liver) --- can be separated and independently characterized. It is precisely this large modulation depth that makes respiratory PT navigation comparatively straightforward \cite{Speier2015PT-Nav:MR-receiver, Vahle2020RespiratoryTone, Rigie2018TrackingNavigation, Lenk2018RespiratoryTechnology, Schroeder2016a}. The cardiac case, where the signal arises solely from the tissue-replacement mechanism at considerably smaller modulation depths, represents the more instructive and technically challenging scenario --- and is therefore the focus of this work.}
 
 \section{Conclusion}\label{conclusion-1}
 
