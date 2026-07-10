@@ -511,3 +511,347 @@ This relation can be further simplified by assuming approximately uniform sensit
 \end{align}
 
 where $\Delta \sigma_{\rev{\mathrm{eff}}}$ is the effective conductivity contrast between displaced tissues.
+
+
+\section{Supplementary Figures}
+\label{app:supplementary-figures}
+
+% ============================================================
+% FIGURE A: Reciprocity Configurations
+% ============================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.75, transform shape,
+    coil/.style={draw, thick, minimum width=0.8cm, minimum height=1.2cm, rounded corners=2pt},
+    body/.style={draw, thick, fill=gray!15, rounded corners=8pt},
+    port/.style={draw, fill=white, circle, inner sep=1pt, font=\scriptsize},
+    arr/.style={->, thick, >=stealth},
+    lbl/.style={font=\small}
+]
+
+% --- Configuration (a): PT loop drives ---
+\node[font=\normalsize\bfseries] at (3.5, 5.2) {Configuration (a)};
+
+% Body
+\node[body, minimum width=4cm, minimum height=3cm] (bodyA) at (3.5, 2) {};
+\node[font=\scriptsize, gray] at (3.5, 2) {$\gamma(\mathbf{r}) = \sigma + j\omega\varepsilon$};
+
+% PT loop (port 1) - left
+\node[coil, fill=blue!15] (ptA) at (0.3, 2) {};
+\node[font=\scriptsize, above] at (ptA.north) {PT loop};
+\node[port] at (ptA.south) {1};
+\draw[arr, blue!70!black] (-0.8, 2.5) -- (ptA.west) node[midway, above, font=\scriptsize] {$I_1$};
+\node[font=\scriptsize, blue!70!black, below] at (0.3, 0.1) {\textbf{Driven}};
+
+% RX coil (port n) - right
+\node[coil, fill=red!10] (rxA) at (6.7, 2) {};
+\node[font=\scriptsize, above] at (rxA.north) {Coil $n$};
+\node[port] at (rxA.south) {$n$};
+\draw[arr, red!70!black] (rxA.east) -- (8.0, 2) node[midway, above, font=\scriptsize] {$V_n^a$};
+\node[font=\scriptsize, red!70!black, below] at (6.7, 0.1) {Terminated ($Z_0$)};
+
+% H-field arrows through body
+\draw[->, thick, blue!50, dashed] (1.5, 3.0) to[bend left=15] (5.5, 3.0);
+\node[font=\scriptsize, blue!50] at (3.5, 3.8) {$\mathbf{H}_1, \mathbf{E}_1$};
+
+% --- Configuration (b): Coil n drives ---
+\node[font=\normalsize\bfseries] at (13, 5.2) {Configuration (b)};
+
+% Body
+\node[body, minimum width=4cm, minimum height=3cm] (bodyB) at (13, 2) {};
+\node[font=\scriptsize, gray] at (13, 2) {$\gamma(\mathbf{r}) = \sigma + j\omega\varepsilon$};
+
+% PT loop (port 1) - left
+\node[coil, fill=blue!10] (ptB) at (9.8, 2) {};
+\node[font=\scriptsize, above] at (ptB.north) {PT loop};
+\node[port] at (ptB.south) {1};
+\draw[arr, blue!70!black] (ptB.west) -- (8.5, 2) node[midway, above, font=\scriptsize] {$V_1^b$};
+\node[font=\scriptsize, blue!70!black, below] at (9.8, 0.1) {Terminated ($Z_0$)};
+
+% RX coil (port n) - right
+\node[coil, fill=red!15] (rxB) at (16.2, 2) {};
+\node[font=\scriptsize, above] at (rxB.north) {Coil $n$};
+\node[port] at (rxB.south) {$n$};
+\draw[arr, red!70!black] (17.5, 2.5) -- (rxB.east) node[midway, above, font=\scriptsize] {$I_n$};
+\node[font=\scriptsize, red!70!black, below] at (16.2, 0.1) {\textbf{Driven}};
+
+% H-field arrows through body (reversed)
+\draw[->, thick, red!50, dashed] (15.0, 3.0) to[bend left=15] (11.0, 3.0);
+\node[font=\scriptsize, red!50] at (13, 3.8) {$\mathbf{H}_n, \mathbf{E}_n$};
+
+% Reciprocity result
+\node[draw, rounded corners, fill=yellow!10, inner sep=6pt, font=\small] at (8.25, -1.2) {
+    Reciprocity: $\displaystyle Z_{n,1} = \frac{V_n^a}{I_1^a} = \frac{V_1^b}{I_n^b} = Z_{1,n}$
+};
+
+\end{tikzpicture}
+\caption{The two configurations used in the Lorentz reciprocity derivation. In configuration (a), the PT source (port 1) is driven and the voltage $V_n^a$ is measured at port $n$. In configuration (b), receive coil $n$ is driven and the voltage $V_1^b$ is measured at port 1. The same tissue environment $\gamma(\mathbf{r})$ is present in both cases. Reciprocity guarantees that the transimpedance is identical: $Z_{n,1} = Z_{1,n}$.}
+\label{fig:reciprocity-configs}
+\end{figure}
+
+
+% ============================================================
+% FIGURE B: Volume Decomposition and Field Overlap
+% ============================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.8, transform shape,
+    lbl/.style={font=\small}
+]
+
+% --- Free space background ---
+\fill[blue!3] (-2,-3) rectangle (14,7);
+\node[font=\scriptsize, blue!30] at (12.5, 6.5) {$V_{\mathrm{free}}$: $\gamma = j\omega\varepsilon_0$};
+
+% --- Body outline ---
+\draw[very thick, gray!70] plot[smooth cycle, tension=0.7] coordinates {
+    (2,0) (4,-1.5) (8,-1.5) (10,0) (10.5,3) (9,5.5) (6,6.5) (3,5.5) (1.5,3)
+};
+\fill[gray!12, opacity=0.8] plot[smooth cycle, tension=0.7] coordinates {
+    (2,0) (4,-1.5) (8,-1.5) (10,0) (10.5,3) (9,5.5) (6,6.5) (3,5.5) (1.5,3)
+};
+\node[font=\small, gray!70!black] at (8.5, 5.5) {$V_{\mathrm{body}}$: $\gamma = \sigma + j\omega\varepsilon$};
+
+% --- E1 field contours (from PT loop, blue) ---
+\draw[blue!50, thick, dashed] plot[smooth, tension=0.8] coordinates {
+    (0.5, 4.5) (2, 4.0) (4, 3.2) (6, 2.8) (8, 3.0) (9.5, 3.5)
+};
+\draw[blue!35, thick, dashed] plot[smooth, tension=0.8] coordinates {
+    (0.8, 3.5) (2.5, 3.0) (4.5, 2.2) (6.5, 1.8) (8.5, 2.0) (10, 2.5)
+};
+\draw[blue!20, thick, dashed] plot[smooth, tension=0.8] coordinates {
+    (1.5, 2.5) (3, 2.0) (5, 1.2) (7, 0.8) (9, 1.0) (10.5, 1.5)
+};
+\node[font=\scriptsize, blue!70!black, rotate=5] at (4.5, 4.0) {$|\mathbf{E}_1|$ contours};
+
+% --- En field contours (from coil n, red) ---
+\draw[red!50, thick, dotted] plot[smooth, tension=0.8] coordinates {
+    (9.5, 5.0) (8, 4.0) (6.5, 3.0) (5.5, 2.2) (5, 1.0) (5.5, -0.5)
+};
+\draw[red!35, thick, dotted] plot[smooth, tension=0.8] coordinates {
+    (8.5, 5.2) (7, 4.2) (5.5, 3.2) (4.5, 2.5) (4, 1.2) (4.5, -0.3)
+};
+\draw[red!20, thick, dotted] plot[smooth, tension=0.8] coordinates {
+    (7.5, 5.5) (6, 4.5) (4.5, 3.5) (3.5, 2.8) (3, 1.5) (3.5, 0.0)
+};
+\node[font=\scriptsize, red!70!black, rotate=-40] at (8.8, 4.0) {$|\mathbf{E}_n|$ contours};
+
+% --- Overlap region (highlighted) ---
+\fill[violet!25, opacity=0.5] plot[smooth cycle, tension=0.8] coordinates {
+    (4.5, 3.5) (6, 3.8) (7.5, 3.2) (7.5, 1.8) (6, 1.2) (4.5, 1.8)
+};
+\draw[violet, thick] plot[smooth cycle, tension=0.8] coordinates {
+    (4.5, 3.5) (6, 3.8) (7.5, 3.2) (7.5, 1.8) (6, 1.2) (4.5, 1.8)
+};
+\node[font=\small\bfseries, violet!80!black] at (6, 2.5) {$\mathbf{E}_1 \cdot \mathbf{E}_n$};
+\node[font=\scriptsize, violet!70!black] at (6, 1.9) {(sensitivity region)};
+
+% --- PT loop (port 1) ---
+\node[draw, thick, fill=blue!20, minimum width=0.6cm, minimum height=1.8cm, rounded corners=2pt] (pt) at (-0.5, 3.5) {};
+\node[font=\scriptsize, blue!70!black, rotate=90] at (-0.5, 3.5) {PT (1)};
+\draw[->, thick, blue!60] (-1.5, 4.2) -- (-0.9, 4.2) node[midway, above, font=\scriptsize] {$I_1$};
+
+% --- RX coil (port n) ---
+\node[draw, thick, fill=red!20, minimum width=0.6cm, minimum height=1.8cm, rounded corners=2pt] (rx) at (11, 3.5) {};
+\node[font=\scriptsize, red!70!black, rotate=90] at (11, 3.5) {Coil $n$};
+
+% --- Equation box ---
+\node[draw, rounded corners, fill=white, inner sep=5pt, font=\small] at (6, -2.5) {
+    $\displaystyle V_n = \iiint_{V_{\mathrm{body}}} \gamma\,(\mathbf{E}_1 \cdot \mathbf{E}_n)\,dV$
+};
+
+% Arrow from overlap to equation
+\draw[->, thick, violet!60] (6, 1.0) -- (6, -1.7);
+
+\end{tikzpicture}
+\caption{Conceptual illustration of the volume integral formulation. The PT source (port 1, blue) and receive coil $n$ (red) each produce electric fields in the body. The received voltage $V_n$ is the volume integral of the admittivity-weighted field overlap $\gamma(\mathbf{E}_1 \cdot \mathbf{E}_n)$ (violet region). The integrand is largest where both fields are strong and co-aligned --- the measurement's ``sensitivity profile.'' In free space ($V_{\mathrm{free}}$), $\gamma = j\omega\varepsilon_0$ contributes only the direct (reactive) coupling path.}
+\label{fig:field-overlap}
+\end{figure}
+
+
+% ============================================================
+% FIGURE C: Born Approximation — Cardiac Displacement
+% ============================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.75, transform shape
+]
+
+% --- Thorax cross-section (axial view) ---
+\draw[very thick, gray!60] plot[smooth cycle, tension=0.7] coordinates {
+    (0,0) (3,-2) (7,-2.5) (11,-2) (14,0) (14,4) (11,6) (7,6.5) (3,6) (0,4)
+};
+\fill[gray!8] plot[smooth cycle, tension=0.7] coordinates {
+    (0,0) (3,-2) (7,-2.5) (11,-2) (14,0) (14,4) (11,6) (7,6.5) (3,6) (0,4)
+};
+\node[font=\small, gray!60] at (2.5, 5) {$V_{\mathrm{body}}$};
+
+% --- Lungs (light fill) ---
+\fill[cyan!8] plot[smooth cycle, tension=0.7] coordinates {
+    (2.5, 1) (4, 0.5) (5, 1.5) (5, 3.5) (4, 4.5) (2.5, 4)
+};
+\draw[cyan!40, thick] plot[smooth cycle, tension=0.7] coordinates {
+    (2.5, 1) (4, 0.5) (5, 1.5) (5, 3.5) (4, 4.5) (2.5, 4)
+};
+\node[font=\scriptsize, cyan!50!black] at (3.5, 2.5) {Lung};
+
+\fill[cyan!8] plot[smooth cycle, tension=0.7] coordinates {
+    (9, 1) (10, 0.5) (11.5, 1) (11.5, 4) (10, 4.5) (9, 3.5)
+};
+\draw[cyan!40, thick] plot[smooth cycle, tension=0.7] coordinates {
+    (9, 1) (10, 0.5) (11.5, 1) (11.5, 4) (10, 4.5) (9, 3.5)
+};
+\node[font=\scriptsize, cyan!50!black] at (10.2, 2.5) {Lung};
+
+% --- Heart at phase phi_1 (end-diastole, larger) ---
+\draw[red!70!black, very thick] plot[smooth cycle, tension=0.7] coordinates {
+    (5.5, 1.0) (7, 0.3) (8.5, 1.0) (9, 2.5) (8.5, 4.0) (7, 4.7) (5.5, 4.0) (5, 2.5)
+};
+\fill[red!12, opacity=0.5] plot[smooth cycle, tension=0.7] coordinates {
+    (5.5, 1.0) (7, 0.3) (8.5, 1.0) (9, 2.5) (8.5, 4.0) (7, 4.7) (5.5, 4.0) (5, 2.5)
+};
+\node[font=\scriptsize, red!70!black] at (8.8, 4.5) {$\varphi_1$ (ED)};
+
+% --- Heart at phase phi_2 (end-systole, smaller) ---
+\draw[red!50, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {
+    (5.8, 1.5) (7, 0.9) (8.2, 1.5) (8.5, 2.5) (8.2, 3.5) (7, 4.1) (5.8, 3.5) (5.5, 2.5)
+};
+\node[font=\scriptsize, red!50] at (5.2, 4.3) {$\varphi_2$ (ES)};
+
+% --- Displacement volume V_Delta (hatched region between the two outlines) ---
+% Top-right region
+\fill[orange!30, opacity=0.6] plot[smooth, tension=0.7] coordinates {
+    (8.5, 1.0) (9, 2.5) (8.5, 4.0)
+} -- plot[smooth, tension=0.7] coordinates {
+    (8.2, 3.5) (8.5, 2.5) (8.2, 1.5)
+} -- cycle;
+
+% Bottom region  
+\fill[orange!30, opacity=0.6] plot[smooth, tension=0.7] coordinates {
+    (5.5, 1.0) (7, 0.3) (8.5, 1.0)
+} -- plot[smooth, tension=0.7] coordinates {
+    (8.2, 1.5) (7, 0.9) (5.8, 1.5)
+} -- cycle;
+
+% Top region
+\fill[orange!30, opacity=0.6] plot[smooth, tension=0.7] coordinates {
+    (5.5, 4.0) (7, 4.7) (8.5, 4.0)
+} -- plot[smooth, tension=0.7] coordinates {
+    (8.2, 3.5) (7, 4.1) (5.8, 3.5)
+} -- cycle;
+
+% Left region
+\fill[orange!30, opacity=0.6] plot[smooth, tension=0.7] coordinates {
+    (5.5, 1.0) (5, 2.5) (5.5, 4.0)
+} -- plot[smooth, tension=0.7] coordinates {
+    (5.8, 3.5) (5.5, 2.5) (5.8, 1.5)
+} -- cycle;
+
+% V_Delta label with arrow
+\draw[->, thick, orange!70!black] (11.5, -0.8) -- (8.8, 1.5);
+\node[font=\small, orange!70!black] at (12.3, -1.1) {$V_{\Delta}$};
+
+% Annotations
+\node[draw, rounded corners, fill=white, inner sep=4pt, font=\scriptsize, text width=4.5cm, align=left] at (3, -2.8) {
+    $\Delta\sigma,\,\Delta\varepsilon \neq 0$ only in $V_{\Delta}$\\[2pt]
+    $V_{\Delta} \approx 250\,\mathrm{mL}$ (stroke volume)\\[2pt]
+    $|\Delta\gamma / \gamma| \approx 0.5$ (weak contrast)
+};
+
+\node[draw, rounded corners, fill=yellow!10, inner sep=4pt, font=\scriptsize, text width=5cm, align=left] at (10.5, -2.8) {
+    \textbf{Born approximation valid because:}\\[2pt]
+    \textbullet\, $V_{\Delta} \ll V_{\mathrm{body}}$\\
+    \textbullet\, $|\mathbf{E}_{\mathrm{scattered}}| \ll |\mathbf{E}_{\mathrm{incident}}|$\\
+    \textbullet\, Confirmed: $M_n < 1\%$
+};
+
+% Scale bar / anterior-posterior labels
+\node[font=\scriptsize, gray] at (7, 7.2) {Anterior};
+\node[font=\scriptsize, gray] at (7, -3.8) {Posterior};
+
+\end{tikzpicture}
+\caption{Schematic axial cross-section of the thorax illustrating the cardiac displacement volume $V_{\Delta}$ (orange) --- the region where tissue identity changes between end-diastole ($\varphi_1$, solid outline) and end-systole ($\varphi_2$, dashed outline). The first-order Born approximation is valid because $V_{\Delta}$ is small compared to the total body volume and the admittivity contrast is weak ($|\Delta\gamma/\gamma| \approx 0.5$), so the scattered field is negligible compared to the incident field.}
+\label{fig:born-displacement}
+\end{figure}
+
+
+% ============================================================
+% FIGURE D: E-field Scaling Comparison
+% ============================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.9, transform shape
+]
+
+% --- Bar chart: E_loop vs E_ind at 1.5T and 3T ---
+
+% Axes
+\draw[thick, ->] (0,0) -- (10, 0) node[right, font=\small] {};
+\draw[thick, ->] (0,0) -- (0, 6.5) node[above, font=\small] {$|\mathbf{E}|$ (V/m)};
+
+% Y-axis ticks
+\foreach \y/\val in {0/0, 1.5/25, 3/50, 4.5/75, 6/100, 7.4/125, 8.9/150} {
+    \ifnum\y<7
+        \draw[gray!50] (0, \y) -- (9.5, \y);
+        \draw (-0.15, \y) -- (0.15, \y) node[left, font=\scriptsize, xshift=-3pt] {\val};
+    \fi
+}
+
+% --- 1.5T group ---
+\node[font=\small\bfseries] at (2.75, -0.8) {1.5T / 62.5\,MHz};
+
+% E_loop bar (1.5T) = 7.5 V/m → 7.5/16.7 = 0.45 units
+\fill[blue!40] (1, 0) rectangle (2.5, 0.45);
+\draw[blue!70!black] (1, 0) rectangle (2.5, 0.45);
+\node[font=\scriptsize, blue!70!black, above] at (1.75, 0.45) {7.5};
+
+% E_ind bar (1.5T) = 74 V/m → 74/16.7 = 4.43 units
+\fill[red!40] (3, 0) rectangle (4.5, 4.43);
+\draw[red!70!black] (3, 0) rectangle (4.5, 4.43);
+\node[font=\scriptsize, red!70!black, above] at (3.75, 4.43) {74};
+
+% Ratio annotation
+\draw[<->, thick, violet] (2.5, 0.225) -- (3, 0.225);
+\node[font=\scriptsize\bfseries, violet] at (2.75, -0.35) {$\times 10$};
+
+% --- 3T group ---
+\node[font=\small\bfseries] at (7.25, -0.8) {3T / 122.5\,MHz};
+
+% E_loop bar (3T) = 15 V/m → 15/16.7 = 0.90 units
+\fill[blue!40] (5.5, 0) rectangle (7, 0.90);
+\draw[blue!70!black] (5.5, 0) rectangle (7, 0.90);
+\node[font=\scriptsize, blue!70!black, above] at (6.25, 0.90) {15};
+
+% E_ind bar (3T) = 148 V/m → need to extend axis or cap
+% 148/16.7 = 8.86 → too tall, let's use break or scale
+% Actually let's just extend up
+\fill[red!40] (7.5, 0) rectangle (9, 6.0);
+\draw[red!70!black] (7.5, 0) rectangle (9, 6.0);
+\node[font=\scriptsize, red!70!black, above] at (8.25, 6.0) {148};
+
+% Ratio annotation
+\draw[<->, thick, violet] (7, 0.45) -- (7.5, 0.45);
+\node[font=\scriptsize\bfseries, violet] at (7.25, -0.35) {$\times 10$};
+
+% --- Legend ---
+\fill[blue!40] (0.5, 7.2) rectangle (1.2, 7.6);
+\draw[blue!70!black] (0.5, 7.2) rectangle (1.2, 7.6);
+\node[font=\small, right] at (1.3, 7.4) {$|\mathbf{E}_1^{\mathrm{loop}}| \approx ka \cdot \eta_0 \cdot |\mathbf{H}_1|$ \quad (loop-radiated)};
+
+\fill[red!40] (0.5, 6.5) rectangle (1.2, 6.9);
+\draw[red!70!black] (0.5, 6.5) rectangle (1.2, 6.9);
+\node[font=\small, right] at (1.3, 6.7) {$|\mathbf{E}_1^{\mathrm{ind}}| \approx \omega\mu_0 \cdot |\mathbf{H}_1| \cdot a_{\mathrm{tissue}}$ \quad (Faraday-induced)};
+
+% Bottom note
+\node[font=\footnotesize, gray, text width=9cm, align=center] at (5, -1.6) {
+    The Faraday-induced E-field in tissue dominates by $\sim\!10\times$ over the loop-radiated E-field, justifying $\mathbf{E} \approx \mathbf{E}^{\mathrm{ind}}$ in the volume integral.
+};
+
+\end{tikzpicture}
+\caption{Comparison of loop-radiated electric field $|\mathbf{E}_1^{\mathrm{loop}}|$ versus Faraday-induced electric field $|\mathbf{E}_1^{\mathrm{ind}}|$ at both PT frequencies, evaluated for $|\mathbf{H}_1| = 1\,\mathrm{A/m}$ at the body surface, loop radius $a = 15\,\mathrm{mm}$, and tissue dimension $a_{\mathrm{tissue}} = 150\,\mathrm{mm}$. The induced field dominates by approximately one order of magnitude, confirming that the electrically small loop approximation ($ka \ll 1$) allows the direct loop-radiated E-field to be neglected in the volume integral.}
+\label{fig:efield-scaling}
+\end{figure}
