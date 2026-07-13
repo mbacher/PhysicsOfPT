@@ -855,3 +855,142 @@ where $\Delta \sigma_{\rev{\mathrm{eff}}}$ is the effective conductivity contras
 \caption{Comparison of loop-radiated electric field $|\mathbf{E}_1^{\mathrm{loop}}|$ versus Faraday-induced electric field $|\mathbf{E}_1^{\mathrm{ind}}|$ at both PT frequencies, evaluated for $|\mathbf{H}_1| = 1\,\mathrm{A/m}$ at the body surface, loop radius $a = 15\,\mathrm{mm}$, and tissue dimension $a_{\mathrm{tissue}} = 150\,\mathrm{mm}$. The induced field dominates by approximately one order of magnitude, confirming that the electrically small loop approximation ($ka \ll 1$) allows the direct loop-radiated E-field to be neglected in the volume integral.}
 \label{fig:efield-scaling}
 \end{figure}
+
+%% ============================================================
+%% Experimental S-parameter data (full per-channel tables)
+%% ============================================================
+\section{Experimental S-parameter data}\label{app:exp-data}
+
+\revbrown{Tables~\ref{tab:exp-v1}--\ref{tab:exp-v3} list the measured scattering parameter $S_{1,n}$\,(dB) and cardiac modulation depths (magnitude and phase, in percent) for each individual receive channel and volunteer. The PT generator was driven at 0\,dBm / 62.5\,MHz; S-parameters were derived from the calibrated receiver characteristic. Modulation depth is defined as the peak-to-peak excursion of the averaged cardiac waveform as a percentage of the mean $S_{1,n}$ level.}
+
+\begin{table}[htbp]
+\centering
+\revbrown{\caption{Volunteer~1: Per-channel S-parameter and cardiac modulation depth. Body~18 (anterior, 18\,ch) + Spine~24 (posterior, 9\,ch). Breathhold 13.7\,s, 20 cardiac cycles averaged.}
+\label{tab:exp-v1}
+\small
+\begin{tabular}{lccc}
+\hline
+Channel & $S_{1,n}$ (dB) & Mag.\ mod.\ (\%) & Phase mod.\ (\%) \\
+\hline
+\multicolumn{4}{l}{\textit{Anterior (Body~18)}} \\
+\hline
+B22 & $-107.8$ & 0.363 & 0.129 \\
+B21 & $-109.2$ & 0.097 & 0.018 \\
+B35 & $-113.1$ & 0.091 & 0.023 \\
+B36 & $-117.6$ & 0.032 & 0.007 \\
+B14 & $-112.0$ & 0.015 & 0.038 \\
+B13 & $-103.6$ & 0.008 & 0.021 \\
+B31 & $-113.5$ & 0.023 & 0.020 \\
+B32 & $-112.6$ & 0.014 & 0.008 \\
+B24 & $-107.9$ & 0.069 & 0.011 \\
+B23 & $-112.7$ & 0.181 & 0.257 \\
+B33 & $-92.8$ & 0.004 & 0.009 \\
+B34 & $-113.1$ & 0.040 & 0.060 \\
+B12 & $-106.8$ & 0.002 & 0.071 \\
+B11 & $-116.7$ & 0.038 & 0.160 \\
+B26 & $-116.6$ & 0.042 & 0.020 \\
+B25 & $-116.1$ & 0.069 & 0.017 \\
+B16 & $-115.3$ & 0.033 & 0.002 \\
+B15 & $-116.3$ & 0.048 & 0.013 \\
+\hline
+\multicolumn{4}{l}{\textit{Posterior (Spine~24)}} \\
+\hline
+S2T & $-119.3$ & 0.212 & 0.009 \\
+S2S & $-118.4$ & 0.125 & 0.006 \\
+S2P & $-118.5$ & 0.069 & 0.034 \\
+S3P & $-118.3$ & 0.041 & 0.010 \\
+S3S & $-118.6$ & 0.063 & 0.105 \\
+S3T & $-118.6$ & 0.138 & 0.018 \\
+S4T & $-119.5$ & 0.198 & 0.103 \\
+S4S & $-119.2$ & 0.042 & 0.029 \\
+S4P & $-119.0$ & 0.045 & 0.003 \\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\revbrown{\caption{Volunteer~2: Per-channel S-parameter and cardiac modulation depth. Body~12 (anterior, 12\,ch) + Spine~24 (posterior, 12\,ch). Breathhold 17.8\,s, 17 cardiac cycles averaged.}
+\label{tab:exp-v2}
+\small
+\begin{tabular}{lccc}
+\hline
+Channel & $S_{1,n}$ (dB) & Mag.\ mod.\ (\%) & Phase mod.\ (\%) \\
+\hline
+\multicolumn{4}{l}{\textit{Anterior (Body~12)}} \\
+\hline
+B33 & $-110.3$ & 0.022 & 0.155 \\
+B34 & $-117.6$ & 0.078 & 0.348 \\
+B12 & $-115.3$ & 0.082 & 0.128 \\
+B11 & $-117.7$ & 0.015 & 0.011 \\
+B24 & $-103.2$ & 0.016 & 0.044 \\
+B23 & $-78.6$ & 0.006 & 0.010 \\
+B31 & $-114.8$ & 0.012 & 0.057 \\
+B32 & $-118.0$ & 0.219 & 0.803 \\
+B22 & $-115.0$ & 0.068 & 0.123 \\
+B21 & $-119.2$ & 0.155 & 0.034 \\
+B14 & $-116.5$ & 0.196 & 0.010 \\
+B13 & $-115.3$ & 0.031 & 0.028 \\
+\hline
+\multicolumn{4}{l}{\textit{Posterior (Spine~24)}} \\
+\hline
+S1P & $-118.5$ & 0.012 & 0.023 \\
+S1S & $-119.2$ & 0.014 & 0.011 \\
+S1T & $-119.7$ & 0.126 & 2.877 \\
+S2T & $-119.8$ & 0.086 & 0.158 \\
+S2S & $-119.5$ & 0.009 & 0.063 \\
+S2P & $-119.5$ & 0.067 & 0.002 \\
+S3P & $-118.9$ & 0.067 & 0.064 \\
+S3S & $-118.4$ & 0.008 & 0.011 \\
+S3T & $-117.8$ & 0.044 & 0.019 \\
+S4T & $-118.6$ & 0.052 & 0.052 \\
+S4S & $-110.9$ & 0.003 & 0.001 \\
+S4P & $-118.9$ & 0.009 & 0.040 \\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\revbrown{\caption{Volunteer~3: Per-channel S-parameter and cardiac modulation depth. Body~18 (anterior, 18\,ch) + Spine~24 (posterior, 9\,ch). Breathhold 22.0\,s, 24 cardiac cycles averaged.}
+\label{tab:exp-v3}
+\small
+\begin{tabular}{lccc}
+\hline
+Channel & $S_{1,n}$ (dB) & Mag.\ mod.\ (\%) & Phase mod.\ (\%) \\
+\hline
+\multicolumn{4}{l}{\textit{Anterior (Body~18)}} \\
+\hline
+B22 & $-107.0$ & 0.580 & 0.355 \\
+B21 & $-109.9$ & 0.093 & 0.043 \\
+B35 & $-112.7$ & 0.055 & 0.026 \\
+B36 & $-117.5$ & 0.106 & 0.027 \\
+B14 & $-111.4$ & 0.017 & 0.136 \\
+B13 & $-103.1$ & 0.069 & 0.009 \\
+B31 & $-114.5$ & 0.016 & 0.016 \\
+B32 & $-112.9$ & 0.038 & 0.001 \\
+B24 & $-107.3$ & 0.091 & 0.049 \\
+B23 & $-112.8$ & 0.353 & 0.642 \\
+B33 & $-92.5$ & 0.024 & 0.035 \\
+B34 & $-112.9$ & 0.020 & 0.025 \\
+B12 & $-106.6$ & 0.021 & 0.214 \\
+B11 & $-116.6$ & 0.057 & 0.044 \\
+B26 & $-116.5$ & 0.023 & 0.030 \\
+B25 & $-116.0$ & 0.055 & 0.016 \\
+B16 & $-115.4$ & 0.094 & 0.001 \\
+B15 & $-116.0$ & 0.112 & 0.145 \\
+\hline
+\multicolumn{4}{l}{\textit{Posterior (Spine~24)}} \\
+\hline
+S2T & $-118.5$ & 0.125 & 0.006 \\
+S2S & $-116.9$ & 0.203 & 0.017 \\
+S2P & $-117.0$ & 0.037 & 0.044 \\
+S3P & $-117.7$ & 0.103 & 0.030 \\
+S3S & $-118.3$ & 0.403 & 0.303 \\
+S3T & $-118.1$ & 0.280 & 0.038 \\
+S4T & $-119.6$ & 0.465 & 0.315 \\
+S4S & $-119.3$ & 0.176 & 0.028 \\
+S4P & $-119.2$ & 0.046 & 0.012 \\
+\hline
+\end{tabular}}
+\end{table}
