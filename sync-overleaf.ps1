@@ -67,15 +67,43 @@ else {
 }
 
 ${currentBranch} = ((Invoke-Git -Args @("branch", "--show-current")) | Select-Object -First 1).Trim()
+$status = (& git status --porcelain)
+$localCommit = $null
+if ($status) {
+    Invoke-Git -Args @("add", ".") | Out-Null
+    Invoke-Git -Args @("commit", "-m", $CommitMessage) | Out-Null
+    $localCommit = ((Invoke-Git -Args @("rev-parse", "HEAD")) | Select-Object -First 1).Trim()
+}
+
 if ($currentBranch -ne "main") {
     Invoke-Git -Args @("checkout", "--quiet", "main") | Out-Null
 }
 Invoke-Git -Args @("pull", "--ff-only", $GitHubRemote, "main") | Out-Null
 
-$status = (& git status --porcelain)
-if ($status) {
-    Invoke-Git -Args @("add", ".") | Out-Null
-    Invoke-Git -Args @("commit", "-m", $CommitMessage) | Out-Null
+if ($localCommit) {
+    & git merge-base --is-ancestor $localCommit main 2>$null
+    $isAncestor = ($LASTEXITCODE -eq 0)
+    if (-not $isAncestor) {
+        $cpMainOutput = & git cherry-pick $localCommit 2>&1
+        $cpMainExit = $LASTEXITCODE
+        if ($cpMainExit -ne 0) {
+            $cpMainText = ($cpMainOutput | Out-String)
+            if ($cpMainText -match "previous cherry-pick is now empty" -or $cpMainText -match "nothing to commit") {
+                Invoke-Git -Args @("cherry-pick", "--skip") | Out-Null
+            }
+            else {
+                throw @"
+Cherry-pick to local main failed and needs manual conflict resolution.
+Run:
+  git status
+  # resolve conflicts
+  git add <files>
+  git cherry-pick --continue
+Then rerun the script.
+"@
+            }
+        }
+    }
 }
 
 $mainCommit = ((Invoke-Git -Args @("rev-parse", "main")) | Select-Object -First 1).Trim()
