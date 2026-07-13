@@ -14,6 +14,7 @@
 \newcommand{\revorange}[1]{\textcolor{orange}{#1}}
 \newcommand{\revpink}[1]{\textcolor{magenta}{#1}}
 \newcommand{\revturquoise}[1]{\textcolor{teal}{#1}}
+\newcommand{\revbrown}[1]{\textcolor{brown}{#1}}
 \usepackage{amsmath,amssymb}
 \usepackage[european]{circuitikz}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
@@ -622,7 +623,7 @@ is a mixture of respiratory, cardiac and other (in)voluntary motions
 where every motion has a different amplitude and phase modulation
 pattern over the receive channels. This difference forms the basis of
 separating the motion types by channel combination in the processing of
-the received signal \cite{BacherCardiacStudy, Bacher2020PerformanceFramework}
+the received signal \cite{Bacher2017CardiacStudy, Bacher2020PerformanceFramework}
 
 \begin{figure}
 \centering
@@ -817,6 +818,42 @@ positive (decrease in received signal as cardiac volume decreases) or
 positive.
 
 \revgreen{To quantify the relationship between signal modulation and cardiac motion, we computed the Pearson correlation coefficient $R$ between each channel's S-parameter curve (magnitude and phase, respectively) and the total heart volume ground truth. The heart volume was extracted from the voxel model by summing all voxels belonging to cardiac tissue types (heart muscle, blood, pericardium) across all 12 cardiac phases. A positive $R$ indicates that the signal quantity increases with cardiac volume; a negative $R$ indicates an inverse relationship. We report $|R|$ (mean $\pm$ SD) across channel groups and per-channel signed $R$ values.}
+
+\revbrown{\subsection{Experimental validation}\label{experimental-validation}
+
+To validate the simulation predictions experimentally, S-parameter measurements were performed on three healthy volunteers (\mbox{Table~\ref{tab:volunteers}}) using an experimental system comprising PT generation hardware, a multi-channel digital receiver, and an interface for clinical product coil arrays. The system was installed in a shielded enclosure with conductive walls of dimensions comparable to a clinical MRI bore, preserving the waveguide boundary conditions discussed in Section~\ref{theory}. No static magnetic field was present.
+
+\begin{table}[htbp]
+\centering
+\caption{Volunteer characteristics.}
+\label{tab:volunteers}
+\begin{tabular}{lccccc}
+\hline
+Volunteer & Gender & Age & Height (cm) & Weight (kg) & Coil configuration \\
+\hline
+V1 & [M/F] & [AGE] & [HEIGHT] & [WEIGHT] & Body~18 + Spine~24 \\
+V2 & [M/F] & [AGE] & [HEIGHT] & [WEIGHT] & Body~12 + Spine~24 \\
+V3 & [M/F] & [AGE] & [HEIGHT] & [WEIGHT] & Body~18 + Spine~24 \\
+\hline
+\end{tabular}
+\end{table}
+
+The PT generator --- a small loop antenna integrated into the anterior coil array housing --- was driven at 0\,dBm (1\,mW) at a carrier frequency of 62.5\,MHz (corresponding to 1.5\,T). Receive coil arrays consisted of either a Biomatrix Body~18 or Body~12 (anterior) combined with a Spine~24 array (posterior), yielding 18+9 or 12+12 active receive channels respectively.
+
+The receiver was characterised by mapping digital output values to analog input power: signals ranging from $-120$\,dBm (noise floor) to $-35$\,dBm (onset of receiver nonlinearity) were directly fed into each coil element's low-noise preamplifier input, establishing a calibrated 85\,dB linear dynamic range. Scattering parameters $S_{1,n}$\,(dB) were then computed from the known transmit power (0\,dBm) and the calibrated received signal level in each channel.
+
+Volunteers were positioned supine and instructed to hold their breath for approximately 10--25\,s. Raw per-channel PT magnitude and phase signals, sampled at 2\,kHz, were recorded continuously. Within each breathhold segment, mild baseline drifts were removed by polynomial detrending (preserving mean amplitudes). Cardiac cycles were segmented using peak detection on a reference channel with strong cardiac modulation, and individual cycles were aligned and averaged to produce mean cardiac waveforms per channel. Confidence intervals (95\,\% CI) were computed as $\bar{x} \pm 1.96\,\sigma_\mathrm{noise}$, where $\sigma_\mathrm{noise}$ is the standard deviation of the residual after cycle averaging, providing a direct measure of the per-channel noise floor relative to the cardiac modulation amplitude.
+
+Modulation depth was defined analogously to the simulation (Eq.~\ref{eq:mod-depth-mag}): the peak-to-peak excursion of the averaged cardiac waveform as a percentage of the mean signal level, evaluated in both raw amplitude, dBm, and $S_{1,n}$\,(dB) domains.
+
+% [FIGURE PLACEHOLDER: Experimental setup photograph or schematic diagram]
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=\columnwidth]{./media/exp_setup.png}
+% \caption{Experimental setup for S-parameter validation measurements.}
+% \label{fig:exp-setup}
+% \end{figure}
+}
 
 \section{\texorpdfstring{Results }{Results }}\label{results-1}
 
@@ -1076,6 +1113,64 @@ $S_{29,1}$ & $+1.00$ & $0.05$ & $-1.00$ & $-0.002$ & $-0.99$ & $0.30$ & $-0.96$ 
 }
 \end{table}
 
+\revbrown{\subsection{Experimental S-parameter measurements}\label{experimental-results}
+
+Table~\ref{tab:exp-sparams} summarises the measured scattering parameters and cardiac modulation depths for all three volunteers. The PT signal was detected in all active receive channels, with $S_{1,n}$ values ranging from $-79$ to $-120$\,dB across all subjects and channels.
+
+\begin{table}[htbp]
+\centering
+\caption{Experimental S-parameter levels and cardiac modulation depths per volunteer. Modulation depth is defined as peak-to-peak excursion of the averaged cardiac waveform in $S_{1,n}$\,(dB). N\textsubscript{cycles} denotes the number of cardiac cycles averaged.}
+\label{tab:exp-sparams}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccccccc}
+\hline
+ & \multicolumn{2}{c}{$S_{1,n}$ range (dB)} & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (\%)} & & \\
+Volunteer & Anterior & Posterior & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean & N\textsubscript{ch} & N\textsubscript{cycles} \\
+\hline
+V1 & $[-93, -118]$ & $[-118, -120]$ & 0.005 & 0.001 & 0.075 & 0.032 & 27 & 17 \\
+V2 & $[-79, -119]$ & $[-111, -120]$ & 0.003 & 0.002 & 0.088 & 0.113 & 24 & 22 \\
+V3 & $[-93, -118]$ & $[-117, -120]$ & 0.010 & 0.003 & 0.105 & 0.132 & 27 & 22 \\
+\hline
+\multicolumn{3}{l}{Pooled (all volunteers)} & 0.006 & 0.002 & 0.089 & 0.092 & 78 & --- \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+% [FIGURE PLACEHOLDER: Averaged cardiac waveforms for strongest channels, all 3 volunteers]
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=\columnwidth]{./media/exp_waveforms.png}
+% \caption{Averaged cardiac waveforms (magnitude and phase) for the three strongest anterior channels per volunteer. Shaded bands indicate 95\,\% CI from cycle averaging. [V1: 17 cycles, V2: 22 cycles, V3: 22 cycles]}
+% \label{fig:exp-waveforms}
+% \end{figure}
+
+% [FIGURE PLACEHOLDER: Modulation depth bar chart per volunteer]
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=\columnwidth]{./media/exp_moddepth_bar.png}
+% \caption{Cardiac modulation depth ($S_{1,n}$\,dB) per channel for all three volunteers. Anterior channels (B\textit{xx}) shown in blue, posterior channels (S\textit{xx}) in orange.}
+% \label{fig:exp-moddepth}
+% \end{figure}
+
+Anterior channels exhibited consistently stronger absolute coupling ($S_{1,n} \approx -93$ to $-118$\,dB) compared to posterior channels ($-111$ to $-120$\,dB), reflecting the closer proximity of the anterior array to the integrated PT generator. Notably, the strongest anterior channels (V1: B22, $-93$\,dB; V2: B24, $-79$\,dB; V3: B22, $-93$\,dB) receive PT signal levels approximately 25--40\,dB above the receiver noise floor of $-120$\,dBm. Even the weakest posterior channels, at approximately $-120$\,dB, remain at the boundary of the receiver's calibrated linear range.
+
+Phase modulation depths were consistently an order of magnitude larger than magnitude modulation depths across all volunteers (pooled: 0.09\,\% phase vs.\ 0.005\,\% magnitude), mirroring the simulation finding that phase carries more cardiac information than magnitude for channels not directly aligned with the heart.
+
+Posterior elements, despite their weaker absolute coupling, showed comparable or even larger phase modulation depths than anterior elements in V2 (0.113\,\% vs.\ 0.088\,\%) and V3 (0.132\,\% vs.\ 0.105\,\%). This is consistent with the simulation prediction of higher modulation depth in the transmissive geometry, where the heart lies on a direct path between generator and posterior receiver.
+
+The inter-subject variability in $S_{1,n}$ levels and modulation depths reflects differences in body habitus (height, weight, subcutaneous fat thickness) and the resulting variation in generator-to-heart and heart-to-coil distances. Additionally, exact coil placement on the body surface --- which determines the spatial overlap between each element's sensitivity profile and the cardiac displacement volume --- differs between subjects and coil configurations (Body~18 vs.\ Body~12).
+
+% [FIGURE PLACEHOLDER: Simulation vs. experimental comparison]
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=\columnwidth]{./media/sim_vs_exp.png}
+% \caption{Comparison of simulated and experimentally measured S-parameter modulation depths at 62.5\,MHz. Simulation values (12 anterior + 16 posterior channels) shown alongside experimental data (pooled across volunteers). Note the simulation represents an idealised upper bound without noise or receiver chain effects.}
+% \label{fig:sim-vs-exp}
+% \end{figure}
+
+Comparing to simulation: the simulated $S_{1,n}$ range at 62.5\,MHz was approximately $-54$ to $-95$\,dB (anterior S2--S13: $-60$ to $-82$\,dB; posterior S14--S29: $-72$ to $-95$\,dB), while measured values are 20--30\,dB weaker. This difference is expected: the simulation uses idealised port coupling (50\,$\Omega$ matched, no cable losses) and a single standardised body geometry, whereas the experiment includes cable attenuation, connector losses, impedance mismatches, and inter-subject anatomical variation. The simulated magnitude modulation depths (0.03--1.7\,\% at 62.5\,MHz) represent an upper bound; the measured values (0.001--0.07\,\%) are approximately one order of magnitude lower, consistent with the cumulative effect of receive chain losses and noise. Importantly, the qualitative spatial pattern --- stronger modulation in channels overlapping the heart, phase exceeding magnitude, posterior channels showing high modulation depth despite weak coupling --- is preserved in both simulation and experiment.}
+
 \section{Discussion}\label{discussion}
 
 \rev{The simulation framework presented here demonstrates how
@@ -1083,7 +1178,17 @@ physiological motion leads to modulations of the Pilot Tone signal by
 inductive coupling of the generator coil to the receiving coils via
 conductive tissues.}
 
-\revpink{The theoretical framework developed above --- from the volume integral formulation (Eq.~\ref{eq:vn-integral}) to the simplified equivalent circuit (Figure~\ref{fig:equivalent-circuit}) --- is intended to build intuitive understanding of the underlying physical principles. Since realistic human anatomy, with its heterogeneous, anisotropic tissue distribution and complex cardiac geometry, is far too complex to solve these equations analytically, the full-wave numerical simulation expands on the theory by solving Maxwell's equations on a discretised model without simplifying assumptions. Nevertheless, the analytical framework offers valuable qualitative insights that guide interpretation of both simulation and experimental results. For instance, the volume integral (Eq.~\ref{eq:vn-integral}) shows that signal modulation is governed by the admittivity-weighted field overlap: adipose tissue, with its comparatively low conductivity, does not significantly shield the PT signal but merely increases the source-to-coil distance --- predicting no fundamental degradation of PT performance in overweight patients, though a decrease in SNR is observed experimentally due to greater separation \cite{BacherCardiacStudy}. Similarly, the theory predicts that coil placement is critical: the sensitivity of each receive channel depends on the spatial overlap between its electric field pattern and the cardiac displacement volume, explaining the wide variation in modulation depth across individual coils. Furthermore, the admittivity $\gamma = \sigma + j\omega\varepsilon$ suggests that signal strength scales with frequency through the permittivity term, and the superposition principle underlying the model explains why each coil receives a distinct mixture of respiratory, cardiac and other motion components --- the physical basis for separating these contributions through blind source separation methods \cite{Bacher2020PerformanceFramework}.}
+\revpink{The theoretical framework developed above --- from the volume integral formulation (Eq.~\ref{eq:vn-integral}) to the simplified equivalent circuit (Figure~\ref{fig:equivalent-circuit}) --- is intended to build intuitive understanding of the underlying physical principles. Since realistic human anatomy, with its heterogeneous, anisotropic tissue distribution and complex cardiac geometry, is far too complex to solve these equations analytically, the full-wave numerical simulation expands on the theory by solving Maxwell's equations on a discretised model without simplifying assumptions. Nevertheless, the analytical framework offers valuable qualitative insights that guide interpretation of both simulation and experimental results. For instance, the volume integral (Eq.~\ref{eq:vn-integral}) shows that signal modulation is governed by the admittivity-weighted field overlap: adipose tissue, with its comparatively low conductivity, does not significantly shield the PT signal but merely increases the source-to-coil distance --- predicting no fundamental degradation of PT performance in overweight patients, though a decrease in SNR is observed experimentally due to greater separation \cite{Bacher2017CardiacStudy}. Similarly, the theory predicts that coil placement is critical: the sensitivity of each receive channel depends on the spatial overlap between its electric field pattern and the cardiac displacement volume, explaining the wide variation in modulation depth across individual coils. Furthermore, the admittivity $\gamma = \sigma + j\omega\varepsilon$ suggests that signal strength scales with frequency through the permittivity term, and the superposition principle underlying the model explains why each coil receives a distinct mixture of respiratory, cardiac and other motion components --- the physical basis for separating these contributions through blind source separation methods \cite{Bacher2020PerformanceFramework}.}
+
+\revbrown{\subsection{Noise and detectability}\label{noise-detectability}
+
+The experimentally measured cardiac modulation depths (0.001--0.07\,\% in magnitude, 0.002--0.95\,\% in phase) are extremely small in absolute terms, raising the question of practical detectability. Two key factors enable reliable real-time cardiac signal extraction despite these low modulation depths. First, the receiver operates within an 85\,dB calibrated linear range ($-120$ to $-35$\,dBm); the measured PT levels ($-79$ to $-120$\,dB $S_{1,n}$) fall comfortably within this range, ensuring that the modulation is not obscured by receiver nonlinearity or quantisation noise. The received levels occupy approximately 27--40\,dB of the available dynamic range in the strongest channels, leaving substantial headroom.
+
+Second, the real-time processing pipeline provides implicit and explicit noise suppression. The linear combination of multiple receive channels --- used to separate cardiac from respiratory motion components via blind source separation methods \cite{Bacher2020PerformanceFramework, BacherRetrospectiveCohort} --- inherently improves SNR by coherently combining cardiac signal from many elements while incoherent noise averages down. Subsequently, Kalman filtering in the temporal domain provides further explicit noise reduction, enabling robust cardiac trigger detection even in single-beat operation without the need for cycle averaging \cite{Bacher2022RobustPlacement, Bacher2021ProspectiveCine, Bacher2017CardiacStudy}. In the present validation experiment, cycle averaging over 17--22 heartbeats was employed solely to characterise the noise floor and demonstrate signal quality --- this step is not required in the real-time processing chain.
+
+The simulation, which includes no noise sources, receiver imperfections, or cable losses, represents an idealised upper bound: simulated modulation depths are approximately one order of magnitude larger than measured values. This is consistent with the cumulative attenuation of the receive chain (estimated at 20--30\,dB from the $S_{1,n}$ level comparison). Crucially, however, the spatial patterns of modulation are preserved: channels with strong simulated cardiac sensitivity also show strong experimental modulation, phase consistently dominates over magnitude, and posterior elements exhibit high modulation depth despite weak absolute coupling. The simulation thus correctly predicts \emph{which} channels carry cardiac information and the \emph{relative} modulation behaviour, while the \emph{absolute} levels are subject to the experimental receive chain attenuation.
+
+The inter-subject variability (factor $\sim$2--3 in modulation depth between volunteers) is attributable to differences in body habitus --- particularly thorax depth, subcutaneous fat layer thickness, and heart-to-array distance --- as well as variation in exact coil placement on the body surface. This is directly predicted by the volume integral formulation (Eq.~\ref{eq:vn-integral}): both the generator field $\mathbf{E}_1$ and receiver sensitivity $\mathbf{E}_n$ decay with distance, such that larger source-to-heart or heart-to-coil separations reduce the overlap integral and thus the modulation depth.}
 
 \subsection{Variations in conductivity and
 permittivity}\label{variations-in-conductivity-and-permittivity}
@@ -1108,7 +1213,7 @@ beneficial to this method: Bone and fat for instance have extremely low
 conductivity and permittivity. This is fortunate, as eddy currents in
 fat and bone are negligible and do not significantly weaken the magnetic
 field. We have previously observed that high BMI does not significantly
-attenuate the received signal \cite{BacherCardiacStudy}.
+attenuate the received signal \cite{Bacher2017CardiacStudy}.
 
 Similarly, blood and myocardium differ significantly in their respective
 properties, especially conductivity and by this two-compartment tissue
@@ -1128,7 +1233,7 @@ motion is to be expected in all coils. This behavior is consistent with
 in-vivo experiments, where channels far away from the heart often carry
 significant cardiac signal \cite{Bacher2017PilotInitialization, Bacher2017CardiacStudy}. The modulation depth in our
 simulations is similar to those found in vivo, around 0.03 percent on
-average at 1.5T \cite{BacherCardiacStudy}.
+average at 1.5T \cite{Bacher2017CardiacStudy}.
 
 Modulation depth was higher overall in the posterior elements. This is
 due to the more ideal geometry, where the heart lies, for most channels,
@@ -1284,7 +1389,7 @@ Finally, it is worth noting that PT can be implemented at relatively
 little cost on, theoretically, any MR system and enables continuous,
 sequence independent respiratory and cardiac motion monitoring at very
 high temporal resolution and without the need for ECG, navigators or
-respiratory bellows. Processing of PT motion data \cite{BacherCardiacStudy, Bacher2020PerformanceFramework} is
+respiratory bellows. Processing of PT motion data \cite{Bacher2017CardiacStudy, Bacher2020PerformanceFramework} is
 decoupled from sequence execution, allowing flexible sequence design.
 Gradient or magnetohydrodynamic artefacts, often encountered in ECG,
 especially at field strengths \textgreater1.5T are avoided. Also, no
