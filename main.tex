@@ -12,6 +12,7 @@
 \newcommand{\revpurple}[1]{\textcolor{violet}{#1}}
 \newcommand{\revpurpdel}[1]{\textcolor{violet}{\sout{#1}}}
 \newcommand{\revorange}[1]{\textcolor{orange}{#1}}
+\newcommand{\revpink}[1]{\textcolor{magenta}{#1}}
 \usepackage{amsmath,amssymb}
 \usepackage[european]{circuitikz}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
@@ -1080,6 +1081,8 @@ $S_{29,1}$ & $+1.00$ & $0.05$ & $-1.00$ & $-0.002$ & $-0.99$ & $0.30$ & $-0.96$ 
 physiological motion leads to modulations of the Pilot Tone signal by
 inductive coupling of the generator coil to the receiving coils via
 conductive tissues.}
+
+\revpink{The theoretical framework developed above --- from the volume integral formulation (Eq.~\ref{eq:vn-integral}) to the simplified equivalent circuit (Figure~\ref{fig:equivalent-circuit}) --- is intended to build intuitive understanding of the underlying physical principles. Since realistic human anatomy, with its heterogeneous, anisotropic tissue distribution and complex cardiac geometry, is far too complex to solve these equations analytically, the full-wave numerical simulation expands on the theory by solving Maxwell's equations on a discretised model without simplifying assumptions. Nevertheless, the analytical framework offers valuable qualitative insights that guide interpretation of both simulation and experimental results. For instance, the volume integral (Eq.~\ref{eq:vn-integral}) shows that signal modulation is governed by the admittivity-weighted field overlap: adipose tissue, with its comparatively low conductivity, does not significantly shield the PT signal but merely increases the source-to-coil distance --- predicting no fundamental degradation of PT performance in overweight patients, though a decrease in SNR is observed experimentally due to greater separation \cite{BacherCardiacStudy}. Similarly, the theory predicts that coil placement is critical: the sensitivity of each receive channel depends on the spatial overlap between its electric field pattern and the cardiac displacement volume, explaining the wide variation in modulation depth across individual coils. Furthermore, the admittivity $\gamma = \sigma + j\omega\varepsilon$ suggests that signal strength scales with frequency through the permittivity term, and the superposition principle underlying the model explains why each coil receives a distinct mixture of respiratory, cardiac and other motion components --- the physical basis for separating these contributions through blind source separation methods \cite{Bacher2020PerformanceFramework}.}
 
 \subsection{Variations in conductivity and
 permittivity}\label{variations-in-conductivity-and-permittivity}
