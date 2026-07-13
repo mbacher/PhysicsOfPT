@@ -13,6 +13,7 @@
 \newcommand{\revpurpdel}[1]{\textcolor{violet}{\sout{#1}}}
 \newcommand{\revorange}[1]{\textcolor{orange}{#1}}
 \newcommand{\revpink}[1]{\textcolor{magenta}{#1}}
+\newcommand{\revturquoise}[1]{\textcolor{teal}{#1}}
 \usepackage{amsmath,amssymb}
 \usepackage[european]{circuitikz}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
@@ -1208,6 +1209,12 @@ simulation setup used in this work. Methods like those proposed by
 Jaeschke et al. (42-44) at 7T or Anand et al. (8, 56, 75) at 1.5/3T but
 using low GHz range carriers are an interesting target for further
 simulation studies.
+
+\revturquoise{While the frequency-domain solver provides broadband S-parameter data through Gaussian pulse excitation (Figure~\ref{fig:mod-depth-vs-frequency}), several aspects of the practical receive system are not captured in the simulation. Coil tuning was not modeled: the receive elements were treated as ideal ports without matching networks, whereas in practice each element has a bandpass response centered at the Larmor frequency. Since the PT carrier is chosen close to, but not exactly at, the Larmor frequency, the receive sensitivity at $f_{PT}$ is reduced but not prohibitively attenuated. Furthermore, coil geometry was kept constant across the frequency sweep, whereas different field strengths employ different array designs with adapted element sizes. Patient-dependent detuning from body loading, the frequency-dependent gain and phase response of the downstream receive chain (preamplifiers, cables, baluns), and mutual coupling between array elements were likewise not modeled.}
+
+\revturquoise{These limitations primarily affect the absolute received signal levels but do not alter the underlying modulation mechanism. The broadband S-parameter data confirms that the physical principles --- admittivity-weighted field overlap, spatial sensitivity dependence, and superposition of motion components --- operate consistently across the simulated bandwidth and produce qualitatively identical behaviour at both 62.5 and 122.5\,MHz. The simulation thus represents an idealised upper bound for modulation depth; actual values will be lower due to receive chain imperfections and noise.}
+
+\revturquoise{The volume integral formulation offers insight into the expected frequency scaling: induced electric fields scale as $E \propto \omega$ (Faraday's law) while direct inductive coupling scales identically, yielding a body-mediated modulation depth that increases approximately linearly with frequency. This has direct implications at the extremes of current clinical field strengths. At 0.55\,T ($f_{PT} \approx 23$\,MHz), the model predicts modulation depths roughly $3\times$ lower than at 1.5\,T --- consistent with the observation by Tasdelen et al.\ that cardiac PT gating at 0.55\,T requires substantially increased transmit amplitude to achieve detectable cardiac signals, and that no successful cardiac PT gating at field strengths below 1.5\,T had been demonstrated prior to their work \textcolor{red}{\cite{Tasdelen2025HAPTIC}}. At 7\,T, Jaeschke et al.\ demonstrated that cardiac motion modulates the scattering parameters of an RF transmit array with SNR up to 33, confirming that the coupling mechanism strengthens at higher frequency as predicted \textcolor{red}{\cite{Jaeschke2018Cardiac7T}}. However, at 7\,T the PT frequency approaches the bore waveguide cutoff, potentially transitioning from the evanescent to the propagating regime and introducing wave-interference effects not captured by the quasi-static model. Dedicated simulations at both 0.55\,T and 7\,T, incorporating field-strength-appropriate coil geometries and accounting for potential near-field breakdown at ultra-high field, represent a valuable direction for future work.}
 
 As for physiology, the electromagnetic parameters in tissue were modeled
 isotropic, whereas in reality, most tissues exhibit strong anisotropy.
