@@ -43,6 +43,28 @@ function Invoke-Git {
     return $output
 }
 
+function Invoke-GitAllowFail {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$Args
+    )
+
+    $oldPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+        $output = & git @Args 2>&1
+        $exitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $oldPreference
+    }
+
+    return [pscustomobject]@{
+        ExitCode = $exitCode
+        Output = $output
+    }
+}
+
 if (-not (Test-Path $RepoPath)) {
     throw "RepoPath does not exist: $RepoPath"
 }
@@ -84,8 +106,9 @@ if ($localCommit) {
     & git merge-base --is-ancestor $localCommit main 2>$null
     $isAncestor = ($LASTEXITCODE -eq 0)
     if (-not $isAncestor) {
-        $cpMainOutput = & git cherry-pick $localCommit 2>&1
-        $cpMainExit = $LASTEXITCODE
+        $cpMainResult = Invoke-GitAllowFail -Args @("cherry-pick", $localCommit)
+        $cpMainOutput = $cpMainResult.Output
+        $cpMainExit = $cpMainResult.ExitCode
         if ($cpMainExit -ne 0) {
             $cpMainText = ($cpMainOutput | Out-String)
             if ($cpMainText -match "previous cherry-pick is now empty" -or $cpMainText -match "nothing to commit") {
@@ -113,8 +136,9 @@ $authOverleafUrl = $OverleafUrl -replace "^https://git@", "https://git:$Overleaf
 Invoke-Git -Args @("fetch", $authOverleafUrl, "main:overleaf-main") | Out-Null
 Invoke-Git -Args @("checkout", "-B", "overleaf-sync", "overleaf-main") | Out-Null
 
-$cherryPickOutput = & git cherry-pick $mainCommit 2>&1
-$cherryPickExit = $LASTEXITCODE
+$cherryPickResult = Invoke-GitAllowFail -Args @("cherry-pick", $mainCommit)
+$cherryPickOutput = $cherryPickResult.Output
+$cherryPickExit = $cherryPickResult.ExitCode
 if ($cherryPickExit -ne 0) {
     $cpText = ($cherryPickOutput | Out-String)
     if ($cpText -match "previous cherry-pick is now empty" -or $cpText -match "nothing to commit") {
