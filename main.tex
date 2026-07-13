@@ -666,36 +666,36 @@ available. Tissue parameters not available in the CST library were taken
 from the IT'IS database \cite{HasgallITIS2018}. and frequency dependence was modeled
 using CST Studios Dielectric Dispersion Fit.
 
-\revorange{Table~\ref{tab:tissue-properties} lists the tissue electromagnetic properties used in the simulations. Values are based on the parametric models of Gabriel et al.\ \cite{Gabriel1996Dielectric} as compiled by Andreuccetti et al.\ \cite{Andreuccetti1997}, evaluated at 100\,MHz. CST Studio's Dielectric Dispersion Fit was applied to adjust all properties to the exact simulation frequencies (62.5\,MHz for 1.5T and 122.5\,MHz for 3T). All tissues are modeled with isotropic, scalar conductivity and permittivity. Pericardium properties were taken from the NICT tissue database.}
+\revorange{Table~\ref{tab:tissue-properties} lists the tissue electromagnetic properties used in the simulations. Values are based on the parametric models of Gabriel et al.\ \cite{Gabriel1996Dielectric} as compiled by Andreuccetti et al.\ \cite{Andreuccetti1997}, evaluated at 100\,MHz. CST Studio's Dielectric Dispersion Fit was applied to adjust all properties to the exact simulation frequencies (62.5\,MHz for 1.5T and 122.5\,MHz for 3T). All tissues are modeled with isotropic, scalar conductivity and permittivity. Pericardium properties were taken from the NICT tissue database \cite{NICT2023Tissues}.}
 
 \begin{table}[htbp]
 \centering
 \revorange{\caption{Electromagnetic tissue properties at 100\,MHz used in the simulation.}\label{tab:tissue-properties}}
 \revorange{
-\begin{tabular}{l r r r}
+\begin{tabular}{l r r}
 \hline
-\textbf{Tissue} & $\varepsilon_r$ & $\sigma$ (S/m) & $\rho$ (kg/m\textsuperscript{3}) \\
+\textbf{Tissue} & $\varepsilon_r$ & $\sigma$ (S/m) \\
 \hline
-Blood             & 76.82 & 1.233 & 1050 \\
-Heart muscle      & 90.82 & 0.733 & 1080 \\
-Pericardium       & 29.50 & 0.246 & 1080 \\
-Lung (avg.)       & 49.38 & 0.434 &  800 \\
-Liver             & 69.02 & 0.487 & 1050 \\
-Muscle            & 65.97 & 0.708 & 1080 \\
-Fat               &  6.07 & 0.036 &  900 \\
-Skin (avg.)       & 69.45 & 0.507 & 1100 \\
-Pancreas          & 68.81 & 0.794 & 1060 \\
-Stomach wall      & 77.90 & 0.900 & 1050 \\
-Small intestine   & 96.55 & 1.655 & 1050 \\
-Large intestine   & 96.55 & 1.655 & 1050 \\
-Gall bladder      & 94.96 & 1.541 & 1010 \\
-Kidney            & 98.09 & 0.811 & 1050 \\
-Spleen            & 90.66 & 0.802 & 1050 \\
-Spinal cord       & 47.27 & 0.338 & 1080 \\
-Bone cortical     & 15.28 & 0.064 & 2000 \\
-Bone spongiosa    & 27.63 & 0.173 & 1200 \\
-Bone medullary    & 27.63 & 0.173 & 1000 \\
-Air (inside body) &  1.00 & 0.000 &    0 \\
+Blood             & 76.82 & 1.233 \\
+Heart muscle      & 90.82 & 0.733 \\
+Pericardium       & 29.50 & 0.246 \\
+Lung (avg.)       & 49.38 & 0.434 \\
+Liver             & 69.02 & 0.487 \\
+Muscle            & 65.97 & 0.708 \\
+Fat               &  6.07 & 0.036 \\
+Skin (avg.)       & 69.45 & 0.507 \\
+Pancreas          & 68.81 & 0.794 \\
+Stomach wall      & 77.90 & 0.900 \\
+Small intestine   & 96.55 & 1.655 \\
+Large intestine   & 96.55 & 1.655 \\
+Gall bladder      & 94.96 & 1.541 \\
+Kidney            & 98.09 & 0.811 \\
+Spleen            & 90.66 & 0.802 \\
+Spinal cord       & 47.27 & 0.338 \\
+Bone cortical     & 15.28 & 0.064 \\
+Bone spongiosa    & 27.63 & 0.173 \\
+Bone medullary    & 27.63 & 0.173 \\
+Air (inside body) &  1.00 & 0.000 \\
 \hline
 \end{tabular}
 }
