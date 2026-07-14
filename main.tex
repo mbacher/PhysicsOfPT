@@ -1124,11 +1124,26 @@ $S_{29,1}$ & $+1.00$ & $0.005$ & $-1.00$ & $4.00$ & $1.90$ & $-0.99$ & $0.029$ &
 }
 \end{table}
 
+\begin{table}[htbp]
+\centering
+\caption{Simulation array-mean modulation depths per frequency, grouped by coil array, derived from Table~\ref{tab:per-channel}. This layout mirrors Table~\ref{tab:exp-sparams} for direct comparison with experimental results.}
+\label{tab:sim-array-means}
+\begin{tabular}{lcccccc}
+\hline
+ & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (mrad)} \\
+Frequency & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean \\
+\hline
+62.5\,MHz  & 0.062 & 0.065 & 1.314 & 1.584 & 3.53  & 4.58  \\
+122.5\,MHz & 0.142 & 0.122 & 0.865 & 5.094 & 17.12 & 34.83 \\
+\hline
+\end{tabular}
+\end{table}
+
 \subsection{Experimental S-parameter measurements}\label{experimental-results}
 
 \begin{revbrownblock}
 
-Table~\ref{tab:exp-sparams} summarises the measured scattering parameters and cardiac modulation depths for all three volunteers (per-channel data in Appendix Tables~\ref{tab:exp-v1}--\ref{tab:exp-v3}). The PT signal was detected in all active receive channels, with $S_{1,n}$ values ranging from $-79$ to $-120$\,dB across all subjects and channels.
+Table~\ref{tab:exp-sparams} summarises the measured scattering parameters and cardiac modulation depths for all three volunteers (per-channel data in Appendix Tables~\ref{tab:exp-v1}--\ref{tab:exp-v3}). Table~\ref{tab:sim-array-means} provides the corresponding simulated array means at 62.5\,MHz and 122.5\,MHz in a matching format for direct comparison. The PT signal was detected in all active receive channels, with $S_{1,n}$ values ranging from $-79$ to $-120$\,dB across all subjects and channels.
 
 \begin{table}[htbp]
 \centering
