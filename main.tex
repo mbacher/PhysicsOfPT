@@ -1181,6 +1181,8 @@ Posterior elements, despite their weaker absolute coupling, showed comparable or
 
 The inter-subject variability in $S_{1,n}$ levels and modulation depths reflects differences in body habitus (height, weight, subcutaneous fat thickness) and the resulting variation in generator-to-heart and heart-to-coil distances. Additionally, exact coil placement on the body surface --- which determines the spatial overlap between each element's sensitivity profile and the cardiac displacement volume --- differs between subjects and coil configurations (Body~18 vs.\ Body~12).
 
+\rev{Comparing the averaged cardiac waveform shapes (Figures~\ref{fig:exp-anterior-mag} and~\ref{fig:exp-posterior-mag}) to the simulated per-channel S-parameter traces (Figure~\ref{fig:rx-magnitude-62}), channels with strong cardiac sensitivity --- particularly those near the heart --- reproduce a smooth, quasi-sinusoidal waveform resembling the simulated cardiac volume curve. More remote channels, however, exhibit more complex multi-peaked waveforms that deviate from the simple volume-like shape seen in the simulation.}
+
 % [FIGURE PLACEHOLDER: Simulation vs. experimental comparison]
 % \begin{figure}[htbp]
 % \centering
@@ -1295,6 +1297,10 @@ heart as possible, though some centimeters of tolerance are acceptable.
 When integrating the PT generator in e.g.\ an abdominal coil array, it
 must be designed in such a way that the generator is optimally located
 when the coil array is positioned for optimal imaging.
+
+\subsection{\rev{Waveform shape}}\label{waveform-shape}
+
+\rev{The experimental cardiac waveforms show greater morphological diversity than those predicted by the simulation. While channels close to the heart reproduce the smooth, volume-like waveform seen in the simulation, more remote channels exhibit multi-peaked or asymmetric shapes. Two factors likely contribute to this discrepancy. First, the experimental coil arrays have a higher element density than the simulated array (e.g.\ Body~18 with 18 anterior elements vs.\ 12 in the simulation), resulting in smaller individual sensitivity profiles. Channels with a narrow field of view may be sensitive to localized cardiac sub-structures --- such as atrial versus ventricular contraction or valve plane motion --- rather than to total cardiac volume. Second, the XCAT phantom models cardiac contraction as a uniform volume change with smooth wall motion, whereas the real heart exhibits complex mechanics including differential timing of atrial and ventricular systole, septal motion, papillary muscle contraction, and valve leaflet dynamics. These sub-components produce distinct temporal signatures that superimpose in each channel according to its spatial sensitivity profile, yielding the more varied waveforms observed experimentally. This observation is consistent with the volume integral formulation (Eq.~\ref{eq:vn-integral}): the received signal is a spatial average over the entire sensitivity region, so a narrower sensitivity profile resolves finer anatomical detail at the cost of a simpler waveform shape.}
 
 \subsection{Noise and detectability}\label{noise-detectability}
 
