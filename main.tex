@@ -1143,7 +1143,7 @@ Frequency & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean & Ant.\ mean & P
 
 \begin{revbrownblock}
 
-Table~\ref{tab:exp-sparams} summarises the measured scattering parameters and cardiac modulation depths for all three volunteers (per-channel data in Appendix Tables~\ref{tab:exp-v1}--\ref{tab:exp-v3}). Table~\ref{tab:sim-array-means} provides the corresponding simulated array means at 62.5\,MHz and 122.5\,MHz in a matching format for direct comparison. The PT signal was detected in all active receive channels, with $S_{1,n}$ values ranging from $-79$ to $-120$\,dB across all subjects and channels.
+Table~\ref{tab:exp-sparams} summarises the measured scattering parameters and cardiac modulation depths for all three volunteers (per-channel data in Appendix Tables~\ref{tab:exp-v1}--\ref{tab:exp-v3}). Table~\ref{tab:sim-array-means} provides the corresponding simulated array means at 62.5\,MHz and 122.5\,MHz in a matching format for direct comparison. The PT signal was detected in all active receive channels, with $S_{1,n}$ values ranging from $-79$ to $-120$\,dB across all subjects and channels. \rev{Figure~\ref{fig:exp-segmentation} illustrates the data processing pipeline for one representative channel: raw data, baseline removal, breath-hold detection, and cardiac cycle segmentation. Figures~\ref{fig:exp-anterior-mag} and~\ref{fig:exp-posterior-mag} show the resulting per-channel averaged cardiac waveforms for Volunteer~3, analogous to the simulated waveforms in Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122}.}
 
 \begin{table}[htbp]
 \centering
@@ -1172,6 +1172,27 @@ V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 0.101 & 0.088 & 27 & 24 \\
 % \caption{Averaged cardiac waveforms (magnitude and phase) for the three strongest anterior channels per volunteer. Shaded bands indicate 95\,\% CI from cycle averaging. [V1: 17 cycles, V2: 22 cycles, V3: 22 cycles]}
 % \label{fig:exp-waveforms}
 % \end{figure}
+
+\begin{figure}[htbp]
+\centering
+\revbrown{\includegraphics[width=\columnwidth]{./media/vol_segmentation.svg}
+\caption{Experimental data processing for one representative channel (Volunteer~3). Grey: raw $S_{1,n}$ magnitude time series; blue: detrended signal after baseline removal; red/green vertical lines: breath-hold start/stop; orange markers: detected cardiac cycle boundaries used for cycle segmentation and averaging.}
+\label{fig:exp-segmentation}}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\revbrown{\includegraphics[width=\columnwidth]{./media/vol_anterior_mag.svg}
+\caption{Per-channel averaged cardiac magnitude S-parameter waveforms for all anterior elements (Volunteer~3, 24 cycles averaged). Blue: mean waveform; red band: $\pm 1.96\,\sigma$ noise level (95\,\% confidence interval). Modulation depth is visible as the peak-to-peak excursion of the blue trace.}
+\label{fig:exp-anterior-mag}}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\revbrown{\includegraphics[width=\columnwidth]{./media/vol_posterior_mag.svg}
+\caption{Per-channel averaged cardiac magnitude S-parameter waveforms for all posterior elements (Volunteer~3, 24 cycles averaged). Blue: mean waveform; red band: $\pm 1.96\,\sigma$ noise level. Despite weaker absolute coupling, several posterior channels exhibit modulation depths comparable to or exceeding those of anterior elements.}
+\label{fig:exp-posterior-mag}}
+\end{figure}
 
 % [FIGURE PLACEHOLDER: Modulation depth bar chart per volunteer]
 % \begin{figure}[htbp]
