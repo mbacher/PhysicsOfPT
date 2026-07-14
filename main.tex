@@ -5,6 +5,7 @@
 ]{article}
 \usepackage{xcolor}
 \usepackage[normalem]{ulem} % \sout is available, but can be fragile in technical text
+\usepackage[inkscapelatex=false]{svg}
 \newcommand{\rev}[1]{\textcolor{blue}{#1}}
 
 % Change-tracking helpers
@@ -843,9 +844,9 @@ To validate the simulation predictions experimentally, S-parameter measurements 
 \hline
 Volunteer & Gender & Age & Height (cm) & Weight (kg) & Coil configuration \\
 \hline
-V1 & [M/F] & [AGE] & [HEIGHT] & [WEIGHT] & Body~18 + Spine~24 \\
-V2 & [M/F] & [AGE] & [HEIGHT] & [WEIGHT] & Body~12 + Spine~24 \\
-V3 & [M/F] & [AGE] & [HEIGHT] & [WEIGHT] & Body~18 + Spine~24 \\
+V1 & M & 41 & 191cm & 112kg & Body~18 + Spine~24 \\
+V2 & M & 60 & 172cm & 81kg & Body~12 + Spine~24 \\
+V3 & F & 27 & 170cm & 68kg & Body~18 + Spine~24 \\
 \hline
 \end{tabular}
 \end{table}
@@ -857,18 +858,10 @@ The PT generator, a small loop antenna integrated into the anterior coil array h
 The receiver was characterized by mapping digital output values to analog input power: signals ranging from $-120$\,dBm (noise floor) to $-35$\,dBm (onset of receiver nonlinearity) were directly fed into each coil element's low-noise preamplifier input, establishing a calibrated 85\,dB linear dynamic range. Scattering parameters $S_{1,n}$\,(dB) were then computed from the known transmit power (0\,dBm) and the calibrated received signal level in each channel.}
 
 \revbrown{
-Volunteers were positioned supine and instructed to hold their breath. Raw per-channel PT magnitude and phase signals, sampled at 2\,kHz, were recorded continuously. Within each breathhold segment, mild baseline drifts were removed by polynomial detrending (preserving mean amplitudes). Cardiac cycles were segmented using peak detection on a reference channel with strong cardiac modulation, and individual cycles were aligned and averaged to produce mean cardiac waveforms per channel. Confidence intervals (95\,\% CI) were computed as $\bar{x} \pm 1.96\,\sigma_\mathrm{noise}$, where $\sigma_\mathrm{noise}$ is the standard deviation of the residual after cycle averaging, providing a direct measure of the per-channel noise floor relative to the cardiac modulation amplitude.}
+Volunteers were positioned supine and instructed to hold their breath. Raw per-channel PT magnitude and phase signals, sampled at 2\,kHz, were recorded continuously. Within each breathhold segment, mild baseline drifts were removed by polynomial detrending (preserving mean amplitudes). Cardiac cycles were segmented using peak detection on a reference channel with strong cardiac modulation, and individual cycles were aligned and averaged to produce mean cardiac waveforms per channel. Confidence intervals (95\,\% CI) were computed as $\bar{x} \pm 1.96\,\sigma_\mathrm{noise}$, where $\sigma_\mathrm{noise}$ is the standard deviation of the residual after cycle averaging, providing a direct measure of the per-channel noise relative to the cardiac modulation amplitude.}
 
 \revbrown{
 Modulation depth was defined analogously to the simulation (Eq.~\ref{eq:mod-depth-mag}): the peak-to-peak excursion of the averaged cardiac waveform as a percentage of the mean signal level, evaluated in both raw amplitude, dBm, and $S_{1,n}$\,(dB) domains.}
-
-% [FIGURE PLACEHOLDER: Experimental setup photograph or schematic diagram]
-% \begin{figure}[htbp]
-% \centering
-% \includegraphics[width=\columnwidth]{./media/exp_setup.png}
-% \caption{Experimental setup for S-parameter validation measurements.}
-% \label{fig:exp-setup}
-% \end{figure}
 
 
 \section{\texorpdfstring{Results }{Results }}\label{results-1}
@@ -1153,21 +1146,21 @@ V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 0.101 & 0.088 & 27 & 24 \\
 
 \begin{figure}[htbp]
 \centering
-\revbrown{\includegraphics[width=\columnwidth]{./media/vol_segmentation.svg}
+\revbrown{\includesvg[width=\columnwidth]{./media/vol_segmentation.svg}
 \caption{Experimental data processing for one representative channel (Volunteer~3). Grey: raw $S_{1,n}$ magnitude time series; blue: detrended signal after baseline removal; red/green vertical lines: breath-hold start/stop; orange markers: detected cardiac cycle boundaries used for cycle segmentation and averaging.}
 \label{fig:exp-segmentation}}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\revbrown{\includegraphics[width=\columnwidth]{./media/vol_anterior_mag.svg}
-\caption{Per-channel averaged cardiac magnitude S-parameter waveforms for all anterior elements (Volunteer~3, 24 cycles averaged). Blue: mean waveform; red band: $\pm 1.96\,\sigma$ noise level (95\,\% confidence interval). Modulation depth is visible as the peak-to-peak excursion of the blue trace.}
+\revbrown{\includesvg[width=\columnwidth]{./media/vol_anterior_mag.svg}
+\caption{Per-channel averaged cardiac magnitude S-parameter waveforms for all anterior elements (Volunteer~3, 24 cycles averaged). Blue: mean waveform; red band: $\pm 1.96\,\sigma$ noise level. Modulation depth is visible as the peak-to-peak excursion of the blue trace.}
 \label{fig:exp-anterior-mag}}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\revbrown{\includegraphics[width=\columnwidth]{./media/vol_posterior_mag.svg}
+\revbrown{\includesvg[width=\columnwidth]{./media/vol_posterior_mag.svg}
 \caption{Per-channel averaged cardiac magnitude S-parameter waveforms for all posterior elements (Volunteer~3, 24 cycles averaged). Blue: mean waveform; red band: $\pm 1.96\,\sigma$ noise level. Despite weaker absolute coupling, several posterior channels exhibit modulation depths comparable to or exceeding those of anterior elements.}
 \label{fig:exp-posterior-mag}}
 \end{figure}
