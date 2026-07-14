@@ -914,8 +914,7 @@ elements, in Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122} as
 1mW input power) and in Figures~\ref{fig:rx-phase-62} and~\ref{fig:rx-phase-122} as phase modulation. \revgreen{Magnitude and phase modulation depths are defined in Eqs.~\eqref{eq:mod-depth-mag} and~\eqref{eq:mod-depth-phase}, respectively.}
 
 Modulation depths of individual channels are compared graphically in
-Figure~\ref{fig:mod-depth-bars-mag} for magnitude and in Figure~\ref{fig:mod-depth-bars-phase} for phase and summarized in
-Figure~\ref{fig:mod-depth-summary}\revred{, with per-channel correlation coefficients listed in Table~\ref{tab:per-channel}}.
+Figure~\ref{fig:mod-depth-bars-mag} for magnitude and in Figure~\ref{fig:mod-depth-bars-phase} for phase\revred{, with per-channel correlation coefficients listed in Table~\ref{tab:per-channel}}.
 
 \revgreen{Results are presented at 62.5\,MHz and 122.5\,MHz, corresponding to PT frequencies close to Larmor frequencies but outside the imaging bandwidth at 1.5\,T and 3\,T, respectively.}
 
@@ -951,7 +950,7 @@ Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122} show the receiv
 extremely well to total cardiac volume}, plotted in red, in all but one
 anterior element.
 
-Modulation depths (see also Figure~\ref{fig:mod-depth-summary} and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) were found to be
+Modulation depths (see also Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase} and Table~\ref{tab:per-channel}) were found to be
 slightly higher in the anterior elements at 122.5MHz (mean modulation
 depth 0.14\% anterior vs. 0.12\% posterior) and almost similar at
 62.5MHz (0.06\% anterior vs. 0.065\% posterior)\revred{. Per-channel modulation depths and signed correlation coefficients are listed in Table~\ref{tab:per-channel}.}
@@ -965,7 +964,7 @@ modulation depth.
 
 Figures~\ref{fig:rx-phase-62} and~\ref{fig:rx-phase-122} show the received phase signal over time at 62.5MHz and
 122.5MHz in anterior and posterior elements. Phase modulation
-(individual elements summarized in Figure~\ref{fig:mod-depth-summary} and Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase}) also
+(individual elements in Figures~\ref{fig:mod-depth-bars-mag} and~\ref{fig:mod-depth-bars-phase} and Table~\ref{tab:per-channel}) also
 correlates very well quantitatively to cardiac volume ground truth.
 Contrary to magnitude modulation depth, phase modulation depth increased
 by a factor of 5 in anterior elements and 7 in posterior elements when
@@ -1006,14 +1005,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 122.5MHz. Cardiac volume ground truth is shown in red.}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics{./media/image10.png}
-\caption{Magnitude (\(m_{D,mag}\)) and absolute phase (\(|m_{D,ph}|\))
-modulation depths of all anterior and posterior elements at f=62.5MHz
-and f=122.5MHz}
-\label{fig:mod-depth-summary}
-\end{figure}
+% Figure moved to Appendix (old figures) — data now in Tables~\ref{tab:correlation} and~\ref{tab:per-channel}
 
 % NOTE: .emf graphics aren’t supported by pdfLaTeX on Overleaf.
 % Convert these to PDF/PNG (e.g., image11.png/image12.png) and re-enable.
