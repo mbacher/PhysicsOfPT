@@ -158,7 +158,7 @@ Differences in conductivity between tissues and their movement during
 the cardiac cycle is the driving force behind the observed PT signal
 modulation. Simulations \rev{reproduce expected signal modulation trends and provide mechanistic insight into} how signal modulation due to
 cardiac motion can be sensed throughout the measurement volume. The
-measured signal modulation is \revred{quantitatively} strongly correlated to total cardiac
+\rev{simulated} signal modulation is \revred{quantitatively} strongly correlated to total cardiac
 volume \revred{($|R| > 0.94$)}.
 
 \subsection{Conclusion}\label{conclusion}
@@ -691,7 +691,7 @@ using CST Studios Dielectric Dispersion Fit.
 
 \begin{table}[htbp]
 \centering
-\revorange{\caption{Electromagnetic tissue properties at 100\,MHz used in the simulation.}\label{tab:tissue-properties}}
+\revorange{\caption{Representative electromagnetic tissue properties (reference values at 100\,MHz, subsequently adjusted to the exact simulation frequencies via CST's Dielectric Dispersion Fit). A subset of the 30 modeled tissue types is shown.}\label{tab:tissue-properties}}
 \revorange{
 \begin{tabular}{l r r}
 \hline
@@ -825,6 +825,8 @@ depth as the difference between the phase in frame 1 and frame 7:
 m_{D,\mathrm{phase}} = \angle s_{PT}(t = 1) - \angle s_{PT}(t = 7)
 \end{equation}
 
+\rev{Because the simulation provides the exact cardiac phases of full expansion (frame~1) and maximum contraction (frame~7) as ground truth, modulation depth is evaluated directly between these two known extremal frames rather than as a peak-to-peak search over all frames. This differs from the experimental analysis, where the true extremal phases are unknown and the peak-to-peak excursion of the averaged waveform is used instead.}
+
 Note that, as discussed previously, the modulation can be either
 positive (decrease in received signal as cardiac volume decreases) or
 negative.
@@ -845,9 +847,9 @@ To validate the simulation predictions experimentally, S-parameter measurements 
 \hline
 Volunteer & Gender & Age & Height (cm) & Weight (kg) & Coil configuration \\
 \hline
-V1 & M & 41 & 191cm & 112kg & Body~18 + Spine~24 \\
-V2 & M & 60 & 172cm & 81kg & Body~12 + Spine~24 \\
-V3 & F & 27 & 170cm & 68kg & Body~18 + Spine~24 \\
+V1 & M & 41 & 191 & 112 & Body~18 + Spine~24 \\
+V2 & M & 60 & 172 & 81 & Body~12 + Spine~24 \\
+V3 & F & 27 & 170 & 68 & Body~18 + Spine~24 \\
 \hline
 \end{tabular}
 \end{table}
@@ -859,7 +861,7 @@ The PT generator, a small loop antenna integrated into the anterior coil array h
 The receiver was characterized by mapping digital output values to analog input power: signals ranging from $-120$\,dBm (noise floor) to $-35$\,dBm (onset of receiver nonlinearity) were directly fed into each coil element's low-noise preamplifier input, establishing a calibrated 85\,dB linear dynamic range. Scattering parameters $S_{1,n}$\,(dB) were then computed from the known transmit power (0\,dBm) and the calibrated received signal level in each channel.}
 
 \revbrown{
-Volunteers were positioned supine and instructed to hold their breath. Raw per-channel PT magnitude and phase signals, sampled at 2\,kHz, were recorded continuously. Within each breathhold segment, mild baseline drifts were removed by polynomial detrending (preserving mean amplitudes). Cardiac cycles were segmented using peak detection on a reference channel with strong cardiac modulation, and individual cycles were aligned and averaged to produce mean cardiac waveforms per channel. Confidence intervals (95\,\% CI) were computed as $\bar{x} \pm 1.96\,\sigma_\mathrm{noise}$, where $\sigma_\mathrm{noise}$ is the standard deviation of the residual after cycle averaging, providing a direct measure of the per-channel noise relative to the cardiac modulation amplitude.}
+Volunteers were positioned supine and instructed to hold their breath. Raw per-channel PT magnitude and phase signals, sampled at 2\,kHz, were recorded continuously. Within each breath-hold segment, mild baseline drifts were removed by polynomial detrending (preserving mean amplitudes). Cardiac cycles were segmented using peak detection on a reference channel with strong cardiac modulation, and individual cycles were aligned and averaged to produce mean cardiac waveforms per channel. Confidence intervals (95\,\% CI) were computed as $\bar{x} \pm 1.96\,\sigma_\mathrm{noise}$, where $\sigma_\mathrm{noise}$ is the standard deviation of the residual after cycle averaging, providing a direct measure of the per-channel noise relative to the cardiac modulation amplitude.}
 
 \revbrown{
 Modulation depth was defined analogously to the simulation (Eq.~\ref{eq:mod-depth-mag}): the peak-to-peak excursion of the averaged cardiac waveform as a percentage of the mean signal level, evaluated in both raw amplitude, dBm, and $S_{1,n}$\,(dB) domains.}
@@ -918,7 +920,7 @@ Table~\ref{tab:per-channel}\revred{, with per-channel correlation coefficients l
 \begin{table}[ht]
 \centering
 \revred{
-\caption{Pearson correlation coefficient $|R|$ and modulation depth $m_D$ between simulated S-parameter curves and heart volume ground truth, given as mean $\pm$ SD across channels. Magnitude modulation depth is in percent; phase modulation depth is given both in percent and in milliradians (absolute phase excursion).}
+\caption{Pearson correlation coefficient $|R|$ and modulation depth $m_D$ between simulated S-parameter curves and heart volume ground truth, given as mean $\pm$ SD across channels. Magnitude modulation depth is in percent; phase modulation depth is given in milliradians (absolute phase excursion, $\angle s_{PT}$ maximum minus minimum).}
 \label{tab:correlation}
 \begin{tabular}{ll|cc|cc}
 \hline
@@ -926,15 +928,12 @@ Table~\ref{tab:per-channel}\revred{, with per-channel correlation coefficients l
 \textbf{Array} & \textbf{Signal} & $|R|$ & $m_D$ & $|R|$ & $m_D$ \\
 \hline
 Anterior (S2--S13) & Mag. [\%] & $0.94 \pm 0.20$ & $0.062 \pm 0.052$ & $0.94 \pm 0.18$ & $0.141 \pm 0.147$ \\
-                   & Phase [\%] & $0.90 \pm 0.28$ & $1.31 \pm 1.81$ & $0.98 \pm 0.05$ & $0.87 \pm 0.94$ \\
-                   & Phase [mrad] & & $3.53 \pm 4.39$ & & $17.12 \pm 23.06$ \\
+                   & Phase [mrad] & $0.90 \pm 0.28$ & $3.53 \pm 4.39$ & $0.98 \pm 0.05$ & $17.12 \pm 23.06$ \\
 Posterior (S14--S29) & Mag. [\%] & $0.99 \pm 0.03$ & $0.065 \pm 0.058$ & $0.97 \pm 0.06$ & $0.122 \pm 0.145$ \\
-                     & Phase [\%] & $0.99 \pm 0.03$ & $1.58 \pm 2.52$ & $0.99 \pm 0.02$ & $5.09 \pm 8.16$ \\
-                     & Phase [mrad] & & $4.59 \pm 4.93$ & & $34.83 \pm 40.45$ \\
+                     & Phase [mrad] & $0.99 \pm 0.03$ & $4.59 \pm 4.93$ & $0.99 \pm 0.02$ & $34.83 \pm 40.45$ \\
 \hline
 All channels & Mag. [\%] & $0.97 \pm 0.13$ & $0.063 \pm 0.054$ & $0.96 \pm 0.13$ & $0.130 \pm 0.143$ \\
-             & Phase [\%] & $0.95 \pm 0.18$ & $1.47 \pm 2.21$ & $0.98 \pm 0.04$ & $3.28 \pm 6.48$ \\
-             & Phase [mrad] & & $4.13 \pm 4.65$ & & $27.24 \pm 34.72$ \\
+             & Phase [mrad] & $0.95 \pm 0.18$ & $4.13 \pm 4.65$ & $0.98 \pm 0.04$ & $27.24 \pm 34.72$ \\
 \hline
 \end{tabular}
 }
@@ -966,7 +965,7 @@ Figures~\ref{fig:rx-phase-62} and~\ref{fig:rx-phase-122} show the received phase
 correlates very well quantitatively to cardiac volume ground truth.
 Contrary to magnitude modulation depth, \rev{absolute} phase modulation depth \rev{(in mrad)} increased
 by a factor of \rev{${\sim}$}5 in anterior elements and \rev{${\sim}$}7\rev{--8} in posterior elements when
-doubling the PT frequency\rev{, although the relative measure ($m_D$ in \%) shows a more complex, channel-dependent pattern because the baseline coupling phase $\angle S_{n,1}$ itself varies with frequency (Table~\ref{tab:per-channel})}.
+doubling the PT frequency \rev{(individual channels in Table~\ref{tab:per-channel})}.
 
 \begin{figure}
 \centering
@@ -1001,6 +1000,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 \caption{Received signal phase in radians in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
 122.5MHz. Cardiac volume ground truth is shown in red.}
+\label{fig:rx-phase-122}
 \end{figure}
 
 
@@ -1050,48 +1050,48 @@ black line shows mean \textbf{absolute} modulation depth.}
 \begin{table}[ht]
 \centering
 \revred{
-\caption{Per-channel signed Pearson correlation coefficient $R$ and modulation depth between the simulated S-parameter and heart volume ground truth. Magnitude modulation depth $m_{D,\text{mag}}$ is given in percent; phase modulation depth $m_{D,\text{ph}}$ is given both as a percentage of the baseline phase and as an absolute phase excursion in milliradians.}
+\caption{Per-channel signed Pearson correlation coefficient $R$ and modulation depth between the simulated S-parameter and heart volume ground truth. Magnitude modulation depth $m_{D,\text{mag}}$ is given in percent; phase modulation depth $m_{D,\text{ph}}$ is given as an absolute phase excursion in milliradians.}
 \label{tab:per-channel}
 \scriptsize
-\begin{tabular}{l|rr|rrr|rr|rrr}
+\begin{tabular}{l|rr|rr|rr|rr}
 \hline
- & \multicolumn{5}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{5}{c}{\textbf{122.5 MHz (3T)}} \\
- & \multicolumn{2}{c|}{Magnitude} & \multicolumn{3}{c|}{Phase} & \multicolumn{2}{c|}{Magnitude} & \multicolumn{3}{c}{Phase} \\
-\textbf{Ch.} & $R$ & $m_D$ [\%] & $R$ & $m_D$ [\%] & $m_D$ [mrad] & $R$ & $m_D$ [\%] & $R$ & $m_D$ [\%] & $m_D$ [mrad] \\
+ & \multicolumn{4}{c|}{\textbf{62.5 MHz (1.5T)}} & \multicolumn{4}{c}{\textbf{122.5 MHz (3T)}} \\
+ & \multicolumn{2}{c|}{Magnitude} & \multicolumn{2}{c|}{Phase} & \multicolumn{2}{c|}{Magnitude} & \multicolumn{2}{c}{Phase} \\
+\textbf{Ch.} & $R$ & $m_D$ [\%] & $R$ & $m_D$ [mrad] & $R$ & $m_D$ [\%] & $R$ & $m_D$ [mrad] \\
 \hline
-\multicolumn{11}{l}{\textit{Anterior array}} \\
+\multicolumn{9}{l}{\textit{Anterior array}} \\
 \hline
-$S_{2,1}$  & $+0.31$ & $0.002$ & $-0.99$ & $1.29$ & $0.78$ & $-1.00$ & $0.010$ & $+0.83$ & $0.13$ & $0.71$ \\
-$S_{3,1}$  & $+1.00$ & $0.008$ & $-1.00$ & $3.20$ & $0.71$ & $-0.99$ & $0.010$ & $-0.94$ & $0.10$ & $0.49$ \\
-$S_{4,1}$  & $+1.00$ & $0.008$ & $-1.00$ & $3.64$ & $1.07$ & $-0.99$ & $0.016$ & $-1.00$ & $0.12$ & $0.59$ \\
-$S_{5,1}$  & $+1.00$ & $0.005$ & $-1.00$ & $5.57$ & $2.56$ & $-0.99$ & $0.031$ & $+0.98$ & $0.04$ & $0.22$ \\
-$S_{6,1}$  & $-1.00$ & $0.103$ & $-0.92$ & $0.02$ & $0.33$ & $+0.97$ & $0.014$ & $+1.00$ & $0.90$ & $27.32$ \\
-$S_{7,1}$  & $-1.00$ & $0.108$ & $-0.87$ & $0.03$ & $0.59$ & $+1.00$ & $0.193$ & $+1.00$ & $2.45$ & $65.25$ \\
-$S_{8,1}$  & $-1.00$ & $0.109$ & $-0.03$ & $0.01$ & $0.30$ & $+1.00$ & $0.414$ & $+1.00$ & $2.03$ & $59.48$ \\
-$S_{9,1}$  & $-1.00$ & $0.058$ & $+1.00$ & $0.21$ & $3.79$ & $+1.00$ & $0.170$ & $+1.00$ & $0.08$ & $2.30$ \\
-$S_{10,1}$ & $-1.00$ & $0.131$ & $-1.00$ & $0.51$ & $10.03$ & $-1.00$ & $0.334$ & $+1.00$ & $0.81$ & $20.27$ \\
-$S_{11,1}$ & $-1.00$ & $0.101$ & $-1.00$ & $0.42$ & $10.67$ & $-1.00$ & $0.241$ & $-1.00$ & $1.20$ & $11.00$ \\
-$S_{12,1}$ & $+0.99$ & $0.008$ & $-0.99$ & $0.44$ & $0.41$ & $-0.36$ & $0.002$ & $+1.00$ & $0.17$ & $0.95$ \\
-$S_{13,1}$ & $-1.00$ & $0.102$ & $-1.00$ & $0.43$ & $11.12$ & $-1.00$ & $0.263$ & $-1.00$ & $2.35$ & $16.89$ \\
+$S_{2,1}$  & $+0.31$ & $0.002$ & $-0.99$ & $0.78$ & $-1.00$ & $0.010$ & $+0.83$ & $0.71$ \\
+$S_{3,1}$  & $+1.00$ & $0.008$ & $-1.00$ & $0.71$ & $-0.99$ & $0.010$ & $-0.94$ & $0.49$ \\
+$S_{4,1}$  & $+1.00$ & $0.008$ & $-1.00$ & $1.07$ & $-0.99$ & $0.016$ & $-1.00$ & $0.59$ \\
+$S_{5,1}$  & $+1.00$ & $0.005$ & $-1.00$ & $2.56$ & $-0.99$ & $0.031$ & $+0.98$ & $0.22$ \\
+$S_{6,1}$  & $-1.00$ & $0.103$ & $-0.92$ & $0.33$ & $+0.97$ & $0.014$ & $+1.00$ & $27.32$ \\
+$S_{7,1}$  & $-1.00$ & $0.108$ & $-0.87$ & $0.59$ & $+1.00$ & $0.193$ & $+1.00$ & $65.25$ \\
+$S_{8,1}$  & $-1.00$ & $0.109$ & $-0.03$ & $0.30$ & $+1.00$ & $0.414$ & $+1.00$ & $59.48$ \\
+$S_{9,1}$  & $-1.00$ & $0.058$ & $+1.00$ & $3.79$ & $+1.00$ & $0.170$ & $+1.00$ & $2.30$ \\
+$S_{10,1}$ & $-1.00$ & $0.131$ & $-1.00$ & $10.03$ & $-1.00$ & $0.334$ & $+1.00$ & $20.27$ \\
+$S_{11,1}$ & $-1.00$ & $0.101$ & $-1.00$ & $10.67$ & $-1.00$ & $0.241$ & $-1.00$ & $11.00$ \\
+$S_{12,1}$ & $+0.99$ & $0.008$ & $-0.99$ & $0.41$ & $-0.36$ & $0.002$ & $+1.00$ & $0.95$ \\
+$S_{13,1}$ & $-1.00$ & $0.102$ & $-1.00$ & $11.12$ & $-1.00$ & $0.263$ & $-1.00$ & $16.89$ \\
 \hline
-\multicolumn{11}{l}{\textit{Posterior array}} \\
+\multicolumn{9}{l}{\textit{Posterior array}} \\
 \hline
-$S_{14,1}$ & $-1.00$ & $0.094$ & $-0.99$ & $0.12$ & $2.57$ & $-1.00$ & $0.516$ & $+1.00$ & $4.69$ & $73.62$ \\
-$S_{15,1}$ & $-1.00$ & $0.162$ & $-1.00$ & $0.55$ & $10.60$ & $-1.00$ & $0.257$ & $+1.00$ & $2.01$ & $61.99$ \\
-$S_{16,1}$ & $-1.00$ & $0.106$ & $-1.00$ & $0.52$ & $13.93$ & $-1.00$ & $0.232$ & $-1.00$ & $9.96$ & $35.13$ \\
-$S_{17,1}$ & $-1.00$ & $0.099$ & $-1.00$ & $0.50$ & $13.54$ & $-1.00$ & $0.161$ & $-1.00$ & $28.53$ & $35.70$ \\
-$S_{18,1}$ & $-1.00$ & $0.082$ & $-0.98$ & $0.12$ & $2.36$ & $+0.78$ & $0.072$ & $-1.00$ & $19.51$ & $133.99$ \\
-$S_{19,1}$ & $-1.00$ & $0.148$ & $-0.99$ & $0.18$ & $3.48$ & $+1.00$ & $0.093$ & $+0.99$ & $1.78$ & $49.59$ \\
-$S_{20,1}$ & $-1.00$ & $0.126$ & $-1.00$ & $0.40$ & $10.70$ & $+0.98$ & $0.323$ & $-1.00$ & $7.89$ & $92.05$ \\
-$S_{21,1}$ & $-1.00$ & $0.109$ & $-0.99$ & $0.29$ & $7.67$ & $+0.87$ & $0.081$ & $-1.00$ & $5.37$ & $55.48$ \\
-$S_{22,1}$ & $-1.00$ & $0.059$ & $+0.86$ & $0.06$ & $1.10$ & $+1.00$ & $0.116$ & $-0.99$ & $0.82$ & $14.61$ \\
-$S_{23,1}$ & $+1.00$ & $0.009$ & $-1.00$ & $6.12$ & $0.66$ & $-1.00$ & $0.010$ & $-1.00$ & $0.08$ & $0.43$ \\
-$S_{24,1}$ & $+0.99$ & $0.007$ & $-1.00$ & $8.57$ & $1.13$ & $-1.00$ & $0.015$ & $-0.99$ & $0.19$ & $0.99$ \\
-$S_{25,1}$ & $+0.89$ & $0.005$ & $-1.00$ & $2.56$ & $2.65$ & $-1.00$ & $0.025$ & $-0.91$ & $0.15$ & $0.81$ \\
-$S_{26,1}$ & $+1.00$ & $0.009$ & $-0.98$ & $0.83$ & $0.35$ & $-0.94$ & $0.003$ & $-0.96$ & $0.11$ & $0.57$ \\
-$S_{27,1}$ & $+1.00$ & $0.006$ & $-0.99$ & $0.19$ & $0.27$ & $-0.97$ & $0.005$ & $-1.00$ & $0.16$ & $0.93$ \\
-$S_{28,1}$ & $+1.00$ & $0.006$ & $-0.99$ & $0.34$ & $0.45$ & $-0.99$ & $0.010$ & $-1.00$ & $0.16$ & $0.92$ \\
-$S_{29,1}$ & $+1.00$ & $0.005$ & $-1.00$ & $4.00$ & $1.90$ & $-0.99$ & $0.029$ & $-0.96$ & $0.09$ & $0.45$ \\
+$S_{14,1}$ & $-1.00$ & $0.094$ & $-0.99$ & $2.57$ & $-1.00$ & $0.516$ & $+1.00$ & $73.62$ \\
+$S_{15,1}$ & $-1.00$ & $0.162$ & $-1.00$ & $10.60$ & $-1.00$ & $0.257$ & $+1.00$ & $61.99$ \\
+$S_{16,1}$ & $-1.00$ & $0.106$ & $-1.00$ & $13.93$ & $-1.00$ & $0.232$ & $-1.00$ & $35.13$ \\
+$S_{17,1}$ & $-1.00$ & $0.099$ & $-1.00$ & $13.54$ & $-1.00$ & $0.161$ & $-1.00$ & $35.70$ \\
+$S_{18,1}$ & $-1.00$ & $0.082$ & $-0.98$ & $2.36$ & $+0.78$ & $0.072$ & $-1.00$ & $133.99$ \\
+$S_{19,1}$ & $-1.00$ & $0.148$ & $-0.99$ & $3.48$ & $+1.00$ & $0.093$ & $+0.99$ & $49.59$ \\
+$S_{20,1}$ & $-1.00$ & $0.126$ & $-1.00$ & $10.70$ & $+0.98$ & $0.323$ & $-1.00$ & $92.05$ \\
+$S_{21,1}$ & $-1.00$ & $0.109$ & $-0.99$ & $7.67$ & $+0.87$ & $0.081$ & $-1.00$ & $55.48$ \\
+$S_{22,1}$ & $-1.00$ & $0.059$ & $+0.86$ & $1.10$ & $+1.00$ & $0.116$ & $-0.99$ & $14.61$ \\
+$S_{23,1}$ & $+1.00$ & $0.009$ & $-1.00$ & $0.66$ & $-1.00$ & $0.010$ & $-1.00$ & $0.43$ \\
+$S_{24,1}$ & $+0.99$ & $0.007$ & $-1.00$ & $1.13$ & $-1.00$ & $0.015$ & $-0.99$ & $0.99$ \\
+$S_{25,1}$ & $+0.89$ & $0.005$ & $-1.00$ & $2.65$ & $-1.00$ & $0.025$ & $-0.91$ & $0.81$ \\
+$S_{26,1}$ & $+1.00$ & $0.009$ & $-0.98$ & $0.35$ & $-0.94$ & $0.003$ & $-0.96$ & $0.57$ \\
+$S_{27,1}$ & $+1.00$ & $0.006$ & $-0.99$ & $0.27$ & $-0.97$ & $0.005$ & $-1.00$ & $0.93$ \\
+$S_{28,1}$ & $+1.00$ & $0.006$ & $-0.99$ & $0.45$ & $-0.99$ & $0.010$ & $-1.00$ & $0.92$ \\
+$S_{29,1}$ & $+1.00$ & $0.005$ & $-1.00$ & $1.90$ & $-0.99$ & $0.029$ & $-0.96$ & $0.45$ \\
 \hline
 \end{tabular}
 }
@@ -1101,13 +1101,13 @@ $S_{29,1}$ & $+1.00$ & $0.005$ & $-1.00$ & $4.00$ & $1.90$ & $-0.99$ & $0.029$ &
 \centering
 \caption{Simulation array-mean modulation depths per frequency, grouped by coil array, derived from Table~\ref{tab:per-channel}. This layout mirrors Table~\ref{tab:exp-sparams} for direct comparison with experimental results.}
 \label{tab:sim-array-means}
-\begin{tabular}{lcccccc}
+\begin{tabular}{lcccc}
 \hline
- & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (mrad)} \\
-Frequency & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean \\
+ & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (mrad)} \\
+Frequency & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean \\
 \hline
-62.5\,MHz  & 0.062 & 0.065 & 1.314 & 1.584 & 3.53  & 4.58  \\
-122.5\,MHz & 0.142 & 0.122 & 0.865 & 5.094 & 17.12 & 34.83 \\
+62.5\,MHz  & 0.062 & 0.065 & 3.53 & 4.58 \\
+122.5\,MHz & 0.142 & 0.122 & 17.12 & 34.83 \\
 \hline
 \end{tabular}
 \end{table}
@@ -1120,19 +1120,19 @@ Table~\ref{tab:exp-sparams} summarizes the measured scattering parameters and ca
 
 \begin{table}[htbp]
 \centering
-\caption{Experimental S-parameter levels and cardiac modulation depths per volunteer. Modulation depth is defined as peak-to-peak excursion of the averaged cardiac waveform in $S_{1,n}$\,(dB). N\textsubscript{cycles} denotes the number of cardiac cycles averaged.}
+\caption{Experimental S-parameter levels and cardiac modulation depths per volunteer. Magnitude modulation depth is the peak-to-peak excursion of the averaged cardiac waveform in $S_{1,n}$\,(dB) as a percentage of the mean level; phase modulation depth is the peak-to-peak phase excursion in milliradians. N\textsubscript{cycles} denotes the number of cardiac cycles averaged.}
 \label{tab:exp-sparams}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcccccccc}
 \hline
- & \multicolumn{2}{c}{$S_{1,n}$ range (dB)} & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (\%)} & & \\
+ & \multicolumn{2}{c}{$S_{1,n}$ range (dB)} & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (mrad)} & & \\
 Volunteer & Anterior & Posterior & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean & N\textsubscript{ch} & N\textsubscript{cycles} \\
 \hline
-V1 & $[-93, -118]$ & $[-118, -120]$ & 0.065 & 0.104 & 0.049 & 0.035 & 27 & 20 \\
-V2 & $[-79, -119]$ & $[-111, -120]$ & 0.075 & 0.041 & 0.146 & 0.277 & 24 & 17 \\
-V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 0.101 & 0.088 & 27 & 24 \\
+V1 & $[-93, -118]$ & $[-118, -120]$ & 0.065 & 0.104 & 47.5 & 93.9 & 27 & 20 \\
+V2 & $[-79, -119]$ & $[-111, -120]$ & 0.075 & 0.041 & 81.6 & 172.1 & 24 & 17 \\
+V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 80.3 & 180.4 & 27 & 24 \\
 \hline
-\multicolumn{3}{l}{Pooled (all volunteers)} & 0.081 & 0.109 & 0.093 & 0.148 & 78 & --- \\
+\multicolumn{3}{l}{Pooled (all volunteers)} & 0.081 & 0.109 & 68.3 & 151.1 & 78 & --- \\
 \hline
 \end{tabular}
 }
@@ -1177,9 +1177,9 @@ V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 0.101 & 0.088 & 27 & 24 \\
 
 Anterior channels exhibited consistently stronger absolute coupling ($S_{1,n} \approx -93$ to $-118$\,dB) compared to posterior channels ($-111$ to $-120$\,dB), reflecting the closer proximity of the anterior array to the integrated PT generator. Notably, the strongest anterior channels (V1: B22, $-93$\,dB; V2: B24, $-79$\,dB; V3: B22, $-93$\,dB) receive PT signal levels approximately 25--40\,dB above the receiver noise floor of $-120$\,dBm. Even the weakest posterior channels, at approximately $-120$\,dB, remain at the boundary of the receiver's calibrated linear range.
 
-Phase modulation depths were of similar magnitude to magnitude modulation depths across all volunteers (pooled mean: 0.11\,\% phase vs.\ 0.09\,\% magnitude), consistent with the simulation finding that both components carry cardiac information. However, individual channels show large variation: some channels exhibit strong magnitude modulation with weak phase modulation and vice versa, confirming that complex-valued (magnitude and phase) processing is advantageous.
+Phase modulation was clearly detectable in all volunteers (pooled anterior/posterior means 68/151\,mrad), consistent with the simulation finding that both magnitude and phase carry cardiac information. Individual channels show large variation: some exhibit strong magnitude modulation with weak phase modulation and vice versa, suggesting that complex-valued (magnitude and phase) processing is advantageous. \rev{The measured phase excursions (tens to hundreds of mrad) substantially exceed the simulated values (a few mrad at 62.5\,MHz, Table~\ref{tab:correlation}); this gap is largest on the weakest posterior channels near the $-120$\,dB noise floor, where phase is intrinsically noise-inflated, and likely also reflects genuine cardiac-motion complexity not captured by the phantom's uniform-volume contraction model.}
 
-Posterior elements, despite their weaker absolute coupling, showed comparable or even larger magnitude modulation depths than anterior elements in V1 (0.10\,\% vs.\ 0.07\,\%) and V3 (0.20\,\% vs.\ 0.10\,\%), and larger phase modulation in V2 (0.28\,\% vs.\ 0.15\,\%). This is consistent with the simulation prediction of higher modulation depth in the transmissive geometry, where the heart lies on a direct path between generator and posterior receiver.
+Posterior elements, despite their weaker absolute coupling, showed comparable or even larger magnitude modulation depths than anterior elements in V1 (0.10\,\% vs.\ 0.07\,\%) and V3 (0.20\,\% vs.\ 0.10\,\%), and larger phase modulation in V2 (\rev{172 vs.\ 82\,mrad}). This is consistent with the simulation prediction of higher modulation depth in the transmissive geometry, where the heart lies on a direct path between generator and posterior receiver.
 
 The inter-subject variability in $S_{1,n}$ levels and modulation depths reflects differences in body habitus (height, weight, subcutaneous fat thickness) and the resulting variation in generator-to-heart and heart-to-coil distances. Additionally, exact coil placement on the body surface, which determines the spatial overlap between each element's sensitivity profile and the cardiac displacement volume, differs between subjects and coil configurations (Body~18 vs.\ Body~12).
 
@@ -1279,7 +1279,7 @@ or S12,1 at 122.5MHz (Figures~\ref{fig:rx-magnitude-122} and~\ref{fig:rx-phase-1
 
 This behavior can also be observed in the modulation depth vs. frequency
 analysis: Element S18,1 at 120.6MHz for instance shows zero magnitude
-modulation but strong phase modulation of -0.19 radians.
+modulation but strong phase modulation of \rev{$-190$\,mrad}.
 
 These results suggest that complex valued processing of PT data can
 avoid ``blind spots'' in sensitivity to motion that can occur in
@@ -1306,7 +1306,7 @@ when the coil array is positioned for optimal imaging.
 
 \subsection{Noise and detectability}\label{noise-detectability}
 
-The experimentally measured cardiac modulation depths (0.002--0.58\,\% in magnitude, 0.001--2.9\,\% in phase) are small in absolute terms, raising the question of practical detectability. Two key factors enable reliable real-time cardiac signal extraction despite these low modulation depths. First, the receiver operates within an 85\,dB calibrated linear range ($-120$ to $-35$\,dBm); the measured PT levels ($-79$ to $-120$\,dB $S_{1,n}$) fall comfortably within this range, ensuring that the modulation is not obscured by receiver nonlinearity or quantisation noise. The received levels occupy approximately 27--40\,dB of the available dynamic range in the strongest channels, leaving substantial headroom.
+The experimentally measured cardiac modulation depths (0.002--0.58\,\% in magnitude, \rev{14--604\,mrad} in phase) are small in absolute terms, raising the question of practical detectability. Two key factors enable reliable real-time cardiac signal extraction despite these low modulation depths. First, the receiver operates within an 85\,dB calibrated linear range ($-120$ to $-35$\,dBm); the measured PT levels ($-79$ to $-120$\,dB $S_{1,n}$) fall comfortably within this range, ensuring that the modulation is not obscured by receiver nonlinearity or quantisation noise. The received levels occupy approximately 27--40\,dB of the available dynamic range in the strongest channels, leaving substantial headroom.
 
 Second, the real-time processing pipeline provides implicit and explicit noise suppression. The linear combination of multiple receive channels used to separate cardiac from respiratory motion components via blind source separation methods \cite{Bacher2020PerformanceFramework, BacherRetrospectiveCohort} inherently improves SNR by coherently combining cardiac signal from many elements while incoherent noise averages down. Subsequently, Kalman filtering in the temporal domain provides further explicit noise reduction, enabling robust cardiac trigger detection even in single-beat operation without the need for cycle averaging \cite{Bacher2022RobustPlacement, Bacher2021ProspectiveCine, Bacher2017CardiacStudy}. In the present validation experiment, cycle averaging over 17--24 heartbeats was employed solely to characterize the noise floor and demonstrate signal quality. This step is not performed in the real-time processing chain.
 
@@ -1394,7 +1394,7 @@ body parts, possibly even that of the head \cite{Speier2018SeparationMeasurement
 in a typical MRI exam, the anterior coil array will move with the chest
 and abdomen, thus creating significant signal modulation simply due to
 the change in distance between PT generator loop and Rx elements. The
-simulation presented here is comparable to a breathheld exam.
+simulation presented here is comparable to a breath-held exam.
 
 As the PT carrier frequency needs to be close to the proton resonance
 frequency, it is constrained by the system's field strength. Overall,
