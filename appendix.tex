@@ -6,7 +6,7 @@
 % RLC parameter extraction
 % S-parameter network theory
 
-The electromagnetic environment is modeled as a time-harmonic system at the PT frequency ($f_{PT}=62.5MHz$ at $1.5T$ and $f_{PT}=122.5MHz$ at 3T) with $\omega=2\pi f_{PT}$.
+The electromag netic environment is modeled as a time-harmonic system at the PT frequency ($f_{PT}=62.5MHz$ at $1.5T$ and $f_{PT}=122.5MHz$ at 3T) with $\omega=2\pi f_{PT}$.
 
 Maxwells curl equations in the source region are:
 
@@ -33,7 +33,7 @@ Configuration (a): source $\mathbf{J}^a$ on the loop conductor, zero elsewhere a
 
 Configuration (b): source $\mathbf{J}^b$ and fields $\mathbf{E}^b$ and $\mathbf{H}^b$
 
-We now seek to describe the Lorentz reciprocity identity
+We now seek to describe the Lorentz reciprocity identity which describes the coupling of fields produced by one source and received by the other and vice versa
 
 \begin{align}
     \label{lorentzreciprocity}
@@ -88,7 +88,7 @@ Integrating Eq. \eqref{before_reciprocity} over a volume $V$ bounded by a closed
 
 the general Lorentz reciprocity theorem for lossy, dispersive, isotropic media. (Harrington 1961, Hoult 2000)
 
-At port n, the fields on the cross section can be expressed in terms of port voltage $V_p$ and port current $I_p$ via the transmission line mode (citation pending):
+At an arbitrary port $n$, the fields on the cross section can be expressed in terms of the ports voltage $V_p$ and current $I_p$ via the transmission line mode (citation pending):
 
 \begin{align}
     \label{harringtonTLM}
@@ -101,7 +101,7 @@ Summing over all N+1 ports:
     \sum_{p=0}^{N} [V_p^a I_p^b -V_p^b I_p^a] = 0
 \end{align}
 
-For a two-port subset, where port 1 is driven in configuration a, port n is driven in configuration b, all other ports terminated we get:
+For a two-port subset, where port 1 is driven in configuration a, port n is driven in configuration b and all other ports terminated we get:
 
 \begin{align}
     V_1^a I_1^b + V_n^a I_n^b = V_1^b I_1^a + V_n^b I_n^a
@@ -211,19 +211,19 @@ In the body volume there are no impressed sources, so
     \oint_{S_{body}}(\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \rev{\mathbf{H}}^a)\rev{\cdot}dS = 0
 \end{align}
 
-This states that the reciprocity surface integral vanishes over any surface enclosing only passive media - a well known result (citation pending).
+This states that the reciprocity surface integral vanishes over any surface enclosing only passive media - a well known result \cite{Harrington}.
 
 To extract $V_n$ we use a different approach. The voltage at a terminated port can be written as \cite{Rumsey1954ReactionTheory}
 
 \begin{align}
     \label{RumseyVoltage}
-    \rev{\langle a,b \rangle} = \rev{\iiint}_V (\mathbf{E}^a \rev{\cdot} \mathbf{J}^b) dV
+    \langle a,b \rangle = \iiint_V (\mathbf{E}^a \rev{\cdot} \mathbf{J}^b) dV
 \end{align}
 
 where $\rev{\langle a,b \rangle}$ is the "reaction", i.e. the response produced by the fields of configuration $a$ \rev{on} the sources of configuration $b$.
 
-In tissue, we defined $\mathbf{J}^b=\gamma \mathbf{E}^b$ as the induced current.
-According to \cite{Rumsey1954ReactionTheory} the port observable at port $n$ is simply the product of port voltage and port current $\rev{\langle a,b \rangle}=V_n I_n$ and with current normalized to $I_n=1A$ Eq. \eqref{RumseyVoltage} over the Volume $V_{body}$ is therefore
+The induced current density in tissue in configuration $b$ is $\mathbf{J}^b=\gamma \mathbf{E}^b$.
+According to \cite{Rumsey1954ReactionTheory} the power observable at port $n$ is simply the product of port voltage and port current $\rev{\langle a,b \rangle}=V_n I_n$. With current normalized to $I_n=1A$, Eq. \eqref{RumseyVoltage} over the Volume $V_{body}$ is therefore
 
 \begin{align}
     \label{PortVoltage}
@@ -241,7 +241,7 @@ The PT loop antennas size ($d=30mm$ in our simulations) is electrically small co
 
 In an electrically small antenna ($ka \rev{\ll} 1$) the loop radiates primarily as a magnetic dipole while the produced E-field is \rev{suppressed} by a factor $ka$ \rev{relative} to a plane wave.
 
-It is important to note that, as the radiated E-field is small, the Faraday induced E-field inside the body ($\mathbf{E}_{ind} \propto \omega \mu_0 \rev{a_{\mathrm{tissue}}}$) is dominant and scales with body dimension $\rev{a_{\mathrm{tissue}}}$.
+It is important to note that, as the radiated E-field is small, the Faraday induced E-field inside the body ($\mathbf{E}_{ind} \propto \omega \mu_0 \rev{a_{\mathrm{tissue}}}$) is dominant and scales with body dimension where $\rev{a_{\mathrm{tissue}}}$ is the characteristic radius of the human torso.
 
 The total electric field in any region is governed by Faraday's law. This Faraday-induced field is:
 
@@ -264,9 +264,9 @@ with scaling by $\rev{a_{\mathrm{tissue}}}$
     |\mathbf{E}_1^{ind}| \rev{\sim} \omega \mu_0 |\mathbf{H}_1| \rev{a_{\mathrm{tissue}}}
 \end{align}
 
-where $\rev{a_{\mathrm{tissue}}}$ is the characteristic radius of the human torso. This induced Faraday field, unlike the loop-generated field, is independent of loop geometry $ka$.
+ This induced Faraday field, unlike the loop-generated field, is independent of loop geometry $ka$.
 
-The proportion of generated field vs. induced field can be approximated: Let $|\mathbf{H}_1|=1\rev{\,\mathrm{A/m}}$ at the body surface. Then the loop generated E-fields at 1.5T / 62.5MHz are approximately
+The proportion of generated field vs. induced field can be estimated as follows: Let $|\mathbf{H}_1|=1\rev{\,\mathrm{A/m}}$ at the body surface. Then the loop generated E-fields at 1.5T / 62.5MHz are approximately
 
 \begin{align}
     \label{LoopEField15T}
@@ -417,7 +417,7 @@ The change in voltage is
     \Delta V_n = V_{n\varphi_1} - V_{n\varphi_2}
 \end{align}
 
-The first-order Born approximation \cite{Chew1995MathematicalTheory} (Chap 8.10) is a linearization of the scattering problem in which the total field inside a perturbed region is approximated by the unperturbed (incident) field.
+The first-order Born approximation (\cite{Chew1995MathematicalTheory}, Chap 8.10) is a linearization of the field scattering problem in which the total field inside a perturbed region is approximated by the unperturbed (incident) field.
 This assumes, that the secondary field produced by the perturbation is negligible compared to the primary field, i.e. $|E_{\rev{\mathrm{scattered}}}| \rev{\ll} |E_{\rev{\mathrm{incident}}}|$ (and $|B_{\rev{\mathrm{scattered}}}| \rev{\ll} |B_{\rev{\mathrm{incident}}}|$). This is the case when the scattering object is electrically small and/or weakly contrasting in its electrical parameters compared to the background.
 In the present \rev{context}, the "perturbation" is not the entire body (which produces substantial loading), but rather the redistribution of tissue during cardiac motion (a volume $V_{\Delta} \approx 250mL$, based on typical stroke volume) with admittivity contrast $|\frac{\Delta \gamma}{\gamma}| \approx 0.5$. Since this displacement volume is small compared to the total body volume, the illuminated volume of each \rev{receive} element and even the typical wavelength in tissue, the condition(s) for the Born application are satisfied. Experimental and simulation results for cardiac modulation depths of $M_n<1\%$ further validate the assumption, that the secondary/scattered field is extremely small compared to the primary/incident field.
 This allows us to write the signal change $\Delta V_n$ as a linear function of $\Delta\gamma$ weighted by the unperturbed field overlap, without requiring more complex iterative solutions:
