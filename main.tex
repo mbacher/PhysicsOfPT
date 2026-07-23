@@ -829,7 +829,7 @@ Note that, as discussed previously, the modulation can be either
 positive (decrease in received signal as cardiac volume decreases) or
 negative.
 
-\revgreen{To quantify the relationship between signal modulation and cardiac motion, we computed the Pearson correlation coefficient $R$ between each channel's S-parameter curve (magnitude and phase, respectively) and the total heart volume ground truth. The heart volume was extracted from the voxel model by summing all voxels belonging to cardiac tissue types (heart muscle, blood, pericardium) across all 12 cardiac phases. A positive $R$ indicates that the signal quantity increases with cardiac volume; a negative $R$ indicates an inverse relationship. We report $|R|$ (mean $\pm$ SD) across channel groups and per-channel signed $R$ values.}
+\revgreen{To quantify the relationship between signal modulation and cardiac motion, we computed the Pearson correlation coefficient $R$ between each channel's S-parameter curve (magnitude and phase, respectively) and the total heart volume ground truth. The heart volume was extracted from the voxel model by summing all voxels belonging to cardiac tissue types (heart muscle, blood, pericardium) across all 12 cardiac phases. \rev{The resulting total (whole-organ) heart volume ranged from 917\,mL at full expansion (frame~1) to 887\,mL at maximum contraction (frame~7), a peak-to-peak change of ${\sim}30$\,mL (${\sim}3.3\,\%$).} A positive $R$ indicates that the signal quantity increases with cardiac volume; a negative $R$ indicates an inverse relationship. We report $|R|$ (mean $\pm$ SD) across channel groups and per-channel signed $R$ values.}
 
 \subsection{Experimental validation}
 %\label{experimental-validation}
@@ -973,7 +973,7 @@ doubling the PT frequency \rev{(individual channels in Table~\ref{tab:per-channe
 \includegraphics{./media/Image6.pdf}
 \caption{Received signal magnitude in dBm in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-62.5MHz. Cardiac volume ground truth is shown in red.}
+62.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
 \label{fig:rx-magnitude-62}
 \end{figure}
 
@@ -982,7 +982,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 \includegraphics{./media/Image7.pdf}
 \caption{Received signal magnitude in dBm in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-122.5MHz. Cardiac volume ground truth is shown in red.}
+122.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
 \label{fig:rx-magnitude-122}
 \end{figure}
 
@@ -991,7 +991,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 \includegraphics{./media/Image8.pdf}
 \caption{Received signal phase in radians in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-62.5MHz. Cardiac volume ground truth is shown in red.}
+62.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
 \label{fig:rx-phase-62}
 \end{figure}
 
@@ -1000,7 +1000,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 \includegraphics{./media/Image9.pdf}
 \caption{Received signal phase in radians in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-122.5MHz. Cardiac volume ground truth is shown in red.}
+122.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
 \label{fig:rx-phase-122}
 \end{figure}
 
