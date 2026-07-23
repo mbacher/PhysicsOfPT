@@ -325,50 +325,7 @@ where $\mathbf{e}_1 = \mathbf{E}_1 \rev{/} I_1$ and $\mathbf{e}_\rev{n} = \mathb
 \begin{figure}[htbp]
 \centering
 % Figure redesigned (clean Venn-style field-overlap schematic); see changes.md #37
-\resizebox{\linewidth}{!}{%
-\begin{tikzpicture}[scale=1.0]
-% Body
-\fill[gray!9] (0,0) ellipse (5.5 and 3.2);
-\draw[very thick, gray!55] (0,0) ellipse (5.5 and 3.2);
-\node[font=\small, gray!55!black] at (0,2.75) {$V_{\mathrm{body}}:\ \gamma=\sigma+j\omega\varepsilon$};
-% Venn field regions
-\fill[blue!45, opacity=0.38] (-1.35,-0.1) ellipse (2.7 and 2.05);
-\fill[red!45, opacity=0.38] (1.35,-0.1) ellipse (2.7 and 2.05);
-\draw[blue!55, thick] (-1.35,-0.1) ellipse (2.7 and 2.05);
-\draw[red!60, thick] (1.35,-0.1) ellipse (2.7 and 2.05);
-% Region labels
-\node[font=\small, blue!65!black] at (-2.75,1.15) {$\mathbf{E}_1$ (PT)};
-\node[font=\small, red!65!black] at (2.75,1.15) {$\mathbf{E}_n$ (coil $n$)};
-\node[font=\small\bfseries, violet!78!black] at (0,0.15) {$\gamma\,(\mathbf{E}_1\!\cdot\!\mathbf{E}_n)$};
-\node[font=\scriptsize\itshape, violet!70!black] at (0,-0.5) {sensitivity};
-% --- PT transmit loop (left) ---
-\draw[blue!70!black, very thick] (-6.3,-0.1) ++(168:0.7) arc (168:-168:0.7);
-\draw[->, blue!70!black, very thick] (-7.65,0.046) -- (-6.985,0.046);
-\draw[blue!70!black, very thick] (-7.65,-0.246) -- (-6.985,-0.246);
-\node[blue!70!black, font=\small] at (-7.5,0.34) {$I_1$};
-\node[blue!70!black, font=\small] at (-6.3,-1.1) {PT};
-% field arrows PT -> blue region
-\draw[->, blue!45, thick] (-5.62,0.25) to[bend left=8] (-3.6,0.5);
-\draw[->, blue!45, thick] (-5.62,-0.45) to[bend right=8] (-3.6,-0.7);
-% --- Coil n receive loop (right) ---
-\draw[red!70!black, very thick] (6.3,-0.1) ++(12:0.7) arc (12:348:0.7);
-\draw[red!70!black, very thick] (6.985,0.046) -- (7.65,0.046);
-\draw[red!70!black, very thick] (6.985,-0.246) -- (7.65,-0.246);
-\fill[red!70!black] (7.65,0.046) circle (1.1pt);
-\fill[red!70!black] (7.65,-0.246) circle (1.1pt);
-\node[red!70!black, font=\scriptsize] at (7.83,0.19) {$+$};
-\node[red!70!black, font=\scriptsize] at (7.83,-0.39) {$-$};
-\draw[<->, red!70!black, thick] (8.05,0.046) -- (8.05,-0.246);
-\node[red!70!black, font=\small] at (8.45,-0.1) {$V_n$};
-\node[red!70!black, font=\small] at (6.3,-1.1) {Coil $n$};
-% field arrows coil n -> red region
-\draw[->, red!45, thick] (5.62,0.25) to[bend right=8] (3.6,0.5);
-\draw[->, red!45, thick] (5.62,-0.45) to[bend left=8] (3.6,-0.7);
-% Equation
-\node[draw, rounded corners, fill=white, inner sep=5pt, font=\small] (eq) at (0,-4.4) {$\displaystyle V_n=\iiint_{V_{\mathrm{body}}}\gamma\,(\mathbf{E}_1\cdot\mathbf{E}_n)\,dV$};
-\draw[->, thick, violet!65] (0,-2.2) -- (eq.north);
-\end{tikzpicture}%
-}
+\includegraphics[width=\linewidth]{./media/AppImage2.pdf}
 \caption{\rev{Conceptual illustration of the volume integral formulation. The PT source (port~1, blue) and receive coil $n$ (red) each produce electric fields in the body; the received voltage $V_n$ is the volume integral of the admittivity-weighted field overlap $\gamma(\mathbf{E}_1 \cdot \mathbf{E}_n)$ (violet region). The integrand is largest where both fields are strong and co-aligned --- the measurement's ``sensitivity profile.'' Outside the body, $\gamma = j\omega\varepsilon_0$ contributes only the direct (reactive) coupling path.}}
 \label{fig:field-overlap}
 \end{figure}
@@ -411,41 +368,7 @@ The signal change equals the admittivity change integrated over the displacement
 \begin{figure}[htbp]
 \centering
 % Figure redesigned (clean thorax cross-section, orange V_Delta ring); see changes.md #37
-\resizebox{\linewidth}{!}{%
-\begin{tikzpicture}[scale=1.0]
-% Body (thorax)
-\fill[gray!8] (0,0) ellipse (6.3 and 3.6);
-\draw[very thick, gray!55] (0,0) ellipse (6.3 and 3.6);
-\node[font=\small, gray!55!black] at (-5.0,2.9) {$V_{\mathrm{body}}$};
-% Lungs
-\fill[cyan!10] (-3.2,0.2) ellipse (1.55 and 2.15);
-\draw[cyan!45, thick] (-3.2,0.2) ellipse (1.55 and 2.15);
-\node[font=\scriptsize, cyan!45!black] at (-3.2,0.2) {Lung};
-\fill[cyan!10] (3.2,0.2) ellipse (1.55 and 2.15);
-\draw[cyan!45, thick] (3.2,0.2) ellipse (1.55 and 2.15);
-\node[font=\scriptsize, cyan!45!black] at (3.2,0.2) {Lung};
-% Heart ED (filled) then ES (covers center -> thin orange ring = small V_Delta)
-\fill[orange!35] (0,-0.1) ellipse (1.4 and 1.6);
-\fill[red!10] (0,-0.1) ellipse (1.12 and 1.28);
-\draw[red!70!black, very thick] (0,-0.1) ellipse (1.4 and 1.6);
-\draw[red!55, very thick, dashed] (0,-0.1) ellipse (1.12 and 1.28);
-\node[font=\scriptsize, red!45!black] at (0,-0.1) {heart};
-% ED / ES labels above body
-\node[font=\small, red!70!black] (edl) at (2.6,4.15) {ED ($\varphi_1$)};
-\draw[red!70!black, thin] (edl.south) to[bend right=12] (0.82,1.2);
-\node[font=\small, red!55!black] (esl) at (-2.6,4.15) {ES ($\varphi_2$)};
-\draw[red!55, thin] (esl.south) to[bend left=12] (-0.66,0.98);
-% V_Delta label
-\node[font=\small\bfseries, orange!78!black] (vd) at (5.4,-2.7) {$V_{\Delta}$};
-\draw[->, thick, orange!78!black] (vd.west) to[bend right=10] (1.02,-1.0);
-% Anterior / Posterior
-\node[font=\scriptsize, gray] at (0,4.15) {Anterior};
-\node[font=\scriptsize, gray] at (0,-4.05) {Posterior};
-% Compact note box
-\node[draw, rounded corners, fill=yellow!8, inner sep=5pt, font=\scriptsize, align=center] at (0,-4.95) {%
-$V_{\Delta}\approx 250\,\mathrm{mL}$ (stroke volume) $\ll V_{\mathrm{body}}$,\quad $|\Delta\gamma/\gamma|\approx 0.5$ \ $\Rightarrow$ \ Born approximation valid ($\mathbf{E}_{\mathrm{scat}}\ll\mathbf{E}_{\mathrm{inc}}$)};
-\end{tikzpicture}%
-}
+\includegraphics[width=\linewidth]{./media/AppImage3.pdf}
 \caption{\rev{Schematic axial cross-section of the thorax illustrating the cardiac displacement volume $V_{\Delta}$ (orange ring) --- the region where tissue identity changes between end-diastole ($\varphi_1$, solid outline) and end-systole ($\varphi_2$, dashed outline). The first-order Born approximation is valid because $V_{\Delta}$ is small compared to the total body volume and the admittivity contrast is weak ($|\Delta\gamma/\gamma| \approx 0.5$), so the scattered field is negligible compared to the incident field.}}
 \label{fig:born-displacement}
 \end{figure}
@@ -564,45 +487,7 @@ Figure~\ref{fig:appendix-circuit} shows the equivalent circuit corresponding to 
 
 \begin{figure}[htbp]
 \centering
-\resizebox{\linewidth}{!}{%
-\begin{circuitikz}[
-    every node/.style={font=\small},
-    ann/.style={font=\footnotesize\itshape, text=violet}
-]
-% --- Primary (TX): PT generator loop ---
-\draw (0,0) to[sinusoidal voltage source, l=$V_{PT}$] (0,3);
-\draw (0,3) to[R, l=$R_{\mathrm{coil},1}$] (3,3);
-\draw (3,3) to[cute inductor, l_=$L_1$] (3,0);
-\draw (0,0) -- (3,0);
-\node[above] at (1.5,3.7) {\textbf{PT generator (primary)}};
-% --- Secondary (RX): MR receive coil ---
-\draw (6,0) to[cute inductor, l_=$L_n$] (6,3);
-\draw (6,3) to[R, l=$R_{\mathrm{coil},n}$] (9,3);
-\draw (9,3) to[C, l_=$C_{\mathrm{tune}}$] (9,0);
-\draw (6,0) -- (9,0);
-\draw (9,3) -- (10,3);
-\draw (9,0) -- (10,0);
-\node[right] at (10,1.5) {$V_{\mathrm{out}}$};
-\draw[<->] (10,0.2) -- (10,2.8);
-\node[above] at (7.5,3.7) {\textbf{MR receive coil (secondary)}};
-% --- Direct magnetic coupling M_0 ---
-\draw[<->, thick, blue!60!black] (3.8,1.5) -- (5.5,1.5);
-\node[blue!60!black, font=\footnotesize] at (4.6,1.9) {$M_0$ (direct)};
-% --- Body-mediated coupling: tissue admittivity R_e || C_e ---
-\draw[violet, thick] (3,0) -- (3,-1.5);
-\draw[violet, thick] (6,0) -- (6,-1.5);
-\draw (3,-1.5) to[R, l=$R_e$, color=violet] (6,-1.5);
-\draw (3,-2.7) to[C, l=$C_e$, color=violet] (6,-2.7);
-\draw[violet] (3,-1.5) -- (3,-2.7);
-\draw[violet] (6,-1.5) -- (6,-2.7);
-% --- Annotations ---
-\node[ann] at (4.5,-3.6) {tissue admittivity $\gamma=\sigma+j\omega\varepsilon \equiv R_e \parallel C_e$};
-\node[ann] at (4.5,-4.1) {$R_e \propto 1/\sigma$ (eddy),\quad $C_e \propto \varepsilon$ (displacement)};
-\node[ann] at (4.5,-4.7) {modulated by cardiac motion $\rightarrow\ M_n = \Delta S_{n,1}/S_{n,1}$};
-\node[ann] at (4.5,-5.3) {mutual: $Z_{n,1}^{\mathrm{body}} = \iiint \gamma\,(\mathbf{e}_1 \cdot \mathbf{e}_n)\,dV$};
-\node[ann] at (4.5,-5.8) {self-loading: $Z_{nn}^{\mathrm{body}} = \iiint \gamma\,|\mathbf{e}_n|^2\,dV$};
-\end{circuitikz}%
-}
+\includegraphics[width=\linewidth]{./media/AppImage4.pdf}
 \caption{\rev{Multiport equivalent circuit derived from the Lorentz reciprocity volume-integral formulation, using the same transformer-coupled representation as the main text (Figure~\ref{fig:equivalent-circuit}). The tissue is drawn explicitly as its complex admittivity $\gamma = \sigma + j\omega\varepsilon \equiv R_e \parallel C_e$, with $R_e \propto 1/\sigma$ and $C_e \propto \varepsilon$. Integrated over the body, the same admittivity produces the body-mediated mutual impedance $Z_{n,1}^{\mathrm{body}} = \iiint \gamma\,(\mathbf{e}_1 \cdot \mathbf{e}_n)\,dV$, which carries the PT signal, and the per-port self-loading $Z_{nn}^{\mathrm{body}} = \iiint \gamma\,|\mathbf{e}_n|^2\,dV$, which modifies the coil $Q$-factor. Cardiac motion modulates $Z_{n,1}^{\mathrm{body}}$ while the self-impedances remain approximately constant, giving $\Delta S_{n,1}/S_{n,1} \approx \Delta Z_{n,1}^{\mathrm{body}}/Z_{n,1}$ (Eq.~\eqref{SParamCouplingSimplified}).}}
 \label{fig:appendix-circuit}
 \end{figure}
