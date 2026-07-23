@@ -184,7 +184,7 @@ in real-time for clinical MRI systems without the need for ECG
 electrodes, pulse oximetry devices, navigators, or respiratory bellows.
 This method is based on a weak continuous high frequency radiofrequency
 signal \cite{NationalCommunicationsSystemTechnologyStandardsDivision1996} emitted into the bore, can be easily integrated in
-current-gen commercial MRI scanners, requiring only a simple RF
+current generation commercial MRI scanners, requiring only a simple RF
 generator and transmit loop. This signal is then modulated by
 physiological motion and received using the existing MR receiver
 hardware.
@@ -208,8 +208,7 @@ beam passing through the human chest is proportional to ventricular
 volume changes in the heart. At microwave frequencies, transmission loss
 and reflection (similar to radar) can be measured \cite{MatsumotoHeartbeatAnalysis, Pfanner2014, Pfanner2013}. At lower
 frequencies, modulation of inductive coupling can be used to detect
-motion. Tarjan and McPhee {\cite{Tarjan1968ElectrodelessInduction} first demonstrated sensing of
-respiratory and cardiac motion in two inductively coupled coils at
+motion. Tarjan and McPhee {\cite{Tarjan1968ElectrodelessInduction} demonstrated the ability to sense respiratory and cardiac motion in two inductively coupled coils at
 100kHz. The underlying principle of measuring an object's resistivity via
 eddy currents generated in the object has been used extensively in a
 wide array of fields since the early 20\textsuperscript{th} century such
@@ -226,7 +225,7 @@ embedded in furniture such as patient beds \cite{Mahdavi2017In-bedGradiometer}.
 
 In the MR community, three methods based on electromagnetic interactions
 with tissue have been proposed recently. These can be roughly classified
-into active methods where the modulation of some external reference
+into active methods where the modulation of some externally generated reference
 signal is measured and passive methods that do not use an external
 reference. The basis for all these methods is that biological tissues
 have different dielectric properties: permittivity and conductivity. The
@@ -273,11 +272,7 @@ In contrast, our proposed Pilot Tone navigator uses a single, continuous
 wave external reference signal, making it an active method. The
 reference signal or ``Pilot Tone'' is transmitted via a small loop-coil
 positioned anterior to the chest wall, in close proximity to the
-subject's heart.
-
-While this method could be implemented in any imaging modality, MRI is
-an especially attractive platform as the necessary high-end receiver
-hardware already exists.
+subject's heart and received with the already existing high-end receiver hardware - making MRI an especially attractive platform for implementation.
 
 Consequently, the Pilot Tone frequency \(f_{PT}\) is chosen such that it
 lies within the receiver's operating bandwidth but has enough separation
@@ -350,31 +345,27 @@ as a single loop and feed it with input power of \(0dB_{m}\). In
 practice, when faced with the challenge of integrating this loop into an
 MR coil array, special care must be taken to minimize direct inductive
 coupling to neighboring Rx elements. This can be done by geometric
-decoupling, i.e. deliberate choice of coil overlap by positioning and
+decoupling: through deliberate choice of coil overlap and/or
 choosing more complex shapes for the loop geometry. Note that in any
 case the geometric dimensions, especially the length of \(L_{G}\) is
 very small compared to the wavelength \(\lambda\) at the used
 frequencies.
 
 This has two important implications: First, the distances between the
-generating coil and the receiving coil(s) must be much smaller than the
-wavelength in air: We then operate in the ``near-field'', a volume
+generating coil and the receiving coil(s) are, in practice, much smaller than the wavelength in air: We thus operate in the ``near-field'', a volume
 around an antenna-like structure, typically defined as
 \(r < \frac{\lambda}{2\pi}\), where the electric and magnetic field can
-be seen as independent and no EM-wave forms. By this definition, the
-near-field at the Pilot Tone frequencies chosen by us at typical
-clinical field strengths of 1.5T and 3T extends to r=0.76m at 62.5MHz
-(1.5T) and r=0.39m at 122.5MHz (3T) in vacuum/air.
+be seen as independent and no EM-wave forms. 
 
+\revorange{It is important to note that the near-field condition is not merely a simplification adopted in this work but a consequence of the system design and bore geometry. In our PT implementation, the carrier frequency was constrained to lie just outside the MR imaging band so that the signal could be received by the existing MR receive chain. At 1.5T and 3T this places the PT frequency at 62.5\,MHz and 122.5\,MHz respectively, well within the near-field regime extending to $r=0.76m$ and $r=0.39m$, respectively.}
 
-\revorange{It is important to note that the near-field condition is not merely a simplification adopted in this work but a consequence of the system design and bore geometry. In our PT implementation, the carrier frequency was constrained to lie just outside the MR imaging band so that the signal could be received by the existing MR receive chain. At 1.5T and 3T this places the PT frequency at 62.5\,MHz and 122.5\,MHz respectively, well within the near-field regime.}
 
 \revorange{Furthermore, the MRI bore itself enforces this condition: the bore liner is a conductive metal cylinder that acts as a circular waveguide \textcolor{red}{\cite{Brunner2009TravellingWave, Tang2011CutoffFree}}. The dominant TE\textsubscript{11} mode has a cutoff frequency of $f_c = \chi'_{11} c / (2\pi a)$, where $\chi'_{11} = 1.8412$ is the first zero of the Bessel function derivative and $a$ is the bore radius \textcolor{red}{\cite{Pozar2012Microwave}}. For a 70\,cm bore ($a = 0.35$\,m), $f_c \approx 251$\,MHz, well above both PT frequencies. Below cutoff, electromagnetic fields cannot propagate along the bore axis. They are evanescent and decay exponentially as $e^{-\alpha z}$ with attenuation constants of $\alpha \approx 44$\,dB/m at 62.5\,MHz and $\alpha \approx 40$\,dB/m at 122.5\,MHz.}
 
 \revorange{Consequently, even when the PT generator is placed on the bore wall or farther from the patient rather than directly on the body, the coupling remains reactive (near-field) in nature, not radiative. The bore suppresses far-field propagation, and all coupling occurs through evanescent modes. This explains why practical PT implementations with generators at various positions along the bore, including configurations that appear to violate the free-space near-field distance criterion $r < \lambda / 2\pi$, still produce \rev{comparable} motion signals \textcolor{red}{\cite{Vahle2020RespiratoryTone, Rigie2018TrackingNavigation}}. In contrast, Anand and Lustig \textcolor{red}{\cite{Anand2024BPT}} recently demonstrated that carrier frequencies above the bore cutoff (1.2--2.4\,GHz) enable propagating waveguide modes with fundamentally different, frequency-dependent motion sensitivity.}
 
-Secondly, the length of \(L_{G}\) is much smaller than the wavelength,
-thus \(L_{G}\) is an ``electrically-small'' antenna in which the
+Secondly, the length of \(L_{G}\) is much smaller than the wavelength.
+Thus, \(L_{G}\) is an "electrically-small" antenna in which the
 generated magnetic field dominates, and the generated electric field can
 be neglected \cite{Bolton2020OptimalAntenna}. Electric fields are however still generated in
 the body, giving rise to displacement currents which are a contributor
@@ -492,7 +483,7 @@ component, dependent on permittivity and \(R_{e}\) models the eddy
 current component, dependent on conductivity.}
 
 The conductive domain can be thought of as the source of a secondary
-magnetic field \(\mathbf{\mathrm{\Delta}B}_{}\) , shown in Figure~\ref{fig:coupling-model}b,
+magnetic field \(\mathbf{\mathrm{\Delta}B}_{}\) , shown in Figure~\ref{fig:coupling-model}b as $\Gamma_{\sigma_1}$,
 which is dependent on conductivity \(\sigma\), permittivity
 \(\varepsilon\) (and, in general, permeability \(\mu\)).
 
@@ -503,7 +494,7 @@ and creates an electromotive force \(\varepsilon_{PT}\) (see Eq.~\eqref{eq:farad
 consequently a measurable induction current \(i_{PT}(t)\) in the
 receiver electronics. Note how the secondary field exactly opposes the
 generative field \(\mathbf{B}_{G}\) at the locations of
-\(L_{\sigma 1}\) (Figure~\ref{fig:coupling-model}b) and \(L_{\sigma 2}\) (Figure~\ref{fig:coupling-model}c) but only
+\(\Gamma_{\sigma 1}\) (Figure~\ref{fig:coupling-model}b) and \(\Gamma_{\sigma 2}\) (Figure~\ref{fig:coupling-model}c) but only
 approximately at the receive coil \(L_{R}\).
 
 \revpurple{The tissue-mediated coupling can be represented by a simplified lumped-element equivalent circuit \cite{Harms2021Theory}, shown in Figure~\ref{fig:equivalent-circuit}. In this model, the system is an inductively coupled pair of inductances conceptionally similar to a transformer with the generating coil as the ``primary'' and the receive element(s) as the ``secondary'' side. The effect of eddy currents is captured by an equivalent resistance $R_e \propto 1/\sigma$ and the displacement current contribution by an equivalent capacitance $C_e \propto \varepsilon$ (see Appendix~\ref{app:derivation} for the rigorous derivation from the volume integral formulation).}
@@ -519,25 +510,25 @@ shown in light grey.}
 \label{fig:equivalent-circuit}
 \end{figure}
 
+This essentially means that resistance \(R_{e}\) and
+capacitance \(C_{e}\) are a function of physiological motion.
+
 \subsection{Signal modulation from physiological
 motion}\label{signal-modulation-from-physiological-motion}
 
 Since the ``illuminated'' area of each receiving coil is relatively
 small, physiological motion such as breathing or heartbeat can be seen
 as replacing one type of tissue within the receiving coil's illuminated
-volume with another type, such as heart muscle \textless-\textgreater{}
-blood for cardiac activity and lung \textless-\textgreater{} liver
+volume with another type, such as heart muscle with
+blood for cardiac activity and lung with liver
 during (abdominal) breathing. When the distribution of tissues, and by
 that, conductivities and permittivities under the coil changes, so does
-the distribution of the induced eddy currents and their secondary field
-and consequently the magnitude and phase of the magnetic field received
-by the Rx coils.
+the distribution of the induced eddy currents and their secondary field.
+Consequently the magnitude and phase of the magnetic field received
+by the Rx coils changes.
 
-In above model, this essentially means that resistance \(R_{e}\) and
-capacitance \(C_{e}\) are a function of physiological motion.
 
-When sampling at a sufficiently high rate, these transient changes in
-magnitude and phase represent the physiological motion within the
+These transient changes in magnitude and phase represent the physiological motion within the
 receiving coils field of view. The resulting time-signals from each
 receive coil can then be processed to yield signals that are
 proportional to these motions.
@@ -545,7 +536,7 @@ proportional to these motions.
 \subsection{Influence of coil position on the received
 signal}\label{influence-of-coil-position-on-the-received-signal}
 
-In our proposed method, the receive channels of the imaging coil arrays
+The receive channels of the imaging coil arrays
 used during imaging at the same time also receive the Pilot Tone signal.
 In practice the receive elements are densely distributed around the
 patient's chest, each receiving a unique PT signal that is highly
@@ -573,20 +564,20 @@ regions.
 \begin{figure}
 \centering
 \includegraphics{./media/image2.png}
-\caption{(a) The primary field \(B_{G}\) is created by driving
-the generating coil \(L_{G}\) with an AC current. The receiving coil
-\(L_{R}\) is penetrated by this field and a current is induced. A
-conductive region \(\Gamma_{\sigma 1 > 0}\) is placed close to \(L_{G}\)
-and \(L_{R}\).\(\ \Gamma_{\sigma 1 > 0}\) is penetrated by field lines
-generated in \(L_{G}\), causing the induction of eddy currents in the
-conductive domain. (b) Eddy currents induced in
-\(\Gamma_{\sigma 1 > 0}\) create a secondary magnetic field \(\Delta\mathbf{B}\)
-opposing the generating field. The magnetic fields \(\mathbf{B}_{G}\)
-and \(\Delta\mathbf{B}\) superpose and can be measured using the
-receiving coil \(L_{R}\). (c) A second conductive region
-\(\Gamma_{\sigma 2 > 0}\) is placed close to \(L_{R}\). As in (b), this
-conductive region is penetrated by field lines of \(B_{G}\) and eddy
-currents form in \(\Gamma_{\sigma 2 > 0}\). Note how the directions of
+\caption{(a) The primary field $B_{G}$ (grey field lines) is created by driving
+the generating coil $L_{G}$ with an AC current. The receiving coil
+$L_{R}$ is penetrated by this field and a current is induced. A
+conductive region $\Gamma_{\sigma 1 > 0}$ is placed close to $L_{G}$
+and $L_{R}$. $\Gamma_{\sigma 1 > 0}$ is penetrated by field lines
+generated in $L_{G}$, causing the induction of eddy currents in the
+conductive domain. (b) Eddy currents (red) induced in
+$\Gamma_{\sigma 1 > 0}$ create a secondary magnetic field $\Delta\mathbf{B}$ (green)
+opposing the generating field. The magnetic fields $\mathbf{B}_{G}$
+and $\Delta\mathbf{B}$ superpose and can be measured using the
+receiving coil $L_{R}$. (c) A second conductive region
+$\Gamma_{\sigma 2 > 0}$ is placed close to $L_{R}$. As in (b), this
+conductive region is penetrated by field lines of $B_{G}$ and eddy
+currents form in $\Gamma_{\sigma 2 > 0}$ and also generate a magnetic field (blue). Note how the directions of
 secondary field lines at the receiver depend on the location of the
 conductive region where they originate.}
 \label{fig:coupling-model}
@@ -598,7 +589,7 @@ geometry}\label{field-distributions-in-simple-geometry}
 Simulated (CST Studio 2024, Frequency Domain Solver, simulation volume
 \(300 \times 300 \times 300\ {mm}^{3}\)) field distributions for a
 single generator and conductive region \(\Gamma_{\sigma > 0}\), like in
-Figure~\ref{fig:coupling-model}b are shown in Figure~\ref{fig:simple-geometry-fields}: The conductive region is modeled as a
+Figure~\ref{fig:coupling-model}b are shown in Figure~\ref{fig:simple-geometry-fields}. Here the conductive region is modeled as a
 sphere of diameter \(d = 140mm\) having conductivity
 \(\sigma = 0.733S/m\) (Heart material from CST Studio Database). The
 circular generator coil (d=22mm) is excited with a broadband excitation
@@ -625,8 +616,8 @@ object boundaries, create a magnetic field extending through the whole
 simulation volume. The resulting modulation of the magnetic field can be
 sensed anywhere within the volume but is most pronounced close to the
 object. Consequently, changes in the distribution of conductive tissues
-and thus, signal modulation can be seen in the entire examination volume
-and most, if not all receive coils will receive signal modulation.
+, and thus, signal modulation, can be seen in the entire examination volume
+, and most, if not all, receive coils will receive signal modulation.
 
 In practice, this means that each coil will receive a motion signal that
 is a mixture of respiratory, cardiac and other (in)voluntary motions
@@ -723,7 +714,7 @@ Air (inside body) &  1.00 & 0.000 \\
 The PT generator coil was placed anterior to the beating in-silico
 heart. A total of 28 rectangular receive coils were modeled to simulate
 an anterior and posterior surface coil array, like those used in a
-typical CMRI exam. We used CST Studio's Time Domain Solver with the
+typical cardiac MRI exam. We used CST Studio's Time Domain Solver with the
 following settings:
 
 \begin{itemize}
@@ -908,6 +899,8 @@ The received signal over time is plotted, for all individual Rx
 elements, in Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122} as complex magnitude in dBm (rescaled to
 1mW input power) and in Figures~\ref{fig:rx-phase-62} and~\ref{fig:rx-phase-122} as phase modulation. \revgreen{Magnitude and phase modulation depths are defined in Eqs.~\eqref{eq:mod-depth-mag} and~\eqref{eq:mod-depth-phase}, respectively.}
 
+Naming convention: the $n$ in $S_{n,1}$ refers to receive element $n$ (see Fig. \ref{fig:phantom-setup}) whereas $1$ always denotes the PT generator loop.
+
 Modulation depths of individual channels are compared in
 Table~\ref{tab:per-channel}\revred{, with per-channel correlation coefficients to cardiac volume ground truth listed in the same table}.
 
@@ -973,7 +966,7 @@ doubling the PT frequency \rev{(individual channels in Table~\ref{tab:per-channe
 \includegraphics{./media/Image6.pdf}
 \caption{Received signal magnitude in dBm in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-62.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
+62.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth.}}
 \label{fig:rx-magnitude-62}
 \end{figure}
 
@@ -982,7 +975,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 \includegraphics{./media/Image7.pdf}
 \caption{Received signal magnitude in dBm in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-122.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
+122.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth.}}
 \label{fig:rx-magnitude-122}
 \end{figure}
 
@@ -991,7 +984,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 \includegraphics{./media/Image8.pdf}
 \caption{Received signal phase in radians in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-62.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
+62.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth.}}
 \label{fig:rx-phase-62}
 \end{figure}
 
@@ -1000,7 +993,7 @@ and posterior (bottom) Rx channels over time during one cardiac phase at
 \includegraphics{./media/Image9.pdf}
 \caption{Received signal phase in radians in anterior (top)
 and posterior (bottom) Rx channels over time during one cardiac phase at
-122.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth (right axis ``Vol/ml''; horizontal axis in cardiac frames).}}
+122.5MHz. \rev{The red curve is the total (whole-organ) heart volume ground truth.}}
 \label{fig:rx-phase-122}
 \end{figure}
 
@@ -1023,15 +1016,14 @@ situation similar to that described in Figure~\ref{fig:coupling-model}c where th
 modulation changes and all modulation information is purely in the phase
 data -- this behavior is especially prevalent in element S18,1.
 
-Magnitude modulation increases approximately linearly with frequency in
+Overall, magnitude modulation (dashed black line) increases approximately linearly with frequency in
 the anterior elements.
 
-In the posterior elements, magnitude modulation increases linearly up to
+In the posterior elements, overall magnitude modulation (dashed black line increases linearly up to
 a frequency of around 130MHz, after which it starts to decrease.
 
-Phase modulation increases strongly with frequency, both in the anterior
-and posterior elements. Note that in Figure~\ref{fig:mod-depth-vs-frequency}, the dashed black line
-shows mean \textbf{absolute} phase modulation.
+Overall absolute phase modulation (dashed black line) increases with frequency, both in the anterior
+and posterior elements.
 
 \begin{figure}
 \centering
@@ -1253,7 +1245,7 @@ Modulation depth was higher overall in the posterior elements. This is
 due to the more ideal geometry, where the heart lies, for most channels,
 on a straight path between the generator loop (primary side) and Rx loop
 (secondary side) -- in this case the measurement is more
-``transmissive'', similar to the experiments made by Moskalenko et al. -
+``transmissive'', similar to the experiments made by Moskalenko et al. \cite{Moskalenko1958, Moskalenko1960, Moskalenko1963OnElectroplethysmography}, -
 though we would discourage the use of this term at such low frequencies.
 
 In practice, a cardiac signal component is sometimes not discernible in
@@ -1296,10 +1288,10 @@ As the generated field is not homogeneous, falling off with distance
 cubed, motion closer to the generator will contribute more to the
 received signal than motion further away. It is therefore crucial for
 best performance to position the PT field generator loop as close to the
-heart as possible, though some centimeters of tolerance are acceptable.
+heart as possible  - the heart should ideally lie on the axis perpendicular to the loops center, though some centimeters of tolerance are acceptable \cite{Bacher2017CardiacStudy}.
 When integrating the PT generator in e.g.\ an abdominal coil array, it
 must be designed in such a way that the generator is optimally located
-when the coil array is positioned for optimal imaging.
+when the coil array is positioned for cardiac imaging.
 
 \subsection{\rev{Waveform shape}}\label{waveform-shape}
 

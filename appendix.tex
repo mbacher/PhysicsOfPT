@@ -86,7 +86,7 @@ Integrating Eq. \eqref{before_reciprocity} over a volume $V$ bounded by a closed
     \oiiint_{S} (\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \mathbf{H}^a) \rev{\cdot} dS = \iiint_{V} (\mathbf{E}^b \rev{\cdot} \mathbf{J}^a - \mathbf{E}^a \rev{\cdot} \mathbf{J}^b) dV
 \end{align}
 
-the general Lorentz reciprocity theorem for lossy, dispersive, isotropic media. (Harrington 1961, Hoult 2000)
+the general Lorentz reciprocity theorem for lossy, dispersive, isotropic media \cite{Harrington2001Time-harmonicFields}
 
 At an arbitrary port $n$, the fields on the cross section can be expressed in terms of the ports voltage $V_p$ and current $I_p$ via the transmission line mode (citation pending):
 
@@ -211,7 +211,7 @@ In the body volume there are no impressed sources, so
     \oint_{S_{body}}(\mathbf{E}^a \times \mathbf{H}^b - \mathbf{E}^b \times \rev{\mathbf{H}}^a)\rev{\cdot}dS = 0
 \end{align}
 
-This states that the reciprocity surface integral vanishes over any surface enclosing only passive media - a well known result \cite{Harrington}.
+This states that the reciprocity surface integral vanishes over any surface enclosing only passive media - a well known result \cite{Harrington2001Time-harmonicFields}.
 
 To extract $V_n$ we use a different approach. The voltage at a terminated port can be written as \cite{Rumsey1954ReactionTheory}
 
@@ -644,7 +644,7 @@ The loaded and unloaded quality factors are:
     Q_{loaded} = \frac{\omega L_{coil}}{R_{coil} + R_{tissue}}
 \end{align}
 
-At clinical frequencies (0.5T, 1.5T and 3T) body noise dominates, so $R_{\rev{\mathrm{tissue}}} \rev{\gg} R_{\rev{\mathrm{coil}}}$ and $Q_{\rev{\mathrm{loaded}}} \rev{\ll} Q_{\rev{\mathrm{unloaded}}}$ [Edelstein 1986, Hoult & Lauterbur 1979].
+At clinical frequencies (0.5T, 1.5T and 3T) body noise dominates, so $R_{\rev{\mathrm{tissue}}} \rev{\gg} R_{\rev{\mathrm{coil}}}$ and $Q_{\rev{\mathrm{loaded}}} \rev{\ll} Q_{\rev{\mathrm{unloaded}}}$ \cite{Edelstein1986TheImaging}.
 
 Figure~\ref{fig:appendix-circuit} shows the complete equivalent circuit corresponding to this multiport formulation. Unlike the simplified lumped model in the main text (Figure~\ref{fig:equivalent-circuit}), this representation explicitly separates self-loading (body impedance on each port) from the body-mediated mutual coupling that carries the PT signal.
 
