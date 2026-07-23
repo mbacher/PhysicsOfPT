@@ -341,15 +341,29 @@ where $\mathbf{e}_1 = \mathbf{E}_1 \rev{/} I_1$ and $\mathbf{e}_\rev{n} = \mathb
 \node[font=\small, red!65!black] at (2.75,1.15) {$\mathbf{E}_n$ (coil $n$)};
 \node[font=\small\bfseries, violet!78!black] at (0,0.15) {$\gamma\,(\mathbf{E}_1\!\cdot\!\mathbf{E}_n)$};
 \node[font=\scriptsize\itshape, violet!70!black] at (0,-0.5) {sensitivity};
-% PT source block
-\node[draw=blue!70!black, thick, fill=blue!12, rounded corners=2pt, minimum width=1.0cm, minimum height=1.3cm, inner sep=2pt, align=center, font=\scriptsize] (pt) at (-6.3,-0.1) {\textcolor{blue!70!black}{PT}\\\textcolor{blue!70!black}{(1)}};
-\draw[->, thick, blue!60] (-7.2,-0.1) -- (pt.west) node[midway, above, font=\scriptsize] {$I_1$};
-\draw[->, blue!45, thick] (pt.east) to[bend left=8] (-3.5,0.5);
-\draw[->, blue!45, thick] (pt.east) to[bend right=8] (-3.5,-0.7);
-% RX coil block
-\node[draw=red!70!black, thick, fill=red!12, rounded corners=2pt, minimum width=1.0cm, minimum height=1.3cm, inner sep=2pt, align=center, font=\scriptsize] (rx) at (6.3,-0.1) {\textcolor{red!70!black}{Coil}\\\textcolor{red!70!black}{$n$}};
-\draw[->, red!45, thick] (rx.west) to[bend right=8] (3.5,0.5);
-\draw[->, red!45, thick] (rx.west) to[bend left=8] (3.5,-0.7);
+% --- PT transmit loop (left) ---
+\draw[blue!70!black, very thick] (-6.3,-0.1) ++(168:0.7) arc (168:-168:0.7);
+\draw[->, blue!70!black, very thick] (-7.65,0.046) -- (-6.985,0.046);
+\draw[blue!70!black, very thick] (-7.65,-0.246) -- (-6.985,-0.246);
+\node[blue!70!black, font=\small] at (-7.5,0.34) {$I_1$};
+\node[blue!70!black, font=\small] at (-6.3,-1.1) {PT};
+% field arrows PT -> blue region
+\draw[->, blue!45, thick] (-5.62,0.25) to[bend left=8] (-3.6,0.5);
+\draw[->, blue!45, thick] (-5.62,-0.45) to[bend right=8] (-3.6,-0.7);
+% --- Coil n receive loop (right) ---
+\draw[red!70!black, very thick] (6.3,-0.1) ++(12:0.7) arc (12:348:0.7);
+\draw[red!70!black, very thick] (6.985,0.046) -- (7.65,0.046);
+\draw[red!70!black, very thick] (6.985,-0.246) -- (7.65,-0.246);
+\fill[red!70!black] (7.65,0.046) circle (1.1pt);
+\fill[red!70!black] (7.65,-0.246) circle (1.1pt);
+\node[red!70!black, font=\scriptsize] at (7.83,0.19) {$+$};
+\node[red!70!black, font=\scriptsize] at (7.83,-0.39) {$-$};
+\draw[<->, red!70!black, thick] (8.05,0.046) -- (8.05,-0.246);
+\node[red!70!black, font=\small] at (8.45,-0.1) {$V_n$};
+\node[red!70!black, font=\small] at (6.3,-1.1) {Coil $n$};
+% field arrows coil n -> red region
+\draw[->, red!45, thick] (5.62,0.25) to[bend right=8] (3.6,0.5);
+\draw[->, red!45, thick] (5.62,-0.45) to[bend left=8] (3.6,-0.7);
 % Equation
 \node[draw, rounded corners, fill=white, inner sep=5pt, font=\small] (eq) at (0,-4.4) {$\displaystyle V_n=\iiint_{V_{\mathrm{body}}}\gamma\,(\mathbf{E}_1\cdot\mathbf{E}_n)\,dV$};
 \draw[->, thick, violet!65] (0,-2.2) -- (eq.north);
@@ -410,20 +424,20 @@ The signal change equals the admittivity change integrated over the displacement
 \fill[cyan!10] (3.2,0.2) ellipse (1.55 and 2.15);
 \draw[cyan!45, thick] (3.2,0.2) ellipse (1.55 and 2.15);
 \node[font=\scriptsize, cyan!45!black] at (3.2,0.2) {Lung};
-% Heart ED (filled) then ES (covers center -> orange ring = V_Delta)
-\fill[orange!35] (0,-0.1) ellipse (1.9 and 2.0);
-\fill[red!10] (0,-0.1) ellipse (1.3 and 1.4);
-\draw[red!70!black, very thick] (0,-0.1) ellipse (1.9 and 2.0);
-\draw[red!55, very thick, dashed] (0,-0.1) ellipse (1.3 and 1.4);
+% Heart ED (filled) then ES (covers center -> thin orange ring = small V_Delta)
+\fill[orange!35] (0,-0.1) ellipse (1.4 and 1.6);
+\fill[red!10] (0,-0.1) ellipse (1.12 and 1.28);
+\draw[red!70!black, very thick] (0,-0.1) ellipse (1.4 and 1.6);
+\draw[red!55, very thick, dashed] (0,-0.1) ellipse (1.12 and 1.28);
 \node[font=\scriptsize, red!45!black] at (0,-0.1) {heart};
 % ED / ES labels above body
 \node[font=\small, red!70!black] (edl) at (2.6,4.15) {ED ($\varphi_1$)};
-\draw[red!70!black, thin] (edl.south) to[bend right=12] (1.35,1.45);
+\draw[red!70!black, thin] (edl.south) to[bend right=12] (0.82,1.2);
 \node[font=\small, red!55!black] (esl) at (-2.6,4.15) {ES ($\varphi_2$)};
-\draw[red!55, thin] (esl.south) to[bend left=12] (-0.92,1.02);
+\draw[red!55, thin] (esl.south) to[bend left=12] (-0.66,0.98);
 % V_Delta label
 \node[font=\small\bfseries, orange!78!black] (vd) at (5.4,-2.7) {$V_{\Delta}$};
-\draw[->, thick, orange!78!black] (vd.west) to[bend right=10] (1.55,-1.15);
+\draw[->, thick, orange!78!black] (vd.west) to[bend right=10] (1.02,-1.0);
 % Anterior / Posterior
 \node[font=\scriptsize, gray] at (0,4.15) {Anterior};
 \node[font=\scriptsize, gray] at (0,-4.05) {Posterior};
