@@ -549,6 +549,8 @@ conductive region where they originate. \rev{The eddy-current loops induced with
 \subsection{Field distributions in simple
 geometry}\label{field-distributions-in-simple-geometry}
 
+\rev{To illustrate the eddy-current mechanism described above in its simplest form---before turning to the anatomically realistic digital-human phantom of the study simulation (Section~\ref{methods-1})---we first consider a deliberately simplified geometry.}
+
 Simulated (CST Studio 2024, Frequency Domain Solver, simulation volume
 \(300 \times 300 \times 300\ {mm}^{3}\)) field distributions for a
 single generator and conductive region \(\Gamma_{\sigma > 0}\), like in
@@ -674,54 +676,33 @@ Air (inside body) &  1.00 & 0.000 \\
 }
 \end{table}
 
-The PT generator coil was placed anterior to the beating in-silico
-heart. A total of 28 rectangular receive coils were modeled to simulate
-an anterior and posterior surface coil array, like those used in a
-typical cardiac MRI exam. We used CST Studio's Time Domain Solver with the
-following settings:
+\rev{The PT generator coil was placed anterior to the beating in-silico heart, integrated into the anterior array and positioned directly over the heart, consistent with the in-vivo placement; for geometric decoupling it was placed between the two central anterior elements 7 and 8. The transmit loop was modeled as a circular PEC (perfect electric conductor) element of \(d = 30\,\mathrm{mm}\). A total of 28 rectangular PEC receive loops (12 anterior, 16 posterior), arranged without overlap, modeled an anterior and posterior surface coil array of the type used in a typical abdominal or cardiac MRI exam. The geometric setup of the phantom, PT generator loop and Rx elements is shown in Figure~\ref{fig:phantom-setup}.}
 
-\begin{itemize}
-\item
-  Mesh type: Hexahedral
-\item
-  Simulation Volume: \(550\  \times 550\  \times 677\ mm^{3}\)
-\item
-  Accuracy: -80dB
-\item
-  Mesh refinement: Expert system based with mesh increment of 5,
-  resulting in a High Frequency Type mesh with 223.5 million meshcells
-\item
-  Boundary Conditions: magnetic (Ht=0)
-\item
-  S-parameter ports with impedance 50 Ohm for Tx and Rx elements, input
-  power 1W
-\item
-  Frequency range: 10MHz-150MHz, step size 0.14MHz
-\item
-  Field probes for magnetic (H), electric (E) and current density (J)
-  fields at 62.5 and 122.5MHz
-\end{itemize}
+\rev{The electromagnetic simulation was performed with CST Studio's Time Domain Solver; the solver, mesh, port and hardware settings are summarised in Table~\ref{tab:cst-settings}.}
 
-The geometric setup of the phantom, PT generator loop and Rx elements is
-shown in Figure~\ref{fig:phantom-setup}.
-
-The transmit loop was modeled as a circular PEC (perfect electric
-conductor) element with d=30mm. Receive loops were modeled as
-rectangular PEC elements arranged in posterior and anterior arrays
-without overlap.
-
-The generator is integrated in the anterior coil and is positioned on
-top of the heart, consistent with the in-vivo placement. For geometric
-decoupling it is placed in between the two central coil elements 7 \rev{and} 8.
-
-Twelve Rx coils were placed anterior and 16 posterior of the phantom,
-simulating elements of a typical surface coil array used in abdominal or
-cardiac MRI.
-
-Simulation was performed on a distributed computing cluster with 2x22
-cores @ 2.2GHz, 512GB of memory and using NVIDIA GPUs (Quadro GV100,
-NVIDIA Corporation, Santa Clara, CA, driver version 441.12). Simulation
-took approximately 6h per frame.
+\begin{table}[htbp]
+\centering
+\rev{\caption{CST Studio simulation and solver settings.}\label{tab:cst-settings}}
+\begin{tabular}{ll}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+Software & CST Studio Suite 2024 \\
+Solver & Time Domain Solver \\
+Mesh type & Hexahedral \\
+Mesh refinement & Expert-system based, mesh increment 5 (High Frequency Type) \\
+Mesh cells & 223.5 million \\
+Simulation volume & \(550 \times 550 \times 677\,\mathrm{mm}^3\) \\
+Boundary conditions & Magnetic (\(H_t = 0\)) \\
+Solver accuracy & \(-80\,\mathrm{dB}\) \\
+Ports & S-parameter ports, \(50\,\Omega\) (Tx and Rx), input power 1\,W \\
+Frequency range & 10--150\,MHz, step 0.14\,MHz \\
+Field probes & H, E and J fields at 62.5 and 122.5\,MHz \\
+Hardware & 2\(\times\)22 cores @ 2.2\,GHz, 512\,GB RAM, NVIDIA Quadro GV100 GPUs \\
+Runtime & \(\approx 6\,\mathrm{h}\) per cardiac frame \\
+\hline
+\end{tabular}
+\end{table}
 
 The simulated (\(\mathbf{H}(x,y,z)\) and \(\mathbf{E}(x,y,z)\)) and
 \(\mathbf{J}(x,y,z)\)) fields and calculated S-parameter curves in the
@@ -1334,6 +1315,16 @@ parameters throughout the numerical simulation.
 
 \revorange{Respiratory motion was not included in the present simulation framework. Unlike cardiac motion, which modulates the PT signal exclusively through redistribution of tissue admittivity within the illuminated volume (Eq.~\ref{eq:vn-integral}), respiration additionally displaces the PT transmit coil itself, typically mounted on or integrated into the anterior array, along with the chest wall. This geometric displacement of the source directly changes the field patterns $\mathbf{E}_1$ and consequently the coupling to all receive elements, producing modulation depths one to two orders of magnitude larger than the cardiac signal. As a result, respiratory motion is typically detectable in almost all receive channels at modulation depths of several percent, whereas the cardiac signal reaches only a fraction of a percent and in a more limited set of well-coupled channels~\cite{SchroederTwo-dimensionalNavigation}. Schroeder et al.\ \cite{Schroeder2016a} demonstrated that two respiratory components, related to chest-wall motion (chest breathing) and internal tissue displacement (e.g.\ liver, abdominal breathing), can be separated and independently characterized. This large modulation depth makes respiratory PT navigation comparatively straightforward \cite{Speier2015PT-Nav:MR-receiver, Vahle2020RespiratoryTone, Rigie2018TrackingNavigation, Lenk2018RespiratoryTechnology, Schroeder2016a}. The cardiac case, where the signal arises solely from the tissue-replacement mechanism at considerably smaller modulation depths, represents the more instructive and technically challenging scenario and is therefore the focus of this work.}
 
+\subsection{\revgreen{Future work}}\label{future-work}
+
+\begin{revgreenblock}
+The close correspondence between the received signal and total cardiac volume allows for triggering or gating to the actual motion of the heart. The high temporal resolution and continuous sampling of the PT signal may also allow for identification of other interesting features, e.g. the end of systole (point of maximum contraction -- the minimum in the cardiac PT signal), a point that is not easily inferred from the distorted ECG available in a clinical MRI scanner.
+
+In these simulations, we concentrated on the cardiac signal but, using the XCat phantom, respiratory and even combined respiratory and cardiac simulations are possible. Our simulations may easily be expanded to investigate the effect of respiratory motion or even motion of other body parts, possibly even that of the head \cite{Speier2018SeparationMeasurements}. During respiration, in a typical MRI exam, the anterior coil array will move with the chest and abdomen, thus creating significant signal modulation simply due to the change in distance between PT generator loop and Rx elements. The simulation presented here is comparable to a breath-held exam.
+
+Different carrier frequencies result in different field distributions. In the future, we believe that investigations into using different or multiple simultaneous PT frequencies could improve performance.
+\end{revgreenblock}
+
 \section{Conclusion}\label{conclusion-1}
 
 We proposed a theoretical model for the Pilot Tone navigator and
@@ -1350,45 +1341,7 @@ We further showed how PT frequency influences the received signal and
 found that in the frequency range used by clinical MRI scanners a stable
 signal can be obtained in most receive coil elements.
 
-\subsection{Outlook}\label{outlook}
-
-This direct relation allows for triggering or gating to the actual
-motion of the heart. The high temporal resolution and continuous
-sampling of the PT signal may also allow for identification of other
-interesting features, e.g. the end of systole (point of maximum
-contraction -- the minimum in the cardiac PT signal), a point that is
-not easily inferred from the distorted ECG available in a clinical MRI
-scanner.
-
-In these simulations, we concentrated on the cardiac signal but using
-the XCat phantom, respiratory and even combined respiratory and cardiac
-simulations are possible. Our simulations may easily be expanded to
-investigate the effect of respiratory motion or even motion of other
-body parts, possibly even that of the head \cite{Speier2018SeparationMeasurements}. During respiration,
-in a typical MRI exam, the anterior coil array will move with the chest
-and abdomen, thus creating significant signal modulation simply due to
-the change in distance between PT generator loop and Rx elements. The
-simulation presented here is comparable to a breath-held exam.
-
-As the PT carrier frequency needs to be close to the proton resonance
-frequency, it is constrained by the system's field strength. Overall,
-modulation depth both in magnitude and phase benefits from moving to
-higher frequencies. While Pilot Tone has been implemented by us on 0.55T
-systems, it is currently only used for respiration. Extracting a stable
-cardiac signal is challenging, because modulation depths at this
-frequency are low compared to 3T or even 1.5T, though Tasdelen et al.
-\cite{Tasdelen2025ContactlessHAPTIC} recently showed that retrospective gating is feasible by using
-a higher powered carrier signal and careful signal separation.
-
-At 7T, Jaeschke et al. \cite{Jaeschke2017, Jaeschke2017a, Jaeschke2019ScatteringMonitoring} demonstrated a method based on the
-same physical principles, utilizing direct measurements of the S-matrix.
-
-Different carrier frequencies do, however, result in different field
-distributions. In the future, we believe that investigations into using
-different or multiple simultaneous PT frequencies could improve
-performance.
-
-Finally, it is worth noting that PT can be implemented at relatively
+\revgreen{Finally, it is worth noting that PT can be implemented at relatively
 little cost on, theoretically, any MR system and enables continuous,
 sequence independent respiratory and cardiac motion monitoring at very
 high temporal resolution and without the need for ECG, navigators or
@@ -1399,8 +1352,8 @@ especially at field strengths \textgreater1.5T are avoided. Also, no
 patient preparation is necessary, potentially saving time in clinical
 environments while particular expertise in ECG lead placement especially
 at higher field strength may no longer be needed. We have demonstrated
-here that the underlying physical principles work on a broad range of
-frequencies and in all patients.
+here that the underlying physical principles operate across a broad range of
+frequencies and consistently across the subjects studied.}
 
 \subsection{Author's contribution
 statement}\label{authors-contribution-statement}
