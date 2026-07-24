@@ -23,6 +23,7 @@
 
 % For multi-paragraph revision blocks (\textcolor can’t handle paragraph breaks).
 \newenvironment{revbrownblock}{\begingroup\color{brown}}{\endgroup}
+\newenvironment{revgreenblock}{\begingroup\color{green!50!black}}{\endgroup}
 
 \newcommand{\revorange}[1]{\textcolor{orange}{#1}}
 \newcommand{\revpink}[1]{\textcolor{magenta}{#1}}
@@ -197,6 +198,33 @@ provide a theoretical foundation for this novel method. We then use
 numerical electromagnetic simulations to visualize and investigate the
 physical processes underlying the Pilot Tone navigator.
 
+\revgreen{Our} proposed Pilot Tone navigator uses a single, continuous
+wave external reference signal, making it an active method. The
+reference signal or ``Pilot Tone'' is transmitted via a small loop-coil
+positioned anterior to the chest wall, in close proximity to the
+subject's heart and received with the already existing high-end receiver hardware - making MRI an especially attractive platform for implementation.
+
+Consequently, the Pilot Tone frequency \(f_{PT}\) is chosen such that it
+lies within the receiver's operating bandwidth but has enough separation
+in the frequency domain to the bandwidth occupied by the MR signal to
+not interfere with imaging.
+
+\rev{In practice, the PT signal is separated from the MR imaging signal in the frequency domain. The PT amplitude and phase are extracted from a narrow spectral bin centered at $f_{PT}$ in the digitized receiver data. The present work models only the electromagnetic physics of the modulation mechanism; the signal processing aspects of PT extraction are beyond its scope.}
+
+Having previously demonstrated \cite{Vahle2020RespiratoryTone, Bacher2018PilotCine, BacherRetrospectiveCohortb, Bacher2017CardiacStudy} the feasibility of using
+Pilot Tone as a replacement for ECG and respiratory belts or navigators
+in practical applications, both retrospective and real-time, we now aim
+to provide a theoretical foundation to the method. We outline how the
+received signal modulation can be explained by Maxwell's equations and
+then use numerical simulations to perform virtual experiments. The Pilot
+Tone navigator has so far been implemented on 1.5T and 3T systems and
+has been found to compare favorably to ECG triggering. \cite{Bacher2020PerformanceFramework, Qian2025ComparisonStudy, Mizuno2024ClinicalLeads}
+
+\section{Theory}\label{theory}
+
+\subsection{\revgreen{Background}}\label{background}
+
+\begin{revgreenblock}
 Contactless motion sensing techniques based on modulation of
 electromagnetic parameters due to physiological motion have been under
 investigation for decades. Moskalenko et al.\ \cite{Moskalenko1960, Moskalenko1958}
@@ -268,19 +296,6 @@ two frequencies are deliberately chosen such that their modulation
 product, created by intermodulation in the receive chain, falls into the
 receivers useable bandwidth.
 
-In contrast, our proposed Pilot Tone navigator uses a single, continuous
-wave external reference signal, making it an active method. The
-reference signal or ``Pilot Tone'' is transmitted via a small loop-coil
-positioned anterior to the chest wall, in close proximity to the
-subject's heart and received with the already existing high-end receiver hardware - making MRI an especially attractive platform for implementation.
-
-Consequently, the Pilot Tone frequency \(f_{PT}\) is chosen such that it
-lies within the receiver's operating bandwidth but has enough separation
-in the frequency domain to the bandwidth occupied by the MR signal to
-not interfere with imaging.
-
-\rev{In practice, the PT signal is separated from the MR imaging signal in the frequency domain. The PT amplitude and phase are extracted from a narrow spectral bin centered at $f_{PT}$ in the digitized receiver data. The present work models only the electromagnetic physics of the modulation mechanism; the signal processing aspects of PT extraction are beyond its scope.}
-
 Since most biological tissues are almost completely transparent to
 magnetic fields, having relative permeabilities
 \(\mu_{r,tissue} = 1 + \chi_{tissue} \approx 1\)
@@ -291,17 +306,9 @@ continuous wave magnetic field induces eddy currents. These eddy
 currents then in turn create a secondary magnetic field which is
 superimposed to the excitation (primary) field, leading to modulations
 of the magnetic field received in the receive coil.
+\end{revgreenblock}
 
-Having previously demonstrated \cite{Vahle2020RespiratoryTone, Bacher2018PilotCine, BacherRetrospectiveCohortb, Bacher2017CardiacStudy} the feasibility of using
-Pilot Tone as a replacement for ECG and respiratory belts or navigators
-in practical applications, both retrospective and real-time, we now aim
-to provide a theoretical foundation to the method. We outline how the
-received signal modulation can be explained by Maxwell's equations and
-then use numerical simulations to perform virtual experiments. The Pilot
-Tone navigator has so far been implemented on 1.5T and 3T systems and
-has been found to compare favorably to ECG triggering. \cite{Bacher2020PerformanceFramework, Qian2025ComparisonStudy, Mizuno2024ClinicalLeads}
-
-\section{Theory}\label{theory}
+\subsection{\revgreen{Basic coupling mechanism}}\label{basic-coupling}
 
 To better understand the underlying physical mechanisms of the Pilot
 Tone, we first focus on the simplest case of one signal-generating coil
@@ -363,6 +370,8 @@ be seen as independent and no EM-wave forms.
 \revorange{Furthermore, the MRI bore itself enforces this condition: the bore liner is a conductive metal cylinder that acts as a circular waveguide \textcolor{red}{\cite{Brunner2009TravellingWave, Tang2011CutoffFree}}. The dominant TE\textsubscript{11} mode has a cutoff frequency of $f_c = \chi'_{11} c / (2\pi a)$, where $\chi'_{11} = 1.8412$ is the first zero of the Bessel function derivative and $a$ is the bore radius \textcolor{red}{\cite{Pozar2012Microwave}}. For a 70\,cm bore ($a = 0.35$\,m), $f_c \approx 251$\,MHz, well above both PT frequencies. Below cutoff, electromagnetic fields cannot propagate along the bore axis. They are evanescent and decay exponentially as $e^{-\alpha z}$ with attenuation constants of $\alpha \approx 44$\,dB/m at 62.5\,MHz and $\alpha \approx 40$\,dB/m at 122.5\,MHz.}
 
 \revorange{Consequently, even when the PT generator is placed on the bore wall or farther from the patient rather than directly on the body, the coupling remains reactive (near-field) in nature, not radiative. The bore suppresses far-field propagation, and all coupling occurs through evanescent modes. This explains why practical PT implementations with generators at various positions along the bore, including configurations that appear to violate the free-space near-field distance criterion $r < \lambda / 2\pi$, still produce \rev{comparable} motion signals \textcolor{red}{\cite{Vahle2020RespiratoryTone, Rigie2018TrackingNavigation}}. In contrast, Anand and Lustig \textcolor{red}{\cite{Anand2024BPT}} recently demonstrated that carrier frequencies above the bore cutoff (1.2--2.4\,GHz) enable propagating waveguide modes with fundamentally different, frequency-dependent motion sensitivity.}
+
+\revorange{Beyond reaching the body surface, the field must penetrate the tissue to the depth of the heart (typically 5--15\,cm below the anterior chest wall). In a lossy medium the field amplitude decays over the penetration depth $\delta = 1/\alpha$, with $\alpha = \omega\sqrt{\mu_0\varepsilon/2}\,\big(\sqrt{1+(\sigma/\omega\varepsilon)^2}-1\big)^{1/2}$. Using representative tissue properties, this gives, for muscle, $\delta \approx 9$\,cm at 62.5\,MHz and $\approx 7$\,cm at 122.5\,MHz, and for blood $\approx 6.5$\,cm and $\approx 5$\,cm, respectively; low-conductivity adipose tissue is penetrated substantially more deeply. These depths are comparable to the anterior heart depth, so the interrogating field reaches the myocardium---albeit attenuated---consistent with the stronger coupling observed for anteriorly placed elements and with the field acting as a weak perturbation rather than a fully penetrating illumination.}
 
 Secondly, the length of \(L_{G}\) is much smaller than the wavelength.
 Thus, \(L_{G}\) is an "electrically-small" antenna in which the
@@ -503,7 +512,7 @@ To understand how motion location affects the phase of
 in Figure~\ref{fig:coupling-model}c: It is penetrated by the same field \(\mathbf{B}_{G}\) and
 thus another eddy current loop \(L_{\sigma 2}\) forms with current
 flowing in the same direction, generating a secondary field similar in
-shape to that of \(L_{\sigma 1}\). Here the secondary field
+shape to that of \(L_{\sigma 1}\)\rev{, the eddy-current loop induced within region \(\Gamma_{\sigma 1}\); throughout, \(L_{\sigma i}\) denotes the eddy-current loop forming inside conductive region \(\Gamma_{\sigma i}\)}. Here the secondary field
 \({\Delta\mathbf{B}}_{2}\) (purple field lines in Figure~\ref{fig:coupling-model}c) oppose the
 generative field at the point of origin but at the receiving coil the
 directions of \(\mathbf{B}_{G}\) and \(\Delta\mathbf{B}_{2}\) now have
@@ -533,7 +542,7 @@ $\Gamma_{\sigma 2 > 0}$ is placed close to $L_{R}$. As in (b), this
 conductive region is penetrated by field lines of $B_{G}$ and eddy
 currents form in $\Gamma_{\sigma 2 > 0}$ and also generate a magnetic field (blue). Note how the directions of
 secondary field lines at the receiver depend on the location of the
-conductive region where they originate.}
+conductive region where they originate. \rev{The eddy-current loops induced within regions $\Gamma_{\sigma 1}$ and $\Gamma_{\sigma 2}$ are denoted $L_{\sigma 1}$ and $L_{\sigma 2}$ in the text.}}
 \label{fig:coupling-model}
 \end{figure}
 
@@ -1065,6 +1074,8 @@ Frequency & Ant.\ mean & Post.\ mean & Ant.\ mean & Post.\ mean \\
 
 Table~\ref{tab:exp-sparams} summarizes the measured scattering parameters and cardiac modulation depths for all three volunteers (per-channel data in Appendix Tables~\ref{tab:exp-v1}--\ref{tab:exp-v3}). Table~\ref{tab:sim-array-means} provides the corresponding simulated array means at 62.5\,MHz and 122.5\,MHz in a matching format for direct comparison. The PT signal was detected in all active receive channels, with $S_{1,n}$ values ranging from $-79$ to $-120$\,dB across all subjects and channels. \rev{Figure~\ref{fig:exp-segmentation} illustrates the data processing pipeline for one representative channel: raw data, baseline removal, breath-hold detection, and cardiac cycle segmentation. Figures~\ref{fig:exp-anterior-mag} and~\ref{fig:exp-posterior-mag} show the resulting per-channel averaged cardiac waveforms for Volunteer~3, analogous to the simulated waveforms in Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122}.}
 
+For practical motion sensing the modulation depth of the most strongly coupled channels is more informative than the array mean, because source-separation post-processing (typically principal- or independent-component analysis) retains only a small number of the most strongly modulated channels. To separate the physiological signals present in the data---respiration (present in all channels to some degree), bulk motion (present in most channels), and cardiac motion---at least $N_\text{sources}+1$ channels carrying information about these sources are required; in our experience, retaining the five most strongly modulated channels is a robust practical choice~\cite{Bacher2017CardiacStudy}. Table~\ref{tab:exp-topN} therefore reports, per volunteer, the maximum and the mean of the five channels with the highest modulation depth (pooled across anterior and posterior elements).
+
 \begin{table}[htbp]
 \centering
 \caption{Experimental S-parameter levels and cardiac modulation depths per volunteer. Magnitude modulation depth is the peak-to-peak excursion of the averaged cardiac waveform in $S_{1,n}$\,(dB) as a percentage of the mean level; phase modulation depth is the peak-to-peak phase excursion in milliradians. N\textsubscript{cycles} denotes the number of cardiac cycles averaged.}
@@ -1085,7 +1096,23 @@ V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 80.3 & 180.4 & 27 & 24 \\
 }
 \end{table}
 
-% [FIGURE PLACEHOLDER: Averaged cardiac waveforms for strongest channels, all 3 volunteers]
+\begin{table}[htbp]
+\centering
+\caption{\revbrown{Strongest-channel cardiac modulation depths per volunteer: the maximum and the mean of the five most strongly modulated channels (pooled across anterior and posterior elements). These summarise the signal available to source-separation post-processing, which typically retains only the most strongly modulated channels. Magnitude values to be completed from the processing pipeline.}}
+\label{tab:exp-topN}
+\begin{tabular}{lcccc}
+\hline
+ & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (mrad)} \\
+Volunteer & Max & Top-5 mean & Max & Top-5 mean \\
+\hline
+V1 & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 141.9 & 120.8 \\
+V2 & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 539.2 & 308.9 \\
+V3 & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 604.3 & 279.5 \\
+\hline
+Pooled & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 604.3 & 415.3 \\
+\hline
+\end{tabular}
+\end{table}
 % \begin{figure}[htbp]
 % \centering
 % \includegraphics[width=\columnwidth]{./media/exp_waveforms.png}
@@ -1126,7 +1153,7 @@ Anterior channels exhibited consistently stronger absolute coupling ($S_{1,n} \a
 
 Phase modulation was clearly detectable in all volunteers (pooled anterior/posterior means 68/151\,mrad), consistent with the simulation finding that both magnitude and phase carry cardiac information. Individual channels show large variation: some exhibit strong magnitude modulation with weak phase modulation and vice versa, suggesting that complex-valued (magnitude and phase) processing is advantageous. \rev{The measured phase excursions (tens to hundreds of mrad) substantially exceed the simulated values (a few mrad at 62.5\,MHz, Table~\ref{tab:correlation}); this gap is largest on the weakest posterior channels near the $-120$\,dB noise floor, where phase is intrinsically noise-inflated, and likely also reflects genuine cardiac-motion complexity not captured by the phantom's uniform-volume contraction model.}
 
-Posterior elements, despite their weaker absolute coupling, showed comparable or even larger magnitude modulation depths than anterior elements in V1 (0.10\,\% vs.\ 0.07\,\%) and V3 (0.20\,\% vs.\ 0.10\,\%), and larger phase modulation in V2 (\rev{172 vs.\ 82\,mrad}). This is consistent with the simulation prediction of higher modulation depth in the transmissive geometry, where the heart lies on a direct path between generator and posterior receiver.
+Posterior elements, despite their weaker absolute coupling, showed comparable or even larger magnitude modulation depths than anterior elements in V1 (0.10\,\% vs.\ 0.07\,\%) and V3 (0.20\,\% vs.\ 0.10\,\%), and larger phase modulation in V2 (\rev{172 vs.\ 82\,mrad}). This is consistent with the simulation prediction of higher modulation depth in the \rev{direct-path (through-body) coupling} geometry, where the heart lies on a direct path between generator and posterior receiver.
 
 The inter-subject variability in $S_{1,n}$ levels and modulation depths reflects differences in body habitus (height, weight, subcutaneous fat thickness) and the resulting variation in generator-to-heart and heart-to-coil distances. Additionally, exact coil placement on the body surface, which determines the spatial overlap between each element's sensitivity profile and the cardiac displacement volume, differs between subjects and coil configurations (Body~18 vs.\ Body~12).
 
@@ -1198,9 +1225,7 @@ average at 1.5T \cite{Bacher2017CardiacStudy}.
 Modulation depth was higher overall in the posterior elements. This is
 due to the more ideal geometry, where the heart lies, for most channels,
 on a straight path between the generator loop (primary side) and Rx loop
-(secondary side) -- in this case the measurement is more
-``transmissive'', similar to the experiments made by Moskalenko et al. \cite{Moskalenko1958, Moskalenko1960, Moskalenko1963OnElectroplethysmography}, -
-though we would discourage the use of this term at such low frequencies.
+(secondary side) -- in this case the measurement relies on \rev{direct-path (through-body) coupling}, conceptually similar to the experiments made by Moskalenko et al. \cite{Moskalenko1958, Moskalenko1960, Moskalenko1963OnElectroplethysmography}\rev{, though at these low frequencies the coupling is near-field and inductive rather than true wave transmission}.
 
 In practice, a cardiac signal component is sometimes not discernible in
 very far away channels, where both direct coupling and modulation depth
@@ -1242,7 +1267,7 @@ As the generated field is not homogeneous, falling off with distance
 cubed, motion closer to the generator will contribute more to the
 received signal than motion further away. It is therefore crucial for
 best performance to position the PT field generator loop as close to the
-heart as possible  - the heart should ideally lie on the axis perpendicular to the loops center, though some centimeters of tolerance are acceptable \cite{Bacher2017CardiacStudy}.
+heart as possible  - the heart should ideally lie on the axis perpendicular to the loops center, though some centimeters of tolerance are acceptable \cite{Bacher2017CardiacStudy}\rev{; experimental testing indicates that a lateral offset of around 5\,cm remains permissible in real-world use cases}.
 When integrating the PT generator in e.g.\ an abdominal coil array, it
 must be designed in such a way that the generator is optimally located
 when the coil array is positioned for cardiac imaging.
@@ -1294,6 +1319,8 @@ Since the PT carrier is chosen close to, but not exactly at, the Larmor frequenc
 
 \revturquoise{These limitations primarily affect the absolute received signal levels but do not alter the underlying modulation mechanism. The broadband S-parameter data confirms that the physical principles (admittivity-weighted field overlap, spatial sensitivity dependence, and superposition of motion components) operate consistently across the simulated bandwidth and produce qualitatively identical behavior at both 62.5 and 122.5\,MHz. The simulation thus provides an idealized estimate of modulation depth; actual values depend on subject anatomy, coil placement, and receive chain characteristics.}
 
+\rev{Finally, the simulations use a single digital anatomy; systematic parameter-variation sweeps over coil and generator position, body habitus, and heart/chest configuration were not performed owing to their considerable computational cost. The three-volunteer experiments provide real inter-subject variability in body habitus and coil placement, and generator position has been analysed experimentally in prior work~\cite{Bacher2017PilotInitialization}; nevertheless, dedicated simulation sweeps over these parameters would be a valuable extension in future work.}
+
 \revturquoise{The volume integral formulation offers insight into the expected frequency scaling: induced electric fields scale as $E \propto \omega$ (Faraday's law) while direct inductive coupling scales identically, yielding a body-mediated modulation depth that increases approximately linearly with frequency. This has direct implications at the extremes of current clinical field strengths. At 0.55\,T ($f_{PT} \approx 23$\,MHz), the model predicts modulation depths roughly $3\times$ lower than at 1.5\,T, consistent with the observation by Tasdelen et al.\ that cardiac PT gating at 0.55\,T requires substantially increased transmit amplitude to achieve detectable cardiac signals, and that no successful cardiac PT gating at field strengths below 1.5\,T had been demonstrated prior to their work \textcolor{red}{\cite{Tasdelen2025ContactlessHAPTIC}}. At 7\,T, Jaeschke et al.\ demonstrated that cardiac motion modulates the scattering parameters of an RF transmit array, confirming that the coupling mechanism strengthens at higher frequency as predicted \textcolor{red}{\cite{Jaeschke2018Cardiac7T}}. However, at 7\,T the PT frequency approaches the bore waveguide cutoff, potentially transitioning from the evanescent to the propagating regime and introducing wave-interference effects not captured by the quasi-static model. Dedicated simulations at both 0.55\,T and 7\,T, incorporating field-strength-appropriate coil geometries and accounting for potential near-field breakdown at ultra-high field, represent an interesting direction for future work.}
 
 As for physiology, the electromagnetic parameters in tissue were modeled
@@ -1305,7 +1332,7 @@ parameters throughout the numerical simulation.
 \rev{However, the isotropic approximation is standard practice in RF safety simulations and MRI coil modeling at clinical frequencies. The bulk effect of tissue redistribution during cardiac motion (replacing one tissue type with another) is expected to dominate over local anisotropy effects. Furthermore, the volume-integrated nature of the PT signal (Appendix, Eq.~\ref{PortVoltage}) averages over many fiber orientations, reducing the impact of directional conductivity variations on the net modulation depth.}
 
 
-\revorange{Respiratory motion was not included in the present simulation framework. Unlike cardiac motion, which modulates the PT signal exclusively through redistribution of tissue admittivity within the illuminated volume (Eq.~\ref{eq:vn-integral}), respiration additionally displaces the PT transmit coil itself, typically mounted on or integrated into the anterior array, along with the chest wall. This geometric displacement of the source directly changes the field patterns $\mathbf{E}_1$ and consequently the coupling to all receive elements, producing modulation depths one to two orders of magnitude larger than the cardiac signal. Schroeder et al.\ \cite{Schroeder2016a} demonstrated that two respiratory components, related to chest-wall motion (chest breathing) and internal tissue displacement (e.g.\ liver, abdominal breathing), can be separated and independently characterized. This large modulation depth makes respiratory PT navigation comparatively straightforward \cite{Speier2015PT-Nav:MR-receiver, Vahle2020RespiratoryTone, Rigie2018TrackingNavigation, Lenk2018RespiratoryTechnology, Schroeder2016a}. The cardiac case, where the signal arises solely from the tissue-replacement mechanism at considerably smaller modulation depths, represents the more instructive and technically challenging scenario and is therefore the focus of this work.}
+\revorange{Respiratory motion was not included in the present simulation framework. Unlike cardiac motion, which modulates the PT signal exclusively through redistribution of tissue admittivity within the illuminated volume (Eq.~\ref{eq:vn-integral}), respiration additionally displaces the PT transmit coil itself, typically mounted on or integrated into the anterior array, along with the chest wall. This geometric displacement of the source directly changes the field patterns $\mathbf{E}_1$ and consequently the coupling to all receive elements, producing modulation depths one to two orders of magnitude larger than the cardiac signal. As a result, respiratory motion is typically detectable in almost all receive channels at modulation depths of several percent, whereas the cardiac signal reaches only a fraction of a percent and in a more limited set of well-coupled channels~\cite{SchroederTwo-dimensionalNavigation}. Schroeder et al.\ \cite{Schroeder2016a} demonstrated that two respiratory components, related to chest-wall motion (chest breathing) and internal tissue displacement (e.g.\ liver, abdominal breathing), can be separated and independently characterized. This large modulation depth makes respiratory PT navigation comparatively straightforward \cite{Speier2015PT-Nav:MR-receiver, Vahle2020RespiratoryTone, Rigie2018TrackingNavigation, Lenk2018RespiratoryTechnology, Schroeder2016a}. The cardiac case, where the signal arises solely from the tissue-replacement mechanism at considerably smaller modulation depths, represents the more instructive and technically challenging scenario and is therefore the focus of this work.}
 
 \section{Conclusion}\label{conclusion-1}
 
