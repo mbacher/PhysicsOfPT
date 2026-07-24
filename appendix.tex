@@ -6,7 +6,7 @@
 % RLC parameter extraction
 % S-parameter network theory
 
-The electromag netic environment is modeled as a time-harmonic system at the PT frequency ($f_{PT}=62.5MHz$ at $1.5T$ and $f_{PT}=122.5MHz$ at 3T) with $\omega=2\pi f_{PT}$.
+The \rev{electromagnetic} environment is modeled as a time-harmonic system at the PT frequency ($f_{PT}=62.5\,MHz$ at $1.5\,T$ and $f_{PT}=122.5\,MHz$ at 3\,T) with $\omega=2\pi f_{PT}$.
 
 Maxwells curl equations in the source region are:
 
@@ -88,7 +88,7 @@ Integrating Eq. \eqref{before_reciprocity} over a volume $V$ bounded by a closed
 
 the general Lorentz reciprocity theorem for lossy, dispersive, isotropic media \cite{Harrington2001Time-harmonicFields}
 
-At an arbitrary port $n$, the fields on the cross section can be expressed in terms of the ports voltage $V_p$ and current $I_p$ via the transmission line mode (citation pending):
+At an arbitrary port $n$, the fields on the cross section can be expressed in terms of the ports voltage $V_p$ and current $I_p$ via the transmission line mode \rev{\cite{Harrington2001Time-harmonicFields}}:
 
 \begin{align}
     \label{harringtonTLM}
@@ -159,7 +159,7 @@ To extract $V_n$ we use a different approach. The voltage at a terminated port c
 where $\rev{\langle a,b \rangle}$ is the "reaction", i.e. the response produced by the fields of configuration $a$ \rev{on} the sources of configuration $b$.
 
 The induced current density in tissue in configuration $b$ is $\mathbf{J}^b=\gamma \mathbf{E}^b$.
-According to \cite{Rumsey1954ReactionTheory} the power observable at port $n$ is simply the product of port voltage and port current $\rev{\langle a,b \rangle}=V_n I_n$. With current normalized to $I_n=1A$, Eq. \eqref{RumseyVoltage} over the Volume $V_{body}$ is therefore
+According to \cite{Rumsey1954ReactionTheory} the power observable at port $n$ is simply the product of port voltage and port current $\rev{\langle a,b \rangle}=V_n I_n$. With current normalized to $I_n=1\,A$, Eq. \eqref{RumseyVoltage} over the Volume $V_{body}$ is therefore
 
 \begin{align}
     \label{PortVoltage}
@@ -173,7 +173,7 @@ This equation states that the received voltage at port $n$ $V_n$ equals the volu
 
 \rev{Henceforth we identify configuration (a) with the PT source (port 1) and configuration (b) with receive element n, writing $\mathbf{E}_1 \equiv \mathbf{E}^a$ and $\mathbf{E}_n \equiv \mathbf{E}^b$.}
 
-The PT loop antennas size ($d=30mm$ in our simulations) is electrically small compared to the wavelength. The electrical size parameter is defined as $ka$ where $k=2 \pi / \lambda_0$\rev{,} the wave number in free space and $a=\rev{0.015}\,\rev{\mathrm{m}}$ is the loop radius, so $ka\rev{\approx 0.02}$ at $62.5MHz$ and $ka\rev{\approx 0.04}$ at $122.5MHz$. 
+The PT loop antennas size ($d=30\,mm$ in our simulations) is electrically small compared to the wavelength. The electrical size parameter is defined as $ka$ where $k=2 \pi / \lambda_0$\rev{,} the wave number in free space and $a=\rev{0.015}\,\rev{\mathrm{m}}$ is the loop radius, so $ka\rev{\approx 0.02}$ at $62.5\,MHz$ and $ka\rev{\approx 0.04}$ at $122.5\,MHz$. 
 
 In an electrically small antenna ($ka \rev{\ll} 1$) the loop radiates primarily as a magnetic dipole while the produced E-field is \rev{suppressed} by a factor $ka$ \rev{relative} to a plane wave.
 
@@ -202,7 +202,7 @@ with scaling by $\rev{a_{\mathrm{tissue}}}$
 
  This induced Faraday field, unlike the loop-generated field, is independent of loop geometry $ka$.
 
-The proportion of generated field vs. induced field can be estimated as follows: Let $|\mathbf{H}_1|=1\rev{\,\mathrm{A/m}}$ at the body surface. Then the loop generated E-fields at 1.5T / 62.5MHz are approximately
+The proportion of generated field vs. induced field can be estimated as follows: Let $|\mathbf{H}_1|=1\rev{\,\mathrm{A/m}}$ at the body surface. Then the loop generated E-fields at 1.5\,T / 62.5\,MHz are approximately
 
 \begin{align}
     \label{LoopEField15T}
@@ -211,7 +211,7 @@ The proportion of generated field vs. induced field can be estimated as follows:
     |\mathbf{E}_1^{ind}| \approx \omega \mu_0 |\mathbf{H}_1| \rev{a_{\mathrm{tissue}}} \approx 3.9 \cdot 10^8 \rev{\,\mathrm{rad/s}} \cdot 1.26 \cdot 10^{-6}\rev{\,\mathrm{H/m}} \cdot  1\rev{\,\mathrm{A/m}} \cdot 0.15\rev{\,\mathrm{m}} \approx 74 \rev{\,\mathrm{V/m}}
 \end{align}
 
-and at 3T / 122.5MHz
+and at 3\,T / 122.5\,MHz
 
 \begin{align}
     \label{LoopEField3T}
@@ -245,7 +245,7 @@ where $Z_{n,1}^{direct} = j \omega M_0$ is the mutual impedance in the absence o
 
 $Z_{n,1}^{tissue}$ is the additional impedance arising from the conductive tissue. It represents the coupling path PT loop $\rightarrow$ H-field $\rightarrow$ Faraday-induced E-field in the body $\rightarrow$ eddy-currents $\rightarrow$ secondary H-field $\rightarrow$ \rev{received} at port n. This term depends on the tissue property distribution and therefore changes when cardiac motion redistributes tissue.
 
-The corresponding voltages (with $I_1=1A$ normalized) are:
+The corresponding voltages (with $I_1=1\,A$ normalized) are:
 
 \begin{align}
     \label{CoouplingVoltages}
@@ -340,7 +340,7 @@ gives $V_n$ for a specific drive current $I_1$. Dividing by $I_1$ yields the \re
 
 Reciprocity is cleanly contained in the \rev{transimpedance}: Eqn. \eqref{PortReciprocity} directly shows $Z_{n,1} = Z_{1,n}$ - the \rev{transimpedance} is symmetric.
 
-The relationship between $S_{n,1}$ and the \rev{transimpedance} $Z_{n,1}$ is shown below (citation pending):
+The relationship between $S_{n,1}$ and the \rev{transimpedance} $Z_{n,1}$ is shown below \rev{\cite{Pozar2012Microwave}}:
 
 \begin{align}
     \label{SandZ}
@@ -417,7 +417,7 @@ The loaded and unloaded quality factors are:
     Q_{loaded} = \frac{\omega L_{coil}}{R_{coil} + R_{tissue}}
 \end{align}
 
-At clinical frequencies (0.5T, 1.5T and 3T) body noise dominates, so $R_{\rev{\mathrm{tissue}}} \rev{\gg} R_{\rev{\mathrm{coil}}}$ and $Q_{\rev{\mathrm{loaded}}} \rev{\ll} Q_{\rev{\mathrm{unloaded}}}$ \cite{Edelstein1986TheImaging}.
+At clinical frequencies (0.5\,T, 1.5\,T and 3\,T) body noise dominates, so $R_{\rev{\mathrm{tissue}}} \rev{\gg} R_{\rev{\mathrm{coil}}}$ and $Q_{\rev{\mathrm{loaded}}} \rev{\ll} Q_{\rev{\mathrm{unloaded}}}$ \cite{Edelstein1986TheImaging}.
 
 Figure~\ref{fig:appendix-circuit} shows the equivalent circuit corresponding to this multiport formulation. \rev{It uses the same transformer-coupled representation as the main text (Figure~\ref{fig:equivalent-circuit}) with the tissue admittivity drawn explicitly as $R_e \parallel C_e$; the volume-integral annotations identify the body-mediated mutual impedance $Z_{n,1}^{\mathrm{body}}$, which carries the PT signal, and the per-port self-loading $Z_{nn}^{\mathrm{body}}$, which modifies the coil $Q$-factor.}
 
