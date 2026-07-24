@@ -884,10 +884,6 @@ Figures~\ref{fig:rx-magnitude-62} and~\ref{fig:rx-magnitude-122} show the receiv
 (rescaled to 1mW input power) during one cardiac cycle, evaluated at
 62.5 and 122.5\,MHz. \revred{Received signal curves show strong quantitative correlation to total cardiac volume ($|R| = 0.97 \pm 0.13$ at 62.5\,MHz, $|R| = 0.96 \pm 0.13$ at 122.5\,MHz, see Table~\ref{tab:correlation}).}
 
-%\revdel{Received signal curves correlate qualitatively
-%extremely well to total cardiac volume}, plotted in red, in all but one
-%anterior element.
-
 Modulation depths (see also Table~\ref{tab:per-channel}) were found to be
 slightly higher in the anterior elements at 122.5\,MHz (mean modulation
 depth 0.14\% anterior vs. 0.12\% posterior) and almost similar at
@@ -1082,7 +1078,7 @@ V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 80.3 & 180.4 & 27 & 24 \\
 
 \begin{table}[htbp]
 \centering
-\caption{\revbrown{Strongest-channel cardiac modulation depths per volunteer: the maximum and the mean of the five most strongly modulated channels (pooled across anterior and posterior elements). These summarise the signal available to source-separation post-processing, which typically retains only the most strongly modulated channels. \revdel{Magnitude values to be completed from the processing pipeline.}}}
+\caption{\revbrown{Strongest-channel cardiac modulation depths per volunteer: the maximum and the mean of the five most strongly modulated channels (pooled across anterior and posterior elements). These summarise the signal available to source-separation post-processing, which typically retains only the most strongly modulated channels.}}
 \label{tab:exp-topN}
 \begin{tabular}{lcccc}
 \hline
@@ -1231,15 +1227,6 @@ truth \revred{($|R| > 0.94$ on average across all channels and both frequencies,
 be seen as a proxy for total cardiac volume. Importantly, maxima and
 minima of the heart volume curve (i.e. the onset of mechanical systole
 and the point of maximum contraction) closely match ground truth.
-
-\revdel{As the generated field is not homogeneous, falling off with distance
-cubed, motion closer to the generator will contribute more to the
-received signal than motion further away. It is therefore crucial for
-best performance to position the PT field generator loop as close to the
-heart as possible  - the heart should ideally lie on the axis perpendicular to the loops center, though some centimeters of tolerance are acceptable \cite{Bacher2017CardiacStudy}; experimental testing indicates that a lateral offset of around 5\,cm remains permissible in real-world use cases.
-When integrating the PT generator in e.g.\ an abdominal coil array, it
-must be designed in such a way that the generator is optimally located
-when the coil array is positioned for cardiac imaging.}
 
 \subsection{\rev{Waveform shape}}\label{waveform-shape}
 
