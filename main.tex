@@ -227,7 +227,7 @@ has been found to compare favorably to ECG triggering. \cite{Bacher2020Performan
 \begin{revgreenblock}
 Contactless motion sensing techniques based on modulation of
 electromagnetic parameters due to physiological motion have been under
-investigation for decades. Moskalenko et al.\ \cite{Moskalenko1960, Moskalenko1958}
+investigation for decades. First experiments date back to the late 1930s when Atzler and Lehmann demonstrated the measurement of cardiac activity by changes in the dielectric constant \cite{Atzler1932UberDielektrographie}. Moskalenko et al.\ \cite{Moskalenko1960, Moskalenko1958}
 demonstrated the modulation of high-frequency radio wave transmission
 and reflection by physiological motion such as blood-flow and
 respiratory volume changes. Guy et al. \cite{Johnson1972} expanded on the idea and
@@ -298,9 +298,9 @@ receivers useable bandwidth.
 
 Since most biological tissues are almost completely transparent to
 magnetic fields, having relative permeabilities
-\(\mu_{r,tissue} = 1 + \chi_{tissue} \approx 1\)
-\(,\ because\ the\ range\ for\ human\ tissues\ is\ only\ \chi_{tissue} \approx ( - 11\ \ldots\  - 7) \times 10^{- 6}\)
-\cite{HasgallITISTissues}, the generated magnetic field penetrates the subject's body
+$\mu_{r,tissue} = 1 + \chi_{tissue} \approx 1$
+(the range for human tissues is only $\chi_{tissue} \approx ( - 11\ \ldots\  - 7) \times 10^{- 6}$
+\cite{HasgallITISTissues}), the generated magnetic field penetrates the subject's body
 almost unchanged. Most tissues however are conductive and therefore the
 continuous wave magnetic field induces eddy currents. These eddy
 currents then in turn create a secondary magnetic field which is
@@ -469,7 +469,7 @@ approximately at the receive coil \(L_{R}\).
 \node[ann] at (4.5,-4.7) {modulated by cardiac motion $\rightarrow\ M_n = \Delta S_{n,1}/S_{n,1}$};
 \end{circuitikz}%
 }
-\caption{\rev{Simplified lumped-element equivalent circuit of one PT transmit (primary) and MR receive (secondary) coil pair. The two coils are inductively coupled through the direct mutual inductance $M_0$, analogous to a transformer. The intervening tissue is represented by its complex admittivity $\gamma = \sigma + j\omega\varepsilon$, modelled as a parallel combination of an equivalent resistance $R_e \propto 1/\sigma$ (eddy/conductive currents) and an equivalent capacitance $C_e \propto \varepsilon$ (displacement currents). Cardiac motion modulates this tissue element, changing the coupling and producing the signal modulation $M_n = \Delta S_{n,1}/S_{n,1}$. Coil resistance $R_{\mathrm{coil}}$ and tuning capacitance $C_{\mathrm{tune}}$ are shown for completeness; the rigorous distributed derivation is given in Appendix~\ref{app:derivation}.}}
+\caption{\rev{Simplified lumped-element equivalent circuit of one PT transmit (primary) and MR receive (secondary) coil pair. The two coils are inductively coupled through the direct mutual inductance $M_0$, analogous to a transformer. The intervening tissue is represented by its complex admittivity $\gamma = \sigma + j\omega\varepsilon$, modelled as a parallel combination of an equivalent resistance $R_e \propto 1/\sigma$ (eddy/conductive currents) and an equivalent capacitance $C_e \propto \varepsilon$ (displacement currents). Cardiac motion modulates this tissue element, changing the coupling and producing the signal modulation $M_n = \Delta S_{n,1}/S_{n,1}$. Coil resistance $R_{\mathrm{coil}}$ and tuning capacitance $C_{\mathrm{tune}}$ are shown for completeness; the rigorous distributed derivation is given in the Appendix~\ref{app:derivation}.}}
 \label{fig:equivalent-circuit}
 \end{figure}
 
@@ -790,8 +790,11 @@ V3 & F & 27 & 170 & 68 & Body~18 + Spine~24 \\
 \revbrown{
 The PT generator, a small loop antenna integrated into the anterior coil array housing, was driven at 0\,dBm (1\,mW) at a carrier frequency of 62.5\,MHz (corresponding to 1.5\,T). Receive coil arrays consisted of either a Biomatrix Body~18 or Body~12 (anterior) combined with a Spine~24 array (posterior), yielding 18+9 or 12+12 active receive channels respectively.}
 
-\revbrown{
-The receiver was characterized by mapping digital output values to analog input power: signals ranging from $-120$\,dBm (noise floor) to $-35$\,dBm (onset of receiver nonlinearity) were directly fed into each coil element's low-noise preamplifier input, establishing a calibrated 85\,dB linear dynamic range. Scattering parameters $S_{1,n}$\,(dB) were then computed from the known transmit power (0\,dBm) and the calibrated received signal level in each channel.}
+%\revbrown{
+%The receiver was characterized by mapping digital output values to analog input %power: signals ranging from $-120$\,dBm (noise floor) to $-35$\,dBm (onset of %receiver nonlinearity) were directly fed into each coil element's low-noise %preamplifier input, establishing a calibrated 85\,dB linear dynamic range. Scattering %parameters $S_{1,n}$\,(dB) were then computed from the known transmit power (0\,dBm) %and the calibrated received signal level in each channel.}
+
+The receiver was characterized using inhouse tooling, such that digital amplitude values (after PT signal extraction and narrowband filtering) could be mapped to specific analog input values in decibels.
+Scattering parameters $S_{1,n}$\,(dB) were then computed from the known transmit power (0\,dBm) and the calibrated received signal level in each channel.
 
 \revbrown{
 Volunteers were positioned supine and instructed to hold their breath. Raw per-channel PT magnitude and phase signals, sampled at 2\,kHz, were recorded continuously. Cardiac cycles were segmented using peak detection on a reference channel with strong cardiac modulation. Mild baseline drifts within the breathhold were removed by polynomial detrending (8th order, preserving mean amplitudes). Individual cycles were aligned and averaged to produce mean cardiac waveforms per channel, see Fig. \ref{fig:exp-segmentation}. Confidence intervals (95\,\% CI) were computed as $\bar{x} \pm 1.96\,\sigma_\mathrm{noise}$, where $\sigma_\mathrm{noise}$ is the standard deviation of the residual after cycle averaging, providing a direct measure of the per-channel noise relative to the cardiac modulation amplitude.}
