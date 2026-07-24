@@ -788,7 +788,7 @@ V3 & F & 27 & 170 & 68 & Body~18 + Spine~24 \\
 \end{table}
 
 \revbrown{
-The PT generator, a small loop antenna integrated into the anterior coil array housing, was driven at 0\,dBm (1\,mW) at a carrier frequency of 62.5\,MHz (corresponding to 1.5\,T). Receive coil arrays consisted of either a Biomatrix Body~18 or Body~12 (anterior) combined with a Spine~24 array (posterior), yielding 18+9 or 12+12 active receive channels respectively.}
+The PT generator, a small loop antenna integrated into the anterior coil array housing, was driven at 0\,dBm (1\,mW) at a carrier frequency of 62.5\,MHz (corresponding to 1.5\,T). Receive coil arrays consisted of either a Biomatrix Body~18 or Body~12 \rev{(Siemens Healthineers, Forchheim, Germany)} (anterior) combined with a Spine~24 array (posterior), yielding 18+9 or 12+12 active receive channels respectively.}
 
 %\revbrown{
 %The receiver was characterized by mapping digital output values to analog input %power: signals ranging from $-120$\,dBm (noise floor) to $-35$\,dBm (onset of %receiver nonlinearity) were directly fed into each coil element's low-noise %preamplifier input, establishing a calibrated 85\,dB linear dynamic range. Scattering %parameters $S_{1,n}$\,(dB) were then computed from the known transmit power (0\,dBm) %and the calibrated received signal level in each channel.}
@@ -1082,18 +1082,18 @@ V3 & $[-93, -118]$ & $[-117, -120]$ & 0.101 & 0.204 & 80.3 & 180.4 & 27 & 24 \\
 
 \begin{table}[htbp]
 \centering
-\caption{\revbrown{Strongest-channel cardiac modulation depths per volunteer: the maximum and the mean of the five most strongly modulated channels (pooled across anterior and posterior elements). These summarise the signal available to source-separation post-processing, which typically retains only the most strongly modulated channels. Magnitude values to be completed from the processing pipeline.}}
+\caption{\revbrown{Strongest-channel cardiac modulation depths per volunteer: the maximum and the mean of the five most strongly modulated channels (pooled across anterior and posterior elements). These summarise the signal available to source-separation post-processing, which typically retains only the most strongly modulated channels. \revdel{Magnitude values to be completed from the processing pipeline.}}}
 \label{tab:exp-topN}
 \begin{tabular}{lcccc}
 \hline
  & \multicolumn{2}{c}{Mag.\ mod.\ depth (\%)} & \multicolumn{2}{c}{Phase mod.\ depth (mrad)} \\
 Volunteer & Max & Top-5 mean & Max & Top-5 mean \\
 \hline
-V1 & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 141.9 & 120.8 \\
-V2 & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 539.2 & 308.9 \\
-V3 & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 604.3 & 279.5 \\
+V1 & \rev{0.363} & \rev{0.218} & 141.9 & 120.8 \\
+V2 & \rev{0.219} & \rev{0.156} & 539.2 & 308.9 \\
+V3 & \rev{0.580} & \rev{0.416} & 604.3 & 279.5 \\
 \hline
-Pooled & \textcolor{red}{[TBD]} & \textcolor{red}{[TBD]} & 604.3 & 415.3 \\
+Pooled & \rev{0.580} & \rev{0.433} & 604.3 & 415.3 \\
 \hline
 \end{tabular}
 \end{table}
@@ -1204,7 +1204,7 @@ motion is to be expected in all coils. This behavior is consistent with
 in-vivo experiments, where channels far away from the heart often carry
 significant cardiac signal \cite{Bacher2017PilotInitialization, Bacher2017CardiacStudy}. The modulation depth in our
 simulations is similar to those found in vivo, around 0.03 percent on
-average at 1.5T \cite{Bacher2017CardiacStudy}.
+average at 1.5T \cite{Bacher2017CardiacStudy}. \rev{Absolute modulation depth is, however, strongly dependent on individual factors---body size and habitus, coil placement relative to the heart, and cardiac stroke volume---so a broad spread across subjects is expected. Even in our three volunteers, the array-averaged magnitude modulation depth ranged from roughly 0.04\,\% to 0.20\,\% (anterior and posterior means, Table~\ref{tab:exp-sparams})---a sizeable range for so few subjects, and consistent with these anatomical and geometric dependencies.}
 
 Modulation depth was higher overall in the posterior elements. This is
 due to the more ideal geometry, where the heart lies, for most channels,
@@ -1247,14 +1247,14 @@ be seen as a proxy for total cardiac volume. Importantly, maxima and
 minima of the heart volume curve (i.e. the onset of mechanical systole
 and the point of maximum contraction) closely match ground truth.
 
-As the generated field is not homogeneous, falling off with distance
+\revdel{As the generated field is not homogeneous, falling off with distance
 cubed, motion closer to the generator will contribute more to the
 received signal than motion further away. It is therefore crucial for
 best performance to position the PT field generator loop as close to the
-heart as possible  - the heart should ideally lie on the axis perpendicular to the loops center, though some centimeters of tolerance are acceptable \cite{Bacher2017CardiacStudy}\rev{; experimental testing indicates that a lateral offset of around 5\,cm remains permissible in real-world use cases}.
+heart as possible  - the heart should ideally lie on the axis perpendicular to the loops center, though some centimeters of tolerance are acceptable \cite{Bacher2017CardiacStudy}; experimental testing indicates that a lateral offset of around 5\,cm remains permissible in real-world use cases.
 When integrating the PT generator in e.g.\ an abdominal coil array, it
 must be designed in such a way that the generator is optimally located
-when the coil array is positioned for cardiac imaging.
+when the coil array is positioned for cardiac imaging.}
 
 \subsection{\rev{Waveform shape}}\label{waveform-shape}
 
@@ -1272,7 +1272,7 @@ The inter-subject variability (factor $\sim$2--3 in modulation depth between vol
 
 \subsection{\rev{Generator placement}}\label{generator-placement}
 
-\rev{The position of the PT generator coil relative to the heart is a key design parameter. In this work, the generator was placed anterior to the chest wall, directly above the heart, consistent with practical implementations where the PT source is integrated into the anterior coil array housing. Because the primary magnetic field decays with $r^{3}$ (magnetic dipole), the induced eddy currents and consequently the secondary field scale strongly with distance. A generator placed closer to the heart produces stronger tissue-mediated coupling and thus higher modulation depths, while a more distant placement yields more uniform illumination at the expense of sensitivity. Optimization of generator position for specific clinical applications remains an interesting topic for future work.}
+\rev{The position of the PT generator coil relative to the heart is a key design parameter. In this work, the generator was placed anterior to the chest wall, directly above the heart, consistent with practical implementations where the PT source is integrated into the anterior coil array housing. Because the primary magnetic field decays with $r^{3}$ (magnetic dipole), the induced eddy currents and consequently the secondary field scale strongly with distance: a generator placed closer to the heart produces stronger tissue-mediated coupling and thus higher modulation depths, while a more distant placement yields more uniform illumination at the expense of sensitivity. For best performance the heart should therefore lie as close as possible to the generator and ideally on the axis perpendicular to the loop centre, although a lateral offset of a few centimetres---around 5\,cm in our experimental testing---remains permissible~\cite{Bacher2017CardiacStudy}. When the PT generator is integrated into an abdominal or cardiac coil array, the array must be designed so that the generator is optimally located once it is positioned for cardiac imaging. Optimizing generator placement for specific clinical applications remains an interesting direction for future work.}
 
 \subsection{Limitations of the model}\label{limitations-of-the-model}
 
