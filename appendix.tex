@@ -122,71 +122,7 @@ wherein $Z_{n,1}$ is the \rev{transimpedance} between port 1 and port n.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[
-    scale=0.75, transform shape,
-    coil/.style={draw, thick, minimum width=0.8cm, minimum height=1.2cm, rounded corners=2pt},
-    body/.style={draw, thick, fill=gray!15, rounded corners=8pt},
-    port/.style={draw, fill=white, circle, inner sep=1pt, font=\scriptsize},
-    arr/.style={->, thick, >=stealth},
-    lbl/.style={font=\small}
-]
-
-% --- Configuration (a): PT loop drives ---
-\node[font=\normalsize\bfseries] at (3.5, 5.2) {Configuration (a)};
-
-% Body
-\node[body, minimum width=4cm, minimum height=3cm] (bodyA) at (3.5, 2) {};
-\node[font=\scriptsize, gray] at (3.5, 2) {$\gamma(\mathbf{r}) = \sigma + j\omega\varepsilon$};
-
-% PT loop (port 1) - left
-\node[coil, fill=blue!15] (ptA) at (0.3, 2) {};
-\node[font=\scriptsize, above] at (ptA.north) {PT loop};
-\node[port] at (ptA.south) {1};
-\draw[arr, blue!70!black] (-0.8, 2.5) -- (ptA.west) node[midway, above, font=\scriptsize] {$I_1$};
-\node[font=\scriptsize, blue!70!black, below] at (0.3, 0.1) {\textbf{Driven}};
-
-% RX coil (port n) - right
-\node[coil, fill=red!10] (rxA) at (6.7, 2) {};
-\node[font=\scriptsize, above] at (rxA.north) {Coil $n$};
-\node[port] at (rxA.south) {$n$};
-\draw[arr, red!70!black] (rxA.east) -- (8.0, 2) node[midway, above, font=\scriptsize] {$V_n^a$};
-\node[font=\scriptsize, red!70!black, below] at (6.7, 0.1) {Terminated ($Z_0$)};
-
-% H-field arrows through body
-\draw[->, thick, blue!50, dashed] (1.5, 3.0) to[bend left=15] (5.5, 3.0);
-\node[font=\scriptsize, blue!50] at (3.5, 3.8) {$\mathbf{H}_1, \mathbf{E}_1$};
-
-% --- Configuration (b): Coil n drives ---
-\node[font=\normalsize\bfseries] at (13, 5.2) {Configuration (b)};
-
-% Body
-\node[body, minimum width=4cm, minimum height=3cm] (bodyB) at (13, 2) {};
-\node[font=\scriptsize, gray] at (13, 2) {$\gamma(\mathbf{r}) = \sigma + j\omega\varepsilon$};
-
-% PT loop (port 1) - left
-\node[coil, fill=blue!10] (ptB) at (9.8, 2) {};
-\node[font=\scriptsize, above] at (ptB.north) {PT loop};
-\node[port] at (ptB.south) {1};
-\draw[arr, blue!70!black] (ptB.west) -- (8.5, 2) node[midway, above, font=\scriptsize] {$V_1^b$};
-\node[font=\scriptsize, blue!70!black, below] at (9.8, 0.1) {Terminated ($Z_0$)};
-
-% RX coil (port n) - right
-\node[coil, fill=red!15] (rxB) at (16.2, 2) {};
-\node[font=\scriptsize, above] at (rxB.north) {Coil $n$};
-\node[port] at (rxB.south) {$n$};
-\draw[arr, red!70!black] (17.5, 2.5) -- (rxB.east) node[midway, above, font=\scriptsize] {$I_n$};
-\node[font=\scriptsize, red!70!black, below] at (16.2, 0.1) {\textbf{Driven}};
-
-% H-field arrows through body (reversed)
-\draw[->, thick, red!50, dashed] (15.0, 3.0) to[bend left=15] (11.0, 3.0);
-\node[font=\scriptsize, red!50] at (13, 3.8) {$\mathbf{H}_n, \mathbf{E}_n$};
-
-% Reciprocity result
-\node[draw, rounded corners, fill=yellow!10, inner sep=6pt, font=\small] at (8.25, -1.2) {
-    Reciprocity: $\displaystyle Z_{n,1} = \frac{V_n^a}{I_1^a} = \frac{V_1^b}{I_n^b} = Z_{1,n}$
-};
-
-\end{tikzpicture}
+\includegraphics[width=\linewidth]{./media/AppImage1.pdf}
 \caption{The two configurations used in the Lorentz reciprocity derivation. In configuration (a), the PT source (port 1) is driven and the voltage $V_n^a$ is measured at port $n$. In configuration (b), receive coil $n$ is driven and the voltage $V_1^b$ is measured at port 1. The same tissue environment $\gamma(\mathbf{r})$ is present in both cases. Reciprocity guarantees that the transimpedance is identical: $Z_{n,1} = Z_{1,n}$.}
 \label{fig:reciprocity-configs}
 \end{figure}
