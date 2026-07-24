@@ -551,7 +551,7 @@ geometry}\label{field-distributions-in-simple-geometry}
 
 \rev{To illustrate the eddy-current mechanism described above in its simplest form---before turning to the anatomically realistic digital-human phantom of the study simulation (Section~\ref{methods-1})---we first consider a deliberately simplified geometry.}
 
-Simulated (CST Studio 2024, Frequency Domain Solver, simulation volume
+Simulated (CST Studio 2024, \rev{Time Domain Solver}, simulation volume
 \(300 \times 300 \times 300\ {mm}^{3}\)) field distributions for a
 single generator and conductive region \(\Gamma_{\sigma > 0}\), like in
 Figure~\ref{fig:coupling-model}b are shown in Figure~\ref{fig:simple-geometry-fields}. Here the conductive region is modeled as a
@@ -1298,7 +1298,7 @@ Jaeschke et al.\ \cite{Jaeschke2017, Jaeschke2017a, Jaeschke2019ScatteringMonito
 using low GHz range carriers are an interesting target for further
 simulation studies.
 
-\revturquoise{While the frequency-domain solver provides broadband S-parameter data through Gaussian pulse excitation (Figure~\ref{fig:mod-depth-vs-frequency}), several aspects of the practical receive system are not captured in the simulation. Coil tuning was not modeled: the receive elements were treated as ideal ports without matching networks, whereas in practice each element has a bandpass response centered at the Larmor frequency. 
+\revturquoise{While the \rev{time-domain} solver provides broadband S-parameter data through Gaussian pulse excitation (Figure~\ref{fig:mod-depth-vs-frequency}), several aspects of the practical receive system are not captured in the simulation. Coil tuning was not modeled: the receive elements were treated as ideal ports without matching networks, whereas in practice each element has a bandpass response centered at the Larmor frequency. 
 Since the PT carrier is chosen close to, but not exactly at, the Larmor frequency, the receive sensitivity at $f_{PT}$ is reduced but not prohibitively attenuated. Furthermore, coil geometry was kept constant across the frequency sweep, whereas different field strengths employ different array designs with adapted element sizes. Patient-dependent detuning from body loading, the frequency-dependent gain and phase response of the downstream receive chain (preamplifiers, cables, baluns), and mutual coupling between array elements were likewise not modeled.}
 
 \revturquoise{These limitations primarily affect the absolute received signal levels but do not alter the underlying modulation mechanism. The broadband S-parameter data confirms that the physical principles (admittivity-weighted field overlap, spatial sensitivity dependence, and superposition of motion components) operate consistently across the simulated bandwidth and produce qualitatively identical behavior at both 62.5 and 122.5\,MHz. The simulation thus provides an idealized estimate of modulation depth; actual values depend on subject anatomy, coil placement, and receive chain characteristics.}
